@@ -1,0 +1,18 @@
+
+.bg{
+    background: url(../image//Mask\ Group.png);
+    height: 1000px;
+}
+.phone1{
+    background: url(../image/Group\ 57.png) ;
+    max-height: 600px;
+    max-width: 500px;
+    height: 100%;
+    width: 100%;
+transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
+}
+
+.loginbtn:hover {
+    background: #6379f4 !important;
+    color: white !important;
+}
