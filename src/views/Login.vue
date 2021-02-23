@@ -20,7 +20,7 @@
       <div
         class="col-md-6"
         style="
-          background: #e5e5e5;
+          background: #fafcff;
           padding-left: 3%;
           padding-right: 10%;
           padding-top: 5%;
@@ -82,7 +82,7 @@
           </button>
         </form>
 
-        <p>
+        <p class="text-center">
           Don't have account? Let's
           <router-link to="/register"
             ><span style="color: #6379f4">Sign Up</span></router-link
