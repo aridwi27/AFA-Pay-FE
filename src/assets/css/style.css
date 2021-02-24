@@ -10,6 +10,8 @@
 
 .bg{
     background: url(../image//Mask\ Group.png);
+    max-height: 1100px;
+    height:80%;
 
 }
 .phone1{
