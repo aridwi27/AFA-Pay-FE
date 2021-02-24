@@ -5,6 +5,7 @@ import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
 import History from '../views/History.vue'
 import Landpage from '../views/Landpage.vue'
+import Transfer from '../views/Transfer.vue'
 import Pin from '../views/Pin.vue'
 
 Vue.use(VueRouter)
@@ -29,6 +30,11 @@ const routes = [
     path: '/history',
     name: 'History',
     component: History
+  },
+  {
+    path: '/transfer',
+    name: 'Transfer',
+    component: Transfer
   },
   {
     path: '/page',

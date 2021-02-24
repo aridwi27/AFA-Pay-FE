@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       navList: [{ icon: 'fas fa-th-large', text: 'Dashboard', to: '/home' },
-        { icon: 'fas fa-arrow-up', text: 'Transfer', to: '/home' },
+        { icon: 'fas fa-arrow-up', text: 'Transfer', to: '/transfer' },
         { icon: 'fas fa-plus', text: 'Top Up', to: '/home' },
         { icon: 'far fa-user', text: 'Profile', to: '/home' },
         { icon: 'fas fa-sign-out-alt ', text: 'Logout', to: '/home' }
