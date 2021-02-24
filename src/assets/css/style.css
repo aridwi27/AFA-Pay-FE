@@ -1,6 +1,7 @@
 /* Variable Color */
 :root {
     --main-theme: #6379F4;
+    --secondary-theme: #E3E7F9;
     --main-hover: #4870db;
     --main-bg: #FAFCFF;
   }
@@ -85,6 +86,15 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     background: rgba(255, 255, 255,0.3);
     border:1px solid white;
 }
+.btnSecondary {
+    color: var(--main-theme);
+    background:var(--secondary-theme);
+}
+.btnSecondary:hover {
+    color: white;
+    background:var(--main-hover);
+}
+
 .btnMain {
     color: white;
     background:var(--main-theme);
@@ -105,3 +115,22 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     scrollbar-width: none;
     /* Firefox */
 }
+
+/* Hide Input Number Arrow */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[readonly].classname{
+    background-color:transparent;
+    border: 0;
+    font-size: 1em;
+  }

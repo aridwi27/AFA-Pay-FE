@@ -8,6 +8,7 @@ import Landpage from '../views/Landpage.vue'
 import Transfer from '../views/Transfer.vue'
 import Search from '../views/Search.vue'
 import Pin from '../views/Pin.vue'
+import Success from '../views/Success.vue'
 import Topup from '../views/Topup.vue'
 
 Vue.use(VueRouter)
@@ -37,6 +38,11 @@ const routes = [
     path: '/transfer',
     name: 'Transfer',
     component: Transfer
+  },
+  {
+    path: '/success',
+    name: 'Success',
+    component: Success
   },
   {
     path: '/search',
