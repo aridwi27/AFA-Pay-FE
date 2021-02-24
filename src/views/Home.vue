@@ -1,7 +1,17 @@
 <template>
-  <div class="h-100">
+  <div class="h-100 bg-main">
     <headers />
-    <div class="h-75">Test</div>
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-3">
+          <!-- INi adalah Sidebar -->
+            <Sidebar />
+        </div>
+        <div class="col-9">
+          <Dashboard />
+        </div>
+      </div>
+    </div>
     <Footer />
   </div>
 </template>
@@ -9,10 +19,14 @@
 <script>
 import headers from '../components/Header'
 import Footer from '../components/Footer'
+import Sidebar from '../components/Sidebar'
+import Dashboard from '../components/Dashboard'
 export default {
   components: {
     headers,
-    Footer
+    Footer,
+    Sidebar,
+    Dashboard
   }
 }
 </script>
