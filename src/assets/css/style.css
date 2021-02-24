@@ -53,7 +53,10 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
 
 .side-nav-item {
     color: #6c757d;
-    border:none;
+    border-right:none;
+    border-top:none;
+    border-bottom:none;
+    border-left: 5px solid white;
 }
 
 .side-nav-item:hover {

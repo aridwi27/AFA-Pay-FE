@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-export const mixins = {
+export const paymentMixin = {
   data () {
     return {
       webURL: process.env.VUE_APP_WEBURL,
