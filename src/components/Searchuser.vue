@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow p-4 border-0" style="border-radius: 20px; width: 100%; height: 100%">
+  <div class="card shadow-nm p-4 border-0" style="border-radius: 20px; width: 100%; height: 100%">
     <div>
       <span style="font-size: 15px; font-weight: 800">Search Reciever</span>
       <form action="">

@@ -44,7 +44,7 @@
                 float: none;
               "
             >
-              <div class="card-body">
+              <router-link to="/personalinfo" style="text-decoration:none" class="card-body">
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Personal Information
                 </h5>
@@ -53,7 +53,7 @@
                   class="float-right"
                   alt=""
                 />
-              </div>
+              </router-link>
             </div>
             <div
               class="card w-50 mb-3"
@@ -64,7 +64,7 @@
                 float: none;
               "
             >
-              <div class="card-body">
+              <router-link to="/changepassword" style="text-decoration:none" class="card-body">
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Change Password
                 </h5>
@@ -73,7 +73,7 @@
                   class="float-right"
                   alt=""
                 />
-              </div>
+              </router-link>
             </div>
             <div
               class="card w-50 mb-3"
@@ -84,7 +84,7 @@
                 float: none;
               "
             >
-              <div class="card-body">
+              <router-link to="/changepin" style="text-decoration:none" class="card-body">
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Change PIN
                 </h5>
@@ -93,7 +93,7 @@
                   class="float-right"
                   alt=""
                 />
-              </div>
+              </router-link>
             </div>
             <div
               class="card w-50 mb-5"

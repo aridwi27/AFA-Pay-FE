@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card shadow" style="border-radius:25px">
+    <div class="card shadow-nm" style="border-radius:25px">
       <div class="card-body px-5">
         <div class="text-center">
           <h1 class="mt-4"><i class="text-success fas fa-2x fa-check-circle"></i></h1>

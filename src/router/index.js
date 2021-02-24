@@ -12,6 +12,11 @@ import Success from '../views/Success.vue'
 import Error from '../views/Error.vue'
 import Topup from '../views/Topup.vue'
 import Profile from '../views/Profile.vue'
+import PersonalInfo from '../views/PersonalInfo.vue'
+import ChangePassword from '../views/ChangePassword.vue'
+import ChangePin from '../views/ChangePin.vue'
+import AddPhone from '../views/AddPhone.vue'
+import ManagePhone from '../views/ManagePhone.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +40,16 @@ const routes = [
     path: '/history',
     name: 'History',
     component: History
+  },
+  {
+    path: '/changepassword',
+    name: 'ChangePassword',
+    component: ChangePassword
+  },
+  {
+    path: '/changepin',
+    name: 'ChangePin',
+    component: ChangePin
   },
   {
     path: '/transfer',
@@ -75,6 +90,21 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/personalinfo',
+    name: 'PersonalInfo',
+    component: PersonalInfo
+  },
+  {
+    path: '/addphone',
+    name: 'AddPhone',
+    component: AddPhone
+  },
+  {
+    path: '/managephone',
+    name: 'ManagePhone',
+    component: ManagePhone
   }
 ]
 

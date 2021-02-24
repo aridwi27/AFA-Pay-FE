@@ -1,5 +1,5 @@
 <template>
-  <div style="box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); border-radius: 25px">
+  <div class="shadow-nm" style="border-radius: 25px">
     <div class="container">
       <div class="row">
         <div class="col-md-12 py-4">

@@ -2,7 +2,7 @@
   <div>
     <!-- Carrd Saldo -->
     <div class="row">
-      <div class="card w-100 bg-theme text-white shadow" style="border-radius:25px">
+      <div class="card w-100 bg-theme text-white shadow-nm" style="border-radius:25px">
         <div class="card-body p-4">
           <div class="row">
             <div class="col-md-8 col-lg-10">
@@ -27,7 +27,7 @@
     <!-- Chart & History -->
     <div class="row mt-4">
       <div class="col-lg-6 col-md-6 pl-0">
-        <div class="card shadow" style="border-radius:25px">
+        <div class="card shadow-nm" style="border-radius:25px">
           <div class="card-body">
             <div class="row">
               <div class="col-6">
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 pr-0">
-        <div class="card shadow" style="border-radius:25px">
+        <div class="card shadow-nm" style="border-radius:25px">
           <div class="card-body">
             <router-link to="/history" class="mb-0 text-main float-right">See All</router-link>
             <h5 class="font-weight-bold">Transaction History</h5>

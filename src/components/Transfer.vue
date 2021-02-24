@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card shadow" style="border-radius:25px">
+    <div class="card shadow-nm" style="border-radius:25px">
       <div class="card-body">
         <h5 class="font-weight-bold">Transfer Money</h5>
         <div class="card border-0 mb-3 shadow-sm">

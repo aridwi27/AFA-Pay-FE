@@ -103,11 +103,27 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     color: white;
     background:var(--main-hover);
 }
-/* Hidden Scrollbar */
+
+.shadow-nm {
+    border:0px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
 /* Hidden Scrollbar */
 .hideScroll::-webkit-scrollbar {
     display: none;
 }
+
+.btnSub {
+    color: #88888F;
+    background:#DADADA;
+    border-radius:10px;
+}
+.btnSub:hover {
+    color: white;
+    background:var(--main-theme);
+}
+
 
 .hideScroll {
     -ms-overflow-style: none;
@@ -133,4 +149,10 @@ input[readonly].classname{
     background-color:transparent;
     border: 0;
     font-size: 1em;
-  }
+}
+
+  /* Input Pin */
+input.vue-pincode-input {
+    font-weight: bold;
+    line-height: 50px;
+}

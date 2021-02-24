@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card shadow" style="border-radius:25px">
+    <div class="card shadow-nm" style="border-radius:25px">
       <div class="card-body">
         <h5 class="font-weight-bold">Transaction History</h5>
         <div class="mt-4 hideScroll" style="overflow-y: scroll; max-height:60vh">
