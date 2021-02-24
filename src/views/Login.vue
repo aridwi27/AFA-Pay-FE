@@ -43,13 +43,14 @@
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
-        <form action="" class="mt-5 mb-5">
+        <form action="" @submit.prevent="onLogin" class="mt-5 mb-5">
           <div class="form-group mb-5">
             <div class="input-group">
               <b-input-group-prepend is-text>
                 <b-icon icon="envelope"></b-icon>
               </b-input-group-prepend>
               <input
+                v-model="form.email"
                 type="text"
                 class="form-control"
                 id="inlineFormInputGroupUsername"
@@ -63,6 +64,7 @@
                 <b-icon icon="lock"></b-icon>
               </b-input-group-prepend>
               <input
+                v-model="form.password"
                 type="password"
                 class="form-control"
                 placeholder="Password"
@@ -99,9 +101,34 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   components: {
+  },
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      login: 'auth/login'
+    }),
+    onLogin () {
+      if (this.form.username !== '' && this.form.password !== '') {
+        this.login(this.form).then((response) => {
+          alert(response)
+        }).catch((err) => {
+          console.log(err)
+        })
+      } else {
+        alert('All Field Required')
+      }
+    }
   }
 }
 </script>
