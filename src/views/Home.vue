@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-3">
           <!-- INi adalah Sidebar -->
-            <Sidebar />
+          <Sidebar />
         </div>
         <div class="col-9">
           <Dashboard />
@@ -21,12 +21,14 @@ import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
 import Dashboard from '../components/Dashboard'
+// import SearchUser from '../components/Searchuser'
 export default {
   components: {
     headers,
     Footer,
     Sidebar,
     Dashboard
+    // SearchUser
   }
 }
 </script>
