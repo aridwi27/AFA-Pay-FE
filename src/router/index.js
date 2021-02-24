@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
+import History from '../views/History.vue'
 import Landpage from '../views/Landpage.vue'
 import Pin from '../views/Pin.vue'
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History
   },
   {
     path: '/page',
