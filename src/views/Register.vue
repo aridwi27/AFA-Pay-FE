@@ -20,13 +20,14 @@
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
-        <form action="" class="mt-5 mb-5">
+        <form action="" @submit.prevent="signUp" class="mt-5 mb-5">
           <div class="form-group mb-5">
             <div class="input-group">
               <b-input-group-prepend is-text>
                 <b-icon icon="person"></b-icon>
               </b-input-group-prepend>
               <input
+                v-model="form.username"
                 type="text"
                 class="form-control"
                 placeholder="Enter your username"
@@ -39,7 +40,8 @@
                 <b-icon icon="envelope"></b-icon>
               </b-input-group-prepend>
               <input
-                type="text"
+                v-model="form.email"
+                type="email"
                 class="form-control"
                 id="inlineFormInputGroupUsername"
                 placeholder="Enter your email"
@@ -52,6 +54,7 @@
                 <b-icon icon="lock"></b-icon>
               </b-input-group-prepend>
               <input
+                v-model="form.password"
                 type="password"
                 class="form-control"
                 placeholder="Enter your Password"
@@ -85,10 +88,37 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import sidelog from '../components/sidelog'
+
 export default {
   components: {
     sidelog
+  },
+  data () {
+    return {
+      form: {
+        email: '',
+        password: '',
+        username: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      register: 'auth/signUp'
+    }),
+    signUp () {
+      if (this.form.email !== '' && this.form.password !== '' && this.form.username !== '') {
+        this.register(this.form).then((response) => {
+          alert(response)
+        }).catch((err) => {
+          console.log(err)
+        })
+      } else {
+        alert('All Field Required')
+      }
+    }
   }
 }
 </script>
