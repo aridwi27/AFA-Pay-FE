@@ -6,6 +6,7 @@ import Home from '../views/Home.vue'
 import History from '../views/History.vue'
 import Landpage from '../views/Landpage.vue'
 import Transfer from '../views/Transfer.vue'
+import Search from '../views/Search.vue'
 import Pin from '../views/Pin.vue'
 import Topup from '../views/Topup.vue'
 import Profile from '../views/Profile.vue'
@@ -37,6 +38,11 @@ const routes = [
     path: '/transfer',
     name: 'Transfer',
     component: Transfer
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
   {
     path: '/page',

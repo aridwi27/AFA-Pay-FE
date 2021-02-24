@@ -85,6 +85,14 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     background: rgba(255, 255, 255,0.3);
     border:1px solid white;
 }
+.btnMain {
+    color: white;
+    background:var(--main-theme);
+}
+.btnMain:hover {
+    color: white;
+    background:var(--main-hover);
+}
 /* Hidden Scrollbar */
 /* Hidden Scrollbar */
 .hideScroll::-webkit-scrollbar {
