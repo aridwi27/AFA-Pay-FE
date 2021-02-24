@@ -65,6 +65,15 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     color: var(--main-theme);
     border-left: 5px solid var(--main-theme);
 }
+.router-link-nav {
+    text-decoration: none;
+    color: #6c757d;
+}
+
+.router-link-nav:hover {
+    text-decoration: none;
+    color: var(--main-theme);
+}
 
 .btnTrans {
     color: white;

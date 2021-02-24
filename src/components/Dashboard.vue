@@ -50,7 +50,7 @@
       <div class="col-lg-6 col-md-6 pr-0">
         <div class="card shadow" style="border-radius:25px">
           <div class="card-body">
-            <p class="mb-0 text-main float-right">See All</p>
+            <router-link to="/history" class="mb-0 text-main float-right">See All</router-link>
             <h5 class="font-weight-bold">Transaction History</h5>
             <div class="mt-2 hideScroll" style="overflow-y: scroll; height:50vh">
               <div v-for="(item, index) in sampleHistory" :key="index">
@@ -61,8 +61,10 @@
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
+                        <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(item.amount)}}</p>
+                        <p v-if="item.type ==='out'" class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(item.amount)}}</p>
                         <p class="font-weight-bold mb-0">{{item.name}}</p>
-                        <p class="card-text mb-0"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
                       </div>
                     </div>
                   </div>
@@ -83,11 +85,11 @@ export default {
   data () {
     return {
       sampleHistory: [
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 }
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'out', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'out', amount: 50000 }
       ]
     }
   }
