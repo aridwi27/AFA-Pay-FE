@@ -5,10 +5,10 @@
       <div class="row">
         <div class="col-3">
           <!-- INi adalah Sidebar -->
-          <Sidebar />
+            <Sidebar />
         </div>
         <div class="col-9">
-          <Dashboard />
+          <Transfer />
         </div>
       </div>
     </div>
@@ -20,15 +20,13 @@
 import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
-import Dashboard from '../components/Dashboard'
-// import SearchUser from '../components/Searchuser'
+import Transfer from '../components/Transfer'
 export default {
   components: {
     headers,
     Footer,
     Sidebar,
-    Dashboard
-    // SearchUser
+    Transfer
   }
 }
 </script>
