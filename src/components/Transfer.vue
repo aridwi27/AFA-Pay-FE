@@ -22,8 +22,8 @@
         </div>
         <div class="text-center">
           <div class="row">
-            <textarea class="form-control border-0 text-center" placeholder="0.00"
-              style="font-size:72px;overflow-y:hidden;resize:none;box-shadow: none;" rows="1"></textarea>
+            <textarea v-model="amount" @keyup="formatAmount()" class="form-control border-0 text-main text-center" placeholder="0.00"
+              style="font-size:72px;overflow-y:hidden;color:var(--main-theme);resize:none;box-shadow: none;" rows="1"></textarea>
           </div>
           <p class="font-weight-bold mb-0 mb-4">Rp. 120000 Available</p>
           <div class="row mt-4">
@@ -56,6 +56,11 @@ export default {
   data () {
     return {
       amount: 0
+    }
+  },
+  methods: {
+    formatAmount () {
+      this.amount = this.formatPrice(this.amount)
     }
   }
 }

@@ -12,12 +12,12 @@
             </div>
             <div class="col-md-4 col-lg-2 my-auto">
               <div class="d-flex flex-column align-items-center">
-                <button class="btn btnTrans d-block w-100 mb-2">
+                <router-link to="/search" class="btn btnTrans d-block w-100 mb-2">
                   <p class="font-weight-bold mb-0"><i class="fas fa-arrow-up"></i> Transfer</p>
-                </button>
-                <button class="btn btnTrans d-block w-100 mt-2">
+                </router-link>
+                <router-link to="/topup" class="btn btnTrans d-block w-100 mt-2">
                   <p class="font-weight-bold mb-0"><i class="fas fa-plus"></i> Top Up</p>
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
