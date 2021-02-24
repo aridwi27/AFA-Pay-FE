@@ -4,15 +4,15 @@
     style="
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
       border-radius: 25px;
-      padding-left: 13%;
+      padding-left: 18%;
       padding-right: 15%;
     "
   >
     <div class="row">
-      <div class="col-md-8 py-5">
-        <h2 style="color: #6379f4">Zwallet</h2>
+      <div class="col-md-9 py-4">
+        <h2 style="color: #6379f4; font-weight: bold">Zwallet</h2>
       </div>
-      <div class="col-md-4 pt-5" style="">
+      <div class="col-md-3 py-4" style="">
         <img
           class="float-left img-fluid mr-3"
           src="../assets/image/Rectangle 25.png"
