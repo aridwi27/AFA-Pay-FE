@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-main">
+  <div class="bg-theme">
     <div class="container py-4">
       <p class="text-white font-weight-light d-inline text-left mb-0">2020 Zwallet. All right reserved.</p>
       <div class="float-right">
