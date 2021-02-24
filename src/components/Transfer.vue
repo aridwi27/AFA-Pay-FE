@@ -23,9 +23,21 @@
         <div class="text-center">
           <h1 class="font-weight-bold mb-0 mb-4">0.00</h1>
           <p class="font-weight-bold mb-0 mb-4">Rp. 120000 Available</p>
-        </div>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+              <div class="input-group mb-3 text-secondary">
+                <div class="input-group-prepend ">
+                  <span class="input-group-text bg-white border-top-0 border-left-0 border-right-0"><i class="fas fa-pencil-alt"></i></span>
+                </div>
+                <input type="text" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Add some notes">
+              </div>
+            </div>
+            <div class="col-3"></div>
+          </div>
+          </div>
+          </div>
+          </div>
   </div>
 </template>
 
