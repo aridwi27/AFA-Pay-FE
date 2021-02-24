@@ -29,7 +29,21 @@
       <div class="col-lg-6 col-md-6 pl-0">
         <div class="card shadow" style="border-radius:25px">
           <div class="card-body">
-            <p>Nanti ada Chart</p>
+            <div class="row">
+              <div class="col-6">
+                <h1><i class="fas fa-arrow-down" style="color:green"></i></h1>
+                <p class="mb-0">Income</p>
+                <p class="font-weight-bold">Rp. {{formatPrice(2120000)}}</p>
+              </div>
+              <div class="col-6">
+                <h1><i class="fas fa-arrow-up" style="color:red"></i></h1>
+                <p class="mb-0">Expense</p>
+                <p class="font-weight-bold">Rp. {{formatPrice(1560000)}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <img src="https://i.ibb.co/8gqzyhG/chart-Sample.png" class="img-fluid" alt="" >
+            </div>
           </div>
         </div>
       </div>
