@@ -12,10 +12,10 @@
             </div>
             <div class="col-md-4 col-lg-2 my-auto">
               <div class="d-flex flex-column align-items-center">
-                <button class="btn btn-warning d-block w-100 mb-2">
+                <button class="btn btnTrans d-block w-100 mb-2">
                   <p class="font-weight-bold mb-0"><i class="fas fa-arrow-up"></i> Transfer</p>
                 </button>
-                <button class="btn btn-warning d-block w-100 mt-2">
+                <button class="btn btnTrans d-block w-100 mt-2">
                   <p class="font-weight-bold mb-0"><i class="fas fa-plus"></i> Top Up</p>
                 </button>
               </div>
@@ -52,7 +52,7 @@
           <div class="card-body">
             <p class="mb-0 text-main float-right">See All</p>
             <h5 class="font-weight-bold">Transaction History</h5>
-            <div class="mt-2 hideScroll" style="overflow-y: scroll; height:40vh">
+            <div class="mt-2 hideScroll" style="overflow-y: scroll; height:50vh">
               <div v-for="(item, index) in sampleHistory" :key="index">
                 <div class="card border-0">
                   <div class="row no-gutters">
