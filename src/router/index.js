@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
 import Landpage from '../views/Landpage.vue'
+import Pin from '../views/Pin.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/page',
     name: 'page',
     component: Landpage
+  },
+  {
+    path: '/pin',
+    name: 'pin',
+    component: Pin
   }
 ]
 
