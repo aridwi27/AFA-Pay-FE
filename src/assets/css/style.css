@@ -63,3 +63,18 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
     color: var(--main-theme);
     border-left: 5px solid var(--main-theme);
 }
+
+/* Hidden Scrollbar */
+/* Hidden Scrollbar */
+.hideScroll::-webkit-scrollbar {
+    oveflow-y: scroll;
+    display: none;
+}
+
+.hideScroll {
+    oveflow-y: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

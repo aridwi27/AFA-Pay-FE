@@ -50,7 +50,25 @@
       <div class="col-lg-6 col-md-6 pr-0">
         <div class="card shadow" style="border-radius:25px">
           <div class="card-body">
-            <p>Nanti ada History</p>
+            <p class="mb-0 text-main float-right">See All</p>
+            <h5 class="font-weight-bold">Transaction History</h5>
+            <div class="mt-2 hideScroll" style="overflow-y: scroll; height:40vh">
+              <div v-for="(item, index) in sampleHistory" :key="index">
+                <div class="card border-0">
+                  <div class="row no-gutters">
+                    <div class="col-md-2 my-auto mx-auto">
+                      <img :src="`${item.image}`" class="card-img text-center" alt="...">
+                    </div>
+                    <div class="col-md-10">
+                      <div class="card-body">
+                        <p class="font-weight-bold mb-0">{{item.name}}</p>
+                        <p class="card-text mb-0"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +79,18 @@
 <script>
 import { paymentMixin } from '../helpers/mixin'
 export default {
-  mixins: [paymentMixin]
+  mixins: [paymentMixin],
+  data () {
+    return {
+      sampleHistory: [
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 },
+        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', amount: 50000 }
+      ]
+    }
+  }
 }
 </script>
 
