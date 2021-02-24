@@ -1,3 +1,12 @@
+/* Font For All Components */
+#app {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.font-nunito {
+    font-family: 'Nunito', sans-serif !important;
+}
+
 
 .bg{
     background: url(../image//Mask\ Group.png);
@@ -10,4 +19,8 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
 .loginbtn:hover {
     background: #6379f4 !important;
     color: white !important;
+}
+/* BG Color */
+.bg-main {
+    background: #6379F4;
 }
