@@ -1,3 +1,15 @@
+/* Variable Color */
+:root {
+    --main-theme: #6379F4;
+    --main-hover: #4870db;
+    --main-bg: #FAFCFF;
+  }
+
+/* Scrolling Behaviour */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Font For All Components */
 #app {
     font-family: 'Nunito', sans-serif !important;
@@ -19,10 +31,34 @@ transform: matrix(0.99, -0.13, 0.13, 0.99, 0, 0);
 }
 
 .loginbtn:hover {
-    background: #6379f4 !important;
+    background: var(--main-theme) !important;
     color: white !important;
 }
 /* BG Color */
+.bg-theme {
+    background: var(--main-theme);
+}
+.text-main {
+    color: var(--main-theme);
+}
 .bg-main {
-    background: #6379F4;
+    background: var(--main-bg);
+}
+.nav-active {
+    color: var(--main-theme);
+}
+
+.side-nav>li:last-child {
+    position: absolute;
+    bottom: 0;
+}
+
+.side-nav-item {
+    color: #6c757d;
+    border:none;
+}
+
+.side-nav-item:hover {
+    color: var(--main-theme);
+    border-left: 5px solid var(--main-theme);
 }
