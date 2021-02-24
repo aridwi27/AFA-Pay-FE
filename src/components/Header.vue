@@ -1,18 +1,25 @@
 <template>
-  <div class="container-fluid bg-info">
+  <div
+    class="container-fluid"
+    style="
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 25px;
+      padding-left: 13%;
+      padding-right: 15%;
+    "
+  >
     <div class="row">
-      <div class="col-8 col-md-8 py-5 px-5">
-        <h1>Zwallet</h1>
+      <div class="col-md-8 py-5">
+        <h2 style="color: #6379f4">Zwallet</h2>
       </div>
-      <div
-        class="col-4 col-md-4 bg-primary pt-5 px-5"
-        style="padding-right: 20%"
-      >
-        <img class="flaot-left" src="../assets/image/Rectangle 25.png" alt="" />
-        <h5 class="flaot-left">Robert Chandler</h5>
-        <p class="flaot-left">+62 8139 3877 7946</p>
-
-        <img class="mt-4" src="../assets/image/Vector (1).png" alt="" />
+      <div class="col-md-4 pt-5" style="">
+        <img
+          class="float-left img-fluid mr-3"
+          src="../assets/image/Rectangle 25.png"
+          alt=""
+        />
+        <h5 class="">Robert Chandler</h5>
+        <p class="" style="color: rgba(58, 61, 66, 0.9)">+62 8139 3877 7946</p>
       </div>
     </div>
   </div>

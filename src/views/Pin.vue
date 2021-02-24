@@ -1,0 +1,74 @@
+<template>
+  <div class="container-fluid">
+    <div class="row">
+      <sidelog />
+      <div
+        class="col-md-6"
+        style="
+          background: #fafcff;
+          padding-left: 5%;
+          padding-right: 10%;
+          padding-top: 5%;
+        "
+      >
+        <h2
+          class="font-weight-bold mb-5"
+          style="padding-right: 10%; line-height: 2"
+        >
+          Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN That
+          You Created Yourself.
+        </h2>
+        <p
+          style="
+            color: rgba(58, 61, 66, 0.6);
+            line-height: 2;
+            padding-right: 8%;
+          "
+        >
+          Create 6 digits pin to secure all your money and your data in Zwallet
+          app. Keep it secret and don’t tell anyone about your Zwallet account
+          password and the PIN.
+        </p>
+        <div class="mt-5" style="margin-left: 20%; margin-bottom: 20%">
+          <PincodeInput v-model="code" :length="6" />
+        </div>
+        <button
+          class="btn btn-primary btn-block w-70"
+          style="
+            background: #6379f4;
+            box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+            border-radius: 12px;
+            height: 57px;
+          "
+          @click="submit()"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import sidelog from '../components/sidelog'
+import PincodeInput from 'vue-pincode-input'
+export default {
+  data () {
+    return {
+      code: null
+    }
+  },
+  components: {
+    sidelog,
+    PincodeInput
+  },
+  methods: {
+    submit () {
+      const data = this.code
+      console.log(data)
+    }
+  }
+}
+</script>
+ <style scoped>
+</style>

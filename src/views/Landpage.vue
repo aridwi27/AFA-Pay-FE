@@ -28,10 +28,10 @@
             </button>
           </div>
           <div class="col-md-6" style="">
+            <button class="btn" style="margin-bottom: -20%">Login</button>
             <div>
-              <!-- <button class="btn" style="z-index: 3">Login</button> -->
+              <img src="../assets/image/mark2.png" class="" style="" alt="" />
 
-              <img src="../assets/image/mark2.png" class="img-fluid" alt="" />
               <img
                 src="../assets/image/png-phone.png"
                 style="margin-left: 20%; margin-top: -80%"
