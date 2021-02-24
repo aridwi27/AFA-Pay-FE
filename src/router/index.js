@@ -9,6 +9,7 @@ import Transfer from '../views/Transfer.vue'
 import Search from '../views/Search.vue'
 import Pin from '../views/Pin.vue'
 import Success from '../views/Success.vue'
+import Error from '../views/Error.vue'
 import Topup from '../views/Topup.vue'
 
 Vue.use(VueRouter)
@@ -43,6 +44,11 @@ const routes = [
     path: '/success',
     name: 'Success',
     component: Success
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component: Error
   },
   {
     path: '/search',

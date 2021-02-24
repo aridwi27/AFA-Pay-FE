@@ -3,11 +3,12 @@
     <div class="card shadow" style="border-radius:25px">
       <div class="card-body px-5">
         <div class="text-center">
-          <h1 class="mt-4"><i class="text-success fas fa-2x fa-check-circle"></i></h1>
-          <p class="font-weight-bold">Transaction Success</p>
+          <h1 class="mt-4"><i class="text-danger fas fa-2x fa-times-circle"></i></h1>
+          <p class="font-weight-bold">Transaction Failed</p>
+          <p class="px-5 text-secondary">We can’t transfer your money at the moment, we recommend you to check your internet connection and try again.</p>
         </div>
         <form action="">
-          <div class="form-group">
+          <div class="form-group mt-5">
             <label class="text-secondary">Amount</label>
             <input readonly type="text" value="Rp. 100.000" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
@@ -39,9 +40,7 @@
           </div>
         </div>
         <div class="text-right mt-4 pt-4">
-          <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="text-secondary fas fa-share-alt"></i></button>
-          <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="fas fa-download"></i> Download PDF</button>
-          <button class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</button>
+          <button class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Try Again</button>
         </div>
       </div>
     </div>
