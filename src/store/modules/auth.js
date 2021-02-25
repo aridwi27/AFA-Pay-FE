@@ -39,7 +39,10 @@ const moduleAuth = {
           localStorage.setItem('id', response.data.data.id)
           context.commit('setToken', response.data.data)
           context.commit('setUserData', response.data.data)
-          resolve(response.data.data.message)
+          // Cek dulu responsnenya apa, bisa pakai console.log dulu
+          // console.log(response)
+          // Kalau sudah tahu lokasi datanya, bisa langsung resolve aja, buat dikembalikan ke fungsi yang panggilnya
+          resolve(response.data)
         }).catch((err) => {
           reject(err)
         })
