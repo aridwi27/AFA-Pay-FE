@@ -7,7 +7,11 @@ const moduleAuth = {
       token: localStorage.getItem('token') || null,
       email: localStorage.getItem('email') || null,
       id: localStorage.getItem('id') || null,
-      userData: {}
+      userData: {},
+      dataDetailUser: {}
+      // dataDetailUser: {
+      //   email: email
+      // }
     }
   },
   mutations: {
@@ -19,6 +23,10 @@ const moduleAuth = {
         id: payload.id,
         email: payload.email
       }
+    },
+    setDetailUser (state, payload) {
+      this.dataDetailUser = { ...state.dataDetailUser, payload }
+      // console.log(payload)
     }
   },
   actions: {
@@ -32,7 +40,6 @@ const moduleAuth = {
       })
     },
     login (context, data) {
-      console.log(data)
       return new Promise((resolve, reject) => {
         axios.post(`${context.rootState.apiURL}/login`, data).then((response) => {
           localStorage.setItem('token', response.data.data.token)
@@ -58,9 +65,9 @@ const moduleAuth = {
     },
     userDetail (context) {
       return new Promise((resolve, reject) => {
-        axios.get(`${context.rootState.apiURL}/user/${context.state.id}`).then((response) => {
+        axios.get(`${context.rootState.apiURL}/user/${context.state.id}`, { headers: { token: context.state.token } }).then((response) => {
+          context.commit('setDetailUser', response.data.data[0])
           // resolve(response.data)
-          console.log(response)
         }).catch((err) => {
           console.log(err)
         })
@@ -68,6 +75,8 @@ const moduleAuth = {
     }
   },
   getters: {
+    detailUser: state => state.dataDetailUser,
+    getToken: state => state.token
   }
 }
 export default moduleAuth

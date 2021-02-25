@@ -19,7 +19,7 @@
           </table>
           <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
-            <h5 class="float-right">Robert Chandler</h5>
+            <h5 class="float-right">username</h5>
             <p class="  " style="color: rgba(58, 61, 66, 0.9)">
               +62 8139 3877 7946
             </p>
@@ -38,3 +38,29 @@
     </div>
   </div>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters({
+      detUser: 'auth/detailUser'
+    })
+  },
+  methods: {
+
+  },
+  mounted () {
+    // // console.log(this.detUser)
+    // console.log(this.$store.getters['auth/getToken'])
+    console.log(this.$store.getters['auth/detailUser'])
+  }
+}
+</script>
+
+<style scoped>
+</style>
