@@ -58,24 +58,28 @@
             <h5 class="font-weight-bold">Transaction History</h5>
             <div class="mt-2 hideScroll" style="overflow-y: scroll; height:50vh">
               <div v-for="(item, index) in transUser" :key="index">
-                <div class="card border-0">
+                <div class="card border-0" @click="detailTrans(item.id)">
                   <div class="row no-gutters">
                     <div class="col-md-2 my-auto mx-auto">
                       <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
-                       <div>
-                          <p v-if="item.status ==='Pending'" class="float-right font-weight-bold mb-0 text-warning">Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <div v-else>
-                          <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
-                          <p v-else class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
+                        <div>
+                          <p v-if="item.status ==='Pending'" class="float-right font-weight-bold mb-0 text-warning">
+                            Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <div v-else>
+                            <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
+                              Rp.{{formatPrice(Number(item.amount))}}</p>
+                            <p v-else class="float-right font-weight-bold mb-0 text-danger">-
+                              Rp.{{formatPrice(Number(item.amount))}}</p>
+                          </div>
                         </div>
-                       </div>
                         <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         <div>
-                        <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up</small></p>
-                        <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                          <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
+                              Up</small></p>
+                          <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
                         </div>
                       </div>
                     </div>
@@ -186,18 +190,25 @@ export default {
       this.addTrans(data)
         .then(async (res) => {
           await this.transDetail(res.data.id).then((result) => {
-            console.log(result)
+            this.swalLoadingClose()
+            this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
+            this.$bvModal.hide('modalTopUp')
+            this.$router.push('/status')
+            this.amount = 0
           })
-          this.swalLoadingClose()
-          this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
-          this.$bvModal.hide('modalTopUp')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    detailTrans (id) {
+      this.transDetail(id)
+        .then((res) => {
           this.$router.push('/status')
         })
         .catch((err) => {
           console.log(err)
         })
-      // console.log(data)
-      // this.amount = 0
     }
   },
   mounted () {
