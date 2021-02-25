@@ -50,7 +50,29 @@
         </form>
       </div>
       <div v-else>
-        <h1>Konfirmasi</h1>
+        <div class="form-group">
+          <label class="text-secondary">Amount</label>
+          <input readonly type="text" :value="`Rp. ${formatPrice(finalData.amount)}`"
+            class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+        </div>
+        <div class="form-group">
+          <label class="text-secondary">Balance Left</label>
+          <input readonly type="text" :value="`Rp. ${formatPrice(userData.credit - finalData.amount)}`"
+            class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+        </div>
+        <div class="form-group">
+          <label class="text-secondary">Date & Time</label>
+          <input readonly type="text" :value="formatDate(new Date())"
+            class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+        </div>
+        <div class="form-group">
+          <label class="text-secondary">Notes</label>
+          <input readonly type="text" :value="`${finalData.info}`"
+            class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+        </div>
+        <div class="text-right">
+          <button @click="doTransfer()" class="btn btnMain font-weight-bold px-4" style="border-radius:10px">Continue</button>
+        </div>
       </div>
       </div>
     </div>
@@ -79,7 +101,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      actionTrans: 'trans/addTrans'
+      actionTrans: 'trans/addTrans',
+      transDetail: 'trans/detailTrans'
     }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
@@ -94,13 +117,22 @@ export default {
       }
       this.finalData = buildFinalData
       this.showConfirm = true
-      // this.actionTrans(finalData)
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   })
+    },
+    doTransfer () {
+      this.actionTrans(this.finalData)
+        .then(async (res) => {
+          await this.transDetail(res.data.id).then((result) => {
+            this.showConfirm = false
+            this.amount = 0
+            this.info = ''
+            this.finalData = {}
+            this.$router.push('/status')
+            this.swalAlert('Transaction Success', 'Please wait for confirmation', 'info')
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

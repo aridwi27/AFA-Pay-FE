@@ -13,10 +13,16 @@
                 </div>
                 <div class="col-md-11">
                   <div class="card-body">
-                    <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
+                  <div>
+                    <p v-if="item.status ==='Pending'" class="float-right font-weight-bold mb-0 text-warning">
                       Rp.{{formatPrice(Number(item.amount))}}</p>
-                    <p v-if="item.type ==='out'" class="float-right font-weight-bold mb-0 text-danger">-
+                   <div v-else>
+                      <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
                       Rp.{{formatPrice(Number(item.amount))}}</p>
+                    <p v-else class="float-right font-weight-bold mb-0 text-danger">-
+                      Rp.{{formatPrice(Number(item.amount))}}</p>
+                   </div>
+                  </div>
                     <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                     <div>
                       <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up</small></p>
@@ -35,7 +41,7 @@
 
 <script>
 import { paymentMixin } from '../helpers/mixin'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   mixins: [paymentMixin],
   data () {
@@ -47,8 +53,19 @@ export default {
       transUser: 'trans/transUser',
       webURL: 'webURL'
     })
-  }
+  },
+  methods: {
+    ...mapActions({
+      getUserTrans: 'trans/getUserTrans'
+    }),
+    getTrans () {
+      this.getUserTrans(this.queryTrans)
+    }
 
+  },
+  mounted () {
+    this.getTrans()
+  }
 }
 </script>
 

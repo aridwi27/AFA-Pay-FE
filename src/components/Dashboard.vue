@@ -65,8 +65,13 @@
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
-                        <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <p v-if="item.type ==='out'" class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
+                       <div>
+                          <p v-if="item.status ==='Pending'" class="float-right font-weight-bold mb-0 text-warning">Rp.{{formatPrice(Number(item.amount))}}</p>
+                        <div v-else>
+                          <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <p v-else class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
+                        </div>
+                       </div>
                         <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         <div>
                         <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up</small></p>
@@ -186,7 +191,7 @@ export default {
           this.swalLoadingClose()
           this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
           this.$bvModal.hide('modalTopUp')
-          this.$router.push('/success')
+          this.$router.push('/status')
         })
         .catch((err) => {
           console.log(err)
@@ -196,7 +201,7 @@ export default {
     }
   },
   mounted () {
-    this.getUserTrans()
+    this.getUserTrans(this.queryTrans)
   }
 }
 </script>

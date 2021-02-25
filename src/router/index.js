@@ -17,6 +17,7 @@ import ChangePassword from '../views/ChangePassword.vue'
 import ChangePin from '../views/ChangePin.vue'
 import AddPhone from '../views/AddPhone.vue'
 import ManagePhone from '../views/ManagePhone.vue'
+import Status from '../views/Status.vue'
 import store from '../store/index'
 
 Vue.use(VueRouter)
@@ -98,6 +99,14 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Search,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/status',
+    name: 'Status',
+    component: Status,
     meta: {
       auth: true
     }
