@@ -29,6 +29,7 @@
               <input
                 v-model="form.username"
                 type="text"
+                required
                 class="form-control"
                 placeholder="Enter your username"
               />
@@ -42,6 +43,7 @@
               <input
                 v-model="form.email"
                 type="email"
+                required
                 class="form-control"
                 id="inlineFormInputGroupUsername"
                 placeholder="Enter your email"
@@ -56,6 +58,7 @@
               <input
                 v-model="form.password"
                 type="password"
+                required
                 class="form-control"
                 placeholder="Enter your Password"
               />
@@ -90,8 +93,10 @@
 <script>
 import { mapActions } from 'vuex'
 import sidelog from '../components/sidelog'
+import { paymentMixin } from '../helpers/mixin'
 
 export default {
+  mixins: [paymentMixin],
   components: {
     sidelog
   },
@@ -111,9 +116,14 @@ export default {
     signUp () {
       if (this.form.email !== '' && this.form.password !== '' && this.form.username !== '') {
         this.register(this.form).then((response) => {
-          alert(response)
-        }).catch((err) => {
-          console.log(err)
+          if (response === 'Email has been registered') {
+            this.$swal.close()
+            this.$swal('Email registed', 'Please Change Email ', 'error')
+          } else {
+            this.$swal.close()
+            this.$swal('Register Email Success', 'You can Login Now ', 'success')
+            this.$router.push('/login')
+          }
         })
       } else {
         alert('All Field Required')

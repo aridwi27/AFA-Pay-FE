@@ -43,7 +43,7 @@
                   ></i>
                   <div class="float-left">
                     <p class="">Transfered from Joshua Lee</p>
-                    <h5 class="" style="color: #43484f">Rp220.000</h5>
+                    <h5 class="" style="color: #43484f">Rp {{ income }}</h5>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                   ></i>
                   <div class="float-left">
                     <p class="">Netflix subscription</p>
-                    <h5 class="" style="color: #43484f">Rp149.000</h5>
+                    <h5 class="" style="color: #43484f">Rp {{ outcome }}</h5>
                   </div>
                 </div>
               </div>
@@ -100,6 +100,8 @@ export default {
   mixins: paymentMixin,
   data () {
     return {
+      income: '30000',
+      outcome: '10000'
     }
   },
   computed: {
