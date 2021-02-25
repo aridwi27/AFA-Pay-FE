@@ -52,6 +52,8 @@
 <script>
 import sidelog from '../components/sidelog'
 import PincodeInput from 'vue-pincode-input'
+import { mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -63,9 +65,21 @@ export default {
     PincodeInput
   },
   methods: {
+    ...mapActions({
+      insertPin: 'auth/updateUser'
+    }),
     submit () {
-      const data = this.code
-      console.log(data)
+      const data = { pin: this.code }
+      this.insertPin(data).then((response) => {
+        if (response.message === 500) {
+          alert('Something wrong with pin')
+        } else {
+          alert('Submit pin success')
+          this.$router.push('/home')
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }

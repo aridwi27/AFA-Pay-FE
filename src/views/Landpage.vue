@@ -1,13 +1,18 @@
 <template>
   <div class="container-fluid" style="">
     <div class="row">
-      <div class="col-md-12" style="background: #fafcff; margin-bottom: 10%">
+      <div class="col-md-12" style="background: #fafcff">
         <div class="row">
           <div
             class="col-md-6"
             style="padding-right: 14%; padding-left: 12%; padding-top: 5%"
           >
-            <h3 class="" style="color: #6379f4; margin-bottom: 20%">Zwallet</h3>
+            <h3
+              class="font-weight-bold"
+              style="color: #6379f4; margin-bottom: 20%"
+            >
+              Zwallet
+            </h3>
             <h1 class="font-weight-bold mb-5" style="line-height: 1.5">
               Awesome App For Saving <span style="color: #6379f4">Time.</span>
             </h1>
@@ -27,14 +32,35 @@
               Try It Free
             </button>
           </div>
-          <div class="col-md-6" style="">
-            <button class="btn" style="margin-bottom: -20%">Login</button>
+          <div class="col-md-6 bgpage" style="padding-right: 10%">
+            <button
+              class="btn btn-lg float-right mt-5 font-weight-bold"
+              style="
+                color: #6379f4;
+                background: #ffffff;
+                box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+                border-radius: 12px;
+              "
+            >
+              Sign Up
+            </button>
+            <button
+              class="btn btn-lg float-right mt-5 mx-5 font-weight-bold"
+              style="
+                background: #6379f4;
+                border: 2px solid #ffffff;
+                box-sizing: border-box;
+                box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+                border-radius: 12px;
+                color: #ffffff;
+              "
+            >
+              Login
+            </button>
             <div>
-              <img src="../assets/image/mark2.png" class="" style="" alt="" />
-
               <img
                 src="../assets/image/png-phone.png"
-                style="margin-left: 20%; margin-top: -80%"
+                style="margin-left: 20%; margin-top: 0%"
                 class="img-fluid"
                 alt=""
               />

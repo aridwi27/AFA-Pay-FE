@@ -23,7 +23,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
     meta: {
@@ -103,7 +103,7 @@ const routes = [
     }
   },
   {
-    path: '/page',
+    path: '/',
     name: 'page',
     component: Landpage,
     meta: {
@@ -169,6 +169,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // console.log(to.matched[0].meta.auth)
   // console.log(Boolean(store.getters['auth/getToken']))
+  // console.log(store.getters['auth/detailUser'])
   if (to.matched[0].meta.auth) {
     if (store.getters['auth/getToken']) {
       next()

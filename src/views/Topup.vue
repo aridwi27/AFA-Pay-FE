@@ -17,9 +17,53 @@
               padding-top: 2%;
             "
           >
-            <p style="font-weight: bold">How To Top Up</p>
+            <p class="d-inline" style="font-weight: bold">How To Top Up</p>
+            <b-button
+              v-b-modal.modal-center
+              style="background: #6379f4"
+              class="btn float-right"
+            >
+              <p class="font-weight-bold mb-0">
+                <i class="fas fa-plus"></i> Top Up
+              </p>
+            </b-button>
+            <b-modal id="modal-center" centered title="Top Up">
+              <form action="" @submit.prevent="btntopup()">
+                <div class="input-group mb-3 text-secondary my-5">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text bg-white border-top-0 border-left-0 border-right-0"
+                      ><i class="fas fa-dollar-sign"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control border-top-0 border-left-0 border-right-0"
+                    placeholder="money you want to top up "
+                    v-model="topup"
+                  />
+                </div>
+              </form>
+              <template #modal-footer="{ cancel }">
+                <b-button size="" variant="" @click="cancel()">
+                  <p class="font-weight-bold mb-0">
+                    <i class="far fa-window-close"></i> Cancel
+                  </p></b-button
+                >
+                <b-button
+                  v-b-modal.modal-center
+                  style="background: #6379f4"
+                  class="btn float-right"
+                  @click="btntopup()"
+                >
+                  <p class="font-weight-bold mb-0">
+                    <i class="fas fa-plus"></i> Top Up
+                  </p>
+                </b-button>
+              </template>
+            </b-modal>
             <div
-              class="card mb-2"
+              class="card mb-2 mt-5"
               style="
                 background: #ffffff;
                 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -173,6 +217,17 @@ export default {
     headers,
     Sidebar,
     Footer
+  },
+  data () {
+    return {
+      topup: ''
+    }
+  },
+  methods: {
+    btntopup () {
+      const value = this.topup
+      alert(value)
+    }
   }
 }
 </script>
