@@ -72,6 +72,15 @@ const moduleAuth = {
           console.log(err)
         })
       })
+    },
+    changePass (context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${context.rootState.apiURL}/changepass/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
+          console.log(response)
+        }).catch((err) => {
+          console.log(err)
+        })
+      })
     }
   },
   getters: {
