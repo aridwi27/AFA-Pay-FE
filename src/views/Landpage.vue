@@ -7,12 +7,14 @@
             class="col-md-6"
             style="padding-right: 14%; padding-left: 12%; padding-top: 5%"
           >
-            <h3
-              class="font-weight-bold"
-              style="color: #6379f4; margin-bottom: 20%"
-            >
-              Zwallet
-            </h3>
+            <router-link to="/">
+              <h3
+                class="font-weight-bold"
+                style="color: #6379f4; margin-bottom: 20%"
+              >
+                Zwallet
+              </h3>
+            </router-link>
             <h1 class="font-weight-bold mb-5" style="line-height: 1.5">
               Awesome App For Saving <span style="color: #6379f4">Time.</span>
             </h1>
@@ -20,43 +22,49 @@
               We bring you a mobile app for banking problems that oftenly
               wasting much of your times.
             </p>
-            <button
-              class="btn mt-4"
-              style="
-                background: #6379f4;
-                box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-                border-radius: 12px;
-                color: #ffffff;
-              "
-            >
-              Try It Free
-            </button>
+            <router-link to="/register">
+              <button
+                class="btn mt-4"
+                style="
+                  background: #6379f4;
+                  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+                  border-radius: 12px;
+                  color: #ffffff;
+                "
+              >
+                Try It Free
+              </button>
+            </router-link>
           </div>
           <div class="col-md-6 bgpage" style="padding-right: 10%">
-            <button
-              class="btn btn-lg float-right mt-5 font-weight-bold"
-              style="
-                color: #6379f4;
-                background: #ffffff;
-                box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-                border-radius: 12px;
-              "
-            >
-              Sign Up
-            </button>
-            <button
-              class="btn btn-lg float-right mt-5 mx-5 font-weight-bold"
-              style="
-                background: #6379f4;
-                border: 2px solid #ffffff;
-                box-sizing: border-box;
-                box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-                border-radius: 12px;
-                color: #ffffff;
-              "
-            >
-              Login
-            </button>
+            <router-link to="/register">
+              <button
+                class="btn btn-lg float-right mt-5 font-weight-bold"
+                style="
+                  color: #6379f4;
+                  background: #ffffff;
+                  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+                  border-radius: 12px;
+                "
+              >
+                Sign Up
+              </button>
+            </router-link>
+            <router-link to="/login">
+              <button
+                class="btn btn-lg float-right mt-5 mx-5 font-weight-bold"
+                style="
+                  background: #6379f4;
+                  border: 2px solid #ffffff;
+                  box-sizing: border-box;
+                  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+                  border-radius: 12px;
+                  color: #ffffff;
+                "
+              >
+                Login
+              </button>
+            </router-link>
             <div>
               <img
                 src="../assets/image/png-phone.png"
@@ -298,6 +306,27 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        class="col-md-12 mt-5 py-5"
+        style="background: #6379f4; padding-left: 12%; padding-right: 12%"
+      >
+        <h3 class="font-weight-bold mb-5" style="color: #ffffff">Zwallet</h3>
+        <p style="color: rgba(239, 239, 239, 0.75); width: 25%; line-height: 2">
+          Simplify financial needs and saving much time in banking needs with
+          one single app.
+        </p>
+        <div
+          style="border: 1px solid rgba(255, 255, 255, 0.6)"
+          class="mb-4"
+        ></div>
+        <p class="d-inline" style="color: rgba(239, 239, 239, 0.75)">
+          2020 Zwallet. All right reserved.
+        </p>
+        <div class="float-right" style="color: #efefef">
+          <p class="d-inline">+62 5637 8882 9901</p>
+          <p class="ml-5 d-inline">contact@zwallet.com</p>
         </div>
       </div>
     </div>

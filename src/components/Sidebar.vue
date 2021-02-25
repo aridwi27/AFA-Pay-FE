@@ -2,15 +2,20 @@
   <div class="card border-0 h-100 shadow-nm" style="border-radius: 25px;">
     <div class="card-body px-0">
       <ul class="side-nav list-group" style="min-height: 60vh">
-        <li
-          v-for="(item, index) in navList"
-          :key="index"
-          class="list-group-item pl-4 side-nav-item"
-        >
-          <router-link :to="`${item.to}`" class="router-link-nav">
-            <i :class="`${item.icon} ml-3 mr-4`"></i
-            >{{ item.text }}</router-link
-          >
+        <li @click="goto('/home')" class="list-group-item pl-4 side-nav-item">
+            <i class="fas fa-th-large ml-3 mr-4"></i>Dashboard
+        </li>
+        <li @click="goto('/search')" class="list-group-item pl-4 side-nav-item">
+            <i class="fas fa-plus ml-3 mr-4"></i>Transfer
+        </li>
+        <li @click="goto('/topup')" class="list-group-item pl-4 side-nav-item">
+            <i class="fas fa-plus ml-3 mr-4"></i>Top Up
+        </li>
+        <li @click="goto('/profile')" class="list-group-item pl-4 side-nav-item">
+            <i class="far fa-user ml-3 mr-4"></i>Profile
+        </li>
+        <li @click="logout()" class="list-group-item pl-4 side-nav-item">
+            <i class="fas fa-sign-out-alt ml-3 mr-4"></i>Logout
         </li>
       </ul>
     </div>
@@ -21,12 +26,14 @@
 export default {
   data () {
     return {
-      navList: [{ icon: 'fas fa-th-large', text: 'Dashboard', to: '/home' },
-        { icon: 'fas fa-arrow-up', text: 'Transfer', to: '/search' },
-        { icon: 'fas fa-plus', text: 'Top Up', to: '/topup' },
-        { icon: 'far fa-user', text: 'Profile', to: '/profile' },
-        { icon: 'fas fa-sign-out-alt ', text: 'Logout', to: '/home' }
-      ]
+    }
+  },
+  methods: {
+    goto (route) {
+      this.$router.push(route)
+    },
+    logout () {
+      alert('Logout')
     }
   }
 }

@@ -11,6 +11,7 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    webURL: state => state.webURL
   },
   mutations: {
   },
