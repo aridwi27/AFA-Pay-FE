@@ -7,7 +7,7 @@ const moduleAuth = {
       token: localStorage.getItem('token') || null,
       email: localStorage.getItem('email') || null,
       id: localStorage.getItem('id') || null,
-      useraData: {}
+      userData: {}
     }
   },
   mutations: {
@@ -54,6 +54,16 @@ const moduleAuth = {
         context.commit('setToken', null)
         context.commit('setUserData', null)
         resolve(true)
+      })
+    },
+    userDetail (context) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${context.rootState.apiURL}/user/${context.state.id}`).then((response) => {
+          // resolve(response.data)
+          console.log(response)
+        }).catch((err) => {
+          console.log(err)
+        })
       })
     }
   },

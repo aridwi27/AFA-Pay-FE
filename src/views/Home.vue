@@ -21,6 +21,7 @@ import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
 import Dashboard from '../components/Dashboard'
+import { mapActions } from 'vuex'
 // import SearchUser from '../components/Searchuser'
 export default {
   components: {
@@ -29,6 +30,14 @@ export default {
     Sidebar,
     Dashboard
     // SearchUser
+  },
+  methods: {
+    ...mapActions({
+      actionGetDetail: 'auth/userDetail'
+    })
+  },
+  mounted () {
+    this.actionGetDetail()
   }
 }
 </script>
