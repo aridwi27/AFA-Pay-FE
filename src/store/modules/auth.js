@@ -32,14 +32,16 @@ const moduleAuth = {
       })
     },
     login (context, data) {
+      console.log(data)
       return new Promise((resolve, reject) => {
         axios.post(`${context.rootState.apiURL}/login`, data).then((response) => {
-          localStorage.setItem('token', response.data.data.token)
-          localStorage.setItem('email', response.data.data.emai)
-          localStorage.setItem('id', response.data.data.id)
-          context.commit('setToken', response.data.data)
-          context.commit('setUserData', response.data.data)
-          resolve(response.data.data.message)
+          console.log(response.data.message)
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('email', response.data.emai)
+          localStorage.setItem('id', response.data.id)
+          context.commit('setToken', response.data)
+          context.commit('setUserData', response.data)
+          resolve(response.data.message)
         }).catch((err) => {
           reject(err)
         })
