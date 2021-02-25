@@ -156,3 +156,8 @@ input.vue-pincode-input {
     font-weight: bold;
     line-height: 50px;
 }
+
+.bgpage {
+    background-image: url("../image/mark2.png");
+    background-repeat: no-repeat;
+}
