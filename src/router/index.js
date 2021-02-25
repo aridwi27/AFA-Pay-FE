@@ -17,6 +17,7 @@ import ChangePassword from '../views/ChangePassword.vue'
 import ChangePin from '../views/ChangePin.vue'
 import AddPhone from '../views/AddPhone.vue'
 import ManagePhone from '../views/ManagePhone.vue'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -24,87 +25,138 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      auth: false
+    }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    meta: {
+      auth: false
+    }
   },
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/history',
     name: 'History',
-    component: History
+    component: History,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/changepassword',
     name: 'ChangePassword',
-    component: ChangePassword
+    component: ChangePassword,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/changepin',
     name: 'ChangePin',
-    component: ChangePin
+    component: ChangePin,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/transfer',
     name: 'Transfer',
-    component: Transfer
+    component: Transfer,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/success',
     name: 'Success',
-    component: Success
+    component: Success,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/error',
     name: 'Error',
-    component: Error
+    component: Error,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/search',
     name: 'Search',
-    component: Search
+    component: Search,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/page',
     name: 'page',
-    component: Landpage
+    component: Landpage,
+    meta: {
+      auth: false
+    }
   },
   {
     path: '/pin',
     name: 'pin',
-    component: Pin
+    component: Pin,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/topup',
     name: 'Topup',
-    component: Topup
+    component: Topup,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/personalinfo',
     name: 'PersonalInfo',
-    component: PersonalInfo
+    component: PersonalInfo,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/addphone',
     name: 'AddPhone',
-    component: AddPhone
+    component: AddPhone,
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/managephone',
     name: 'ManagePhone',
-    component: ManagePhone
+    component: ManagePhone,
+    meta: {
+      auth: true
+    }
   }
 ]
 
@@ -112,6 +164,34 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // console.log(to.matched[0].meta.auth)
+  // console.log(Boolean(store.getters['auth/getToken']))
+  if (to.matched[0].meta.auth) {
+    if (store.getters['auth/getToken']) {
+      next()
+    } else {
+      alert('Need Login')
+      next({
+        path: '/'
+      })
+    }
+  } else {
+    // if (store.getters['auth/getToken']) {
+    //   Swal.fire({
+    //     icon: 'info',
+    //     title: '',
+    //     text: 'You already logged in!'
+    //   })
+    //   next({
+    //     path: '/product'
+    //   })
+    // } else {
+    next()
+    // }
+  }
 })
 
 export default router
