@@ -1,7 +1,8 @@
 <template>
   <div class="col-md-6 bg" style="padding-left: 7%; padding-right: 10%">
-    <h3 class="pt-5 text-left" style="color: #ffffff">Zwallet</h3>
-    <!-- <div class="phone1"></div> -->
+    <router-link to="/">
+      <h3 class="pt-5 text-left" style="color: #ffffff">Zwallet</h3>
+    </router-link>
     <img class="img-fluid" src="../assets/image/Group 57.png" alt="" />
     <h3 class="mb-5 text-left" style="color: #ffffff">
       App that Covering Banking Needs.
