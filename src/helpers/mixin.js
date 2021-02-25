@@ -10,7 +10,12 @@ export const paymentMixin = {
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true
-      })
+      }),
+      querySearch: {
+        name: '',
+        page: 1,
+        sort: 'ASC'
+      }
     }
   },
   methods: {

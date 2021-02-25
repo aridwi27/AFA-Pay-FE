@@ -31,12 +31,12 @@
           <div class="card-body">
             <div class="row">
               <div class="col-6">
-                <h1><i class="fas fa-arrow-down" style="color:green"></i></h1>
+                <h1><i class="fas fa-arrow-down text-success"></i></h1>
                 <p class="mb-0">Income</p>
                 <p class="font-weight-bold">Rp. {{formatPrice(Number(transRecap.totalIncome))}}</p>
               </div>
               <div class="col-6">
-                <h1><i class="fas fa-arrow-up" style="color:red"></i></h1>
+                <h1><i class="fas fa-arrow-up text-danger"></i></h1>
                 <p class="mb-0">Expense</p>
                 <p class="font-weight-bold">Rp. {{transRecap.totalExpense === null ? 0:formatPrice(Number(transRecap.totalExpense))}}</p>
               </div>
@@ -68,7 +68,10 @@
                         <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
                         <p v-if="item.type ==='out'" class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
                         <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        <div>
+                        <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up</small></p>
+                        <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        </div>
                       </div>
                     </div>
                   </div>
