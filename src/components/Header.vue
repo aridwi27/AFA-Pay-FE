@@ -19,7 +19,53 @@
               </tr>
             </tbody>
           </table>
-          <i class="far fa-bell float-right pl-3 mt-3"></i>
+          <b-dropdown
+            id="dropdown-right"
+            variant="link"
+            right
+            class="float-right pl-3 mt-3"
+            no-caret
+          >
+            <template #button-content>
+              <b-icon
+                icon="bell"
+                style="color: black"
+                aria-hidden="true"
+              ></b-icon>
+            </template>
+            <b-dropdown-text style="width: 500px">
+              Today
+              <div class="card" style="border-radius: 10px">
+                <div class="card-body">
+                  <i
+                    class="fas fa-arrow-down float-left fa-2x mr-3"
+                    style="color: #4cedb3"
+                  ></i>
+                  <div class="float-left">
+                    <p class="">Transfered from Joshua Lee</p>
+                    <h5 class="" style="color: #43484f">Rp220.000</h5>
+                  </div>
+                </div>
+              </div>
+            </b-dropdown-text>
+            <b-dropdown-text style="width: 500px">
+              <div class="card" style="border-radius: 10px">
+                <div class="card-body">
+                  <i
+                    class="fas fa-arrow-up float-left fa-2x mr-3"
+                    style="color: red"
+                  ></i>
+                  <div class="float-left">
+                    <p class="">Netflix subscription</p>
+                    <h5 class="" style="color: #43484f">Rp149.000</h5>
+                  </div>
+                </div>
+              </div>
+            </b-dropdown-text>
+
+            <!-- <i class="far fa-bell"></i> -->
+          </b-dropdown>
+
           <div class="float-right">
             <h5>{{ detUser.first_name }} {{ detUser.last_name }}</h5>
             <p
