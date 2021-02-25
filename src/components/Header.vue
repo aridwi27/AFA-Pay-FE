@@ -7,13 +7,17 @@
             <tbody>
               <tr>
                 <td>
-                  <h2 style="color: #6379f4; font-weight: bold" class="d-inline">
+                  <h2
+                    style="color: #6379f4; font-weight: bold"
+                    class="d-inline"
+                  >
                     Zwallet
                   </h2>
                 </td>
               </tr>
             </tbody>
           </table>
+          <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
             <h5 class="float-right">Robert Chandler</h5>
             <p class="  " style="color: rgba(58, 61, 66, 0.9)">
@@ -21,7 +25,12 @@
             </p>
           </div>
 
-          <img class="float-right img-fluid mr-3" src="../assets/image/Rectangle 25.png" alt="" />
+          <img
+            class="float-right img-fluid mr-3"
+            src="../assets/image/Rectangle 25.png"
+            alt=""
+          />
+
           <!-- <div class="col-md-4 py-4 float-right" style="">
           </div> -->
         </div>

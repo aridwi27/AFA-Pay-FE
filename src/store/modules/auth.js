@@ -35,6 +35,7 @@ const moduleAuth = {
       console.log(data)
       return new Promise((resolve, reject) => {
         axios.post(`${context.rootState.apiURL}/login`, data).then((response) => {
+<<<<<<< HEAD
           console.log(response.data.message)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('email', response.data.emai)
@@ -42,6 +43,17 @@ const moduleAuth = {
           context.commit('setToken', response.data)
           context.commit('setUserData', response.data)
           resolve(response.data.message)
+=======
+          localStorage.setItem('token', response.data.data.token)
+          localStorage.setItem('email', response.data.data.emai)
+          localStorage.setItem('id', response.data.data.id)
+          context.commit('setToken', response.data.data)
+          context.commit('setUserData', response.data.data)
+          // Cek dulu responsnenya apa, bisa pakai console.log dulu
+          // console.log(response)
+          // Kalau sudah tahu lokasi datanya, bisa langsung resolve aja, buat dikembalikan ke fungsi yang panggilnya
+          resolve(response.data)
+>>>>>>> e2a8511160f8313c3d8a9991538c6f33622df39e
         }).catch((err) => {
           reject(err)
         })
