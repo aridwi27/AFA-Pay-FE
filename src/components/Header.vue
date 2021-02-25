@@ -7,19 +7,21 @@
             <tbody>
               <tr>
                 <td>
-                  <h2
-                    style="color: #6379f4; font-weight: bold"
-                    class="d-inline"
-                  >
-                    Zwallet
-                  </h2>
+                  <router-link to="/home">
+                    <h2
+                      style="color: #6379f4; font-weight: bold"
+                      class="d-inline"
+                    >
+                      Zwallet
+                    </h2>
+                  </router-link>
                 </td>
               </tr>
             </tbody>
           </table>
           <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
-            <h5 >{{detUser.username}}</h5>
+            <h5>{{ detUser.username }}</h5>
             <p class="  " style="color: rgba(58, 61, 66, 0.9)">
               +62 8139 3877 7946
             </p>
