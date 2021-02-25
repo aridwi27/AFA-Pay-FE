@@ -176,7 +176,7 @@ router.beforeEach((to, from, next) => {
     } else {
       alert('Need Login')
       next({
-        path: '/'
+        path: '/login'
       })
     }
   } else {
