@@ -23,7 +23,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
     meta: {
@@ -103,7 +103,7 @@ const routes = [
     }
   },
   {
-    path: '/page',
+    path: '/',
     name: 'page',
     component: Landpage,
     meta: {
