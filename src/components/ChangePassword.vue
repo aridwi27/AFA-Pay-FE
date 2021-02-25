@@ -19,7 +19,7 @@
                     ></span>
                   </div>
                   <input
-                    v-model="curPassword"
+                    v-model="form.curPassword"
                     type="password"
                     class="form-control border-0 shadow-sm"
                     placeholder="Current Password"
@@ -39,7 +39,7 @@
                     ></span>
                   </div>
                   <input
-                    v-model="newPassword"
+                    v-model="form.newPassword"
                     type="password"
                     class="form-control border-0 shadow-sm"
                     placeholder="New Password"
@@ -59,7 +59,7 @@
                     ></span>
                   </div>
                   <input
-                    v-model="confNewPassword"
+                    v-model="form.confNewPassword"
                     type="password"
                     class="form-control border-0 shadow-sm"
                     placeholder="Confirm New Password"
@@ -88,38 +88,48 @@
 
 <script>
 import { paymentMixin } from '../helpers/mixin'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   mixins: [paymentMixin],
   data () {
     return {
       form: {
-        password: '',
+        curPassword: '',
         newPassword: '',
         confNewPassword: ''
       },
       amount: 0
     }
   },
+  computed: {
+    ...mapGetters({
+      detUser: 'auth/detailUser'
+    })
+  },
   methods: {
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
     },
     ...mapActions({
-      changePass: 'auth/changePass'
+      changePass: 'auth/changePass',
+      actionsDetUser: 'auth/userDetail'
     }),
     onChange () {
-      if (this.form.password && this.form.newPassword && this.form.confNewPassword) {
+      if (this.form.curPassword && this.form.newPassword && this.form.confNewPassword) {
         if (this.form.newPassword !== this.form.confNewPassword) {
           alert('New Password Not Match')
         } else {
           const data = {
-            password: this.form.password,
+            password: this.form.curPassword,
             newPassword: this.form.newPassword
           }
           this.changePass(data).then((response) => {
-            console.log(response)
+            if (response.code === 500) {
+              alert(response.message)
+            } else {
+              alert(response.message)
+            }
           }).then((err) => {
             console.log(err)
           })
@@ -128,6 +138,9 @@ export default {
         alert('All Field Required')
       }
     }
+  },
+  mounted () {
+    this.actionsDetUser()
   }
 }
 </script>

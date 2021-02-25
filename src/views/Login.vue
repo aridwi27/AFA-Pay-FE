@@ -105,8 +105,12 @@ export default {
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then((response) => {
           this.getUserDetail()
-            .then(() => {
-              this.$router.push('/home')
+            .then((response) => {
+              if (!response.pin) {
+                this.$router.push('/pin')
+              } else {
+                this.$router.push('/home')
+              }
             })
         }).catch((err) => {
           console.log(err)

@@ -73,12 +73,21 @@ const moduleAuth = {
         })
       })
     },
+    updateUser (context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${context.rootState.apiURL}/user/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
+          resolve(response.data)
+        }).catch((err) => {
+          reject(err)
+        })
+      })
+    },
     changePass (context, data) {
       return new Promise((resolve, reject) => {
         axios.patch(`${context.rootState.apiURL}/changepass/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
-          console.log(response)
+          resolve(response.data)
         }).catch((err) => {
-          console.log(err)
+          reject(err)
         })
       })
     }
