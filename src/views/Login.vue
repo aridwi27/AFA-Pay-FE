@@ -103,7 +103,6 @@ export default {
     onLogin () {
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then((response) => {
-          // Yang disini kant adi dikembalikannya itu sudah datanya saja yang json, jadi bisa langsung ditampilkan yang diinginkan
           alert(response.message)
         }).catch((err) => {
           console.log(err)
