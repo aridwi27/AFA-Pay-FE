@@ -83,8 +83,10 @@
 <script>
 import { mapActions } from 'vuex'
 import sidelog from '../components/sidelog'
+import { paymentMixin } from '../helpers/mixin'
 
 export default {
+  mixins: [paymentMixin],
   components: {
     sidelog
   },
@@ -109,6 +111,7 @@ export default {
               if (!response.pin) {
                 this.$router.push('/pin')
               } else {
+                this.swalToast('success', 'Login Success')
                 this.$router.push('/home')
               }
             })
