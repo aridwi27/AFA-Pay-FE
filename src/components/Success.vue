@@ -9,11 +9,11 @@
         <form action="">
           <div class="form-group">
             <label class="text-secondary">Amount</label>
-            <input readonly type="text" value="Rp. 100.000" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+            <input readonly type="text" :value="`Rp. ${formatPrice(transDetail.amount)}`" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
           <div class="form-group">
             <label class="text-secondary">Balance Left</label>
-            <input readonly type="text" value="Rp. 20.000" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+            <input readonly type="text" :value="`Rp. ${formatPrice(transDetail.currentCredit)}`" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
           <div class="form-group">
             <label class="text-secondary">Date & Time</label>
@@ -21,7 +21,7 @@
           </div>
           <div class="form-group">
             <label class="text-secondary">Notes</label>
-            <input readonly type="text" value="For buying some socks" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
+            <input readonly type="text" :value="`${transDetail.info}`" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
         </form>
         <p class="font-weight-bold mt-4">Transfers To</p>
@@ -50,12 +50,18 @@
 
 <script>
 import { paymentMixin } from '../helpers/mixin'
+import { mapGetters } from 'vuex'
 export default {
   mixins: [paymentMixin],
   data () {
     return {
       amount: 0
     }
+  },
+  computed: {
+    ...mapGetters({
+      transDetail: 'trans/transDetail'
+    })
   },
   methods: {
     formatAmount () {

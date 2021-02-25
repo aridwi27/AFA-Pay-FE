@@ -8,10 +8,17 @@ const moduleAuth = {
       email: localStorage.getItem('email') || null,
       id: localStorage.getItem('id') || null,
       userData: {},
-      dataDetailUser: {}
-      // dataDetailUser: {
-      //   email: email
-      // }
+      dataDetailUser: {
+        id: 0,
+        username: '',
+        first_name: '',
+        last_name: '',
+        pin: null,
+        image: 'default_photo.png',
+        email: 'user@afapay.com',
+        handphone: '+62',
+        credit: 0
+      }
     }
   },
   mutations: {
@@ -94,7 +101,8 @@ const moduleAuth = {
   },
   getters: {
     detailUser: state => state.dataDetailUser,
-    getToken: state => state.token
+    getToken: state => state.token,
+    userId: state => state.id
   }
 }
 export default moduleAuth

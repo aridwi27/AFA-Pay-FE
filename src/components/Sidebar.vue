@@ -6,7 +6,7 @@
             <i class="fas fa-th-large ml-3 mr-4"></i>Dashboard
         </li>
         <li @click="goto('/search')" class="list-group-item pl-4 side-nav-item">
-            <i class="fas fa-plus ml-3 mr-4"></i>Transfer
+            <i class="fas fa-arrow-up ml-3 mr-4"></i>Transfer
         </li>
         <li @click="goto('/topup')" class="list-group-item pl-4 side-nav-item">
             <i class="fas fa-plus ml-3 mr-4"></i>Top Up
