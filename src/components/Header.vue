@@ -19,12 +19,11 @@
           </table>
           <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
-            <h5 class="float-right">username</h5>
+            <h5 >{{detUser.username}}</h5>
             <p class="  " style="color: rgba(58, 61, 66, 0.9)">
               +62 8139 3877 7946
             </p>
           </div>
-
           <img
             class="float-right img-fluid mr-3"
             src="../assets/image/Rectangle 25.png"
@@ -39,7 +38,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -52,12 +51,14 @@ export default {
     })
   },
   methods: {
-
+    ...mapActions({
+      actionUserDetail: 'auth/userDetail'
+    })
   },
   mounted () {
-    // // console.log(this.detUser)
+    this.actionUserDetail()
     // console.log(this.$store.getters['auth/getToken'])
-    console.log(this.$store.getters['auth/detailUser'])
+    // console.log(this.$store.getters['auth/detailUser'])
   }
 }
 </script>
