@@ -98,13 +98,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: 'auth/login'
+      login: 'auth/login',
+      getUserDetail: 'auth/userDetail'
     }),
     onLogin () {
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then((response) => {
-          alert(response.message)
-          this.$router.push('/home')
+          this.getUserDetail()
+            .then(() => {
+              this.$router.push('/home')
+            })
         }).catch((err) => {
           console.log(err)
         })

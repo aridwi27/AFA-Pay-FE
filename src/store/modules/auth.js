@@ -25,8 +25,7 @@ const moduleAuth = {
       }
     },
     setDetailUser (state, payload) {
-      this.dataDetailUser = { ...state.dataDetailUser, payload }
-      // console.log(payload)
+      state.dataDetailUser = payload
     }
   },
   actions: {
@@ -67,9 +66,10 @@ const moduleAuth = {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.apiURL}/user/${context.state.id}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setDetailUser', response.data.data[0])
+          resolve(response.data.data[0])
           // resolve(response.data)
         }).catch((err) => {
-          console.log(err)
+          reject(err)
         })
       })
     }

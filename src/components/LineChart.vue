@@ -8,7 +8,7 @@ export default {
       type: String
     },
     chartData: {
-      type: Array
+      type: Object
     },
     options: {
       type: Object
