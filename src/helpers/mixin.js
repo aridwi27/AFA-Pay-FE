@@ -2,8 +2,8 @@ import Swal from 'sweetalert2'
 export const paymentMixin = {
   data () {
     return {
-      webURL: process.env.VUE_APP_WEBURL,
-      apiURL: process.env.VUE_APP_APIURL,
+      mixin_webURL: process.env.VUE_APP_WEBURL,
+      mixin_apiURL: process.env.VUE_APP_APIURL,
       Toast: Swal.mixin({
         toast: true,
         position: 'top',

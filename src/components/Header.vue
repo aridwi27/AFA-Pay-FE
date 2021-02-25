@@ -21,17 +21,19 @@
           </table>
           <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
-            <h5>{{ detUser.username }}</h5>
-            <p class="  " style="color: rgba(58, 61, 66, 0.9)">
-              +62 8139 3877 7946
+            <h5>{{detUser.first_name}} {{detUser.last_name}}</h5>
+            <p v-if="detUser.handphone.split().length > 4" class="" style="color: rgba(58, 61, 66, 0.9)">
+              {{detUser.handphone}}
             </p>
+            <router-link to="/addphone" v-else class="text-main">
+              Add Your Phone Number
+            </router-link>
           </div>
-          <img
-            class="float-right img-fluid mr-3"
-            src="../assets/image/Rectangle 25.png"
+          <img v-if="detUser.image"
+            class="float-right img-fluid mr-3" style="max-height:55px"
+            :src="`${webURL}/images/${detUser.image}`"
             alt=""
           />
-
           <!-- <div class="col-md-4 py-4 float-right" style="">
           </div> -->
         </div>
@@ -41,15 +43,17 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import { paymentMixin } from '../helpers/mixin'
 export default {
+  mixins: paymentMixin,
   data () {
     return {
     }
   },
   computed: {
     ...mapGetters({
-      detUser: 'auth/detailUser'
+      detUser: 'auth/detailUser',
+      webURL: 'webURL'
     })
   },
   methods: {
