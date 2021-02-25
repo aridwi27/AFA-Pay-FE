@@ -25,7 +25,6 @@
       </div>
     </div>
     <!-- Chart & History -->
-    {{userData}}
     <div class="row mt-4">
       <div class="col-lg-6 col-md-6 pl-0">
         <div class="card shadow-nm" style="border-radius:25px">
@@ -34,12 +33,12 @@
               <div class="col-6">
                 <h1><i class="fas fa-arrow-down" style="color:green"></i></h1>
                 <p class="mb-0">Income</p>
-                <p class="font-weight-bold">Rp. {{formatPrice(Number(transRecap.income))}}</p>
+                <p class="font-weight-bold">Rp. {{formatPrice(Number(transRecap.totalIncome))}}</p>
               </div>
               <div class="col-6">
                 <h1><i class="fas fa-arrow-up" style="color:red"></i></h1>
                 <p class="mb-0">Expense</p>
-                <p class="font-weight-bold">Rp. {{formatPrice(Number(transRecap.expense))}}</p>
+                <p class="font-weight-bold">Rp. {{transRecap.totalExpense === null ? 0:formatPrice(Number(transRecap.totalExpense))}}</p>
               </div>
             </div>
             <div class="row">
@@ -58,17 +57,17 @@
             <router-link to="/history" class="mb-0 text-main float-right">See All</router-link>
             <h5 class="font-weight-bold">Transaction History</h5>
             <div class="mt-2 hideScroll" style="overflow-y: scroll; height:50vh">
-              <div v-for="(item, index) in sampleHistory" :key="index">
+              <div v-for="(item, index) in transUser" :key="index">
                 <div class="card border-0">
                   <div class="row no-gutters">
                     <div class="col-md-2 my-auto mx-auto">
-                      <img :src="`${item.image}`" class="card-img text-center" alt="...">
+                      <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
                         <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
                         <p v-if="item.type ==='out'" class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <p class="font-weight-bold mb-0">{{item.name}}</p>
+                        <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
                       </div>
                     </div>
@@ -90,7 +89,7 @@
               style="font-size:72px;overflow-y:hidden;color:var(--main-theme);resize:none;box-shadow: none;" />
         <div class="text-center">
           <button type="submit" class="btn btnMain font-weight-bold px-4 w-25 mr-2" style="border-radius:10px">Continue</button>
-          <button @click="$bvModal.hide('modalTopUp')" class="btn btnSecondary font-weight-bold px-4 w-25 ml-2" style="border-radius:10px">Cancel</button>
+          <button type="button" @click="$bvModal.hide('modalTopUp')" class="btn btnSecondary font-weight-bold px-4 w-25 ml-2" style="border-radius:10px">Cancel</button>
         </div>
           </div>
         </div>
@@ -115,7 +114,8 @@ export default {
       userData: 'auth/detailUser',
       transRecap: 'trans/transRecap',
       transUser: 'trans/transUser',
-      userId: 'auth/userId'
+      userId: 'auth/userId',
+      webURL: 'webURL'
     })
   },
   data () {
@@ -163,7 +163,8 @@ export default {
     ...mapActions({
       getUserTrans: 'trans/getUserTrans',
       userDetail: 'auth/userDetail',
-      addTrans: 'trans/addTrans'
+      addTrans: 'trans/addTrans',
+      transDetail: 'trans/detailTrans'
     }),
     submitTopUp () {
       this.swalLoading('Creating Request')
@@ -175,12 +176,14 @@ export default {
         type: 'in'
       }
       this.addTrans(data)
-        .then((res) => {
+        .then(async (res) => {
+          await this.transDetail(res.data.id).then((result) => {
+            console.log(result)
+          })
           this.swalLoadingClose()
           this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
           this.$bvModal.hide('modalTopUp')
           this.$router.push('/success')
-          console.log(res)
         })
         .catch((err) => {
           console.log(err)

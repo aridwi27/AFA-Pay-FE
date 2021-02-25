@@ -24,16 +24,19 @@
             <input readonly type="text" :value="`${transDetail.info}`" class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
         </form>
-        <p class="font-weight-bold mt-4">Transfers To</p>
+        <div>
+          <p v-if="transDetail.info !== 'Top Up' " class="font-weight-bold mb-0 mt-4">Transfers To</p>
+          <p v-else class="font-weight-bold mb-0 mt-4">Top Up Of</p>
+        </div>
         <div class="card border-0 mb-4 shadow-sm">
           <div class="row no-gutters pr-1">
             <div class="col-md-1 my-auto mx-auto">
-              <img src="../assets/image/Rectangle 25.png" class="card-img text-center" alt="...">
+              <img :src="`${webURL}/images/${transDetailUser.targetImage}`" class="card-img text-center" alt="...">
             </div>
             <div class="col-md-11">
               <div class="card-body">
-                <p class="font-weight-bold mb-0">Samuel Suhi</p>
-                <p class="card-text mb-0"><small class="text-muted">+6289blabla</small></p>
+                <p class="font-weight-bold mb-0">{{transDetailUser.targetFirstName}} {{transDetailUser.targetLastName}}</p>
+                <p class="card-text mb-0"><small class="text-muted">+62{{transDetailUser.targetHandphone}}</small></p>
               </div>
             </div>
           </div>
@@ -41,7 +44,7 @@
         <div class="text-right mt-4 pt-4">
           <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="text-secondary fas fa-share-alt"></i></button>
           <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="fas fa-download"></i> Download PDF</button>
-          <button class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</button>
+          <router-link to="/home" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</router-link>
         </div>
       </div>
     </div>
@@ -60,7 +63,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      transDetail: 'trans/transDetail'
+      transDetail: 'trans/transDetail',
+      transDetailUser: 'trans/transDetailUser',
+      webURL: 'webURL'
     })
   },
   methods: {
