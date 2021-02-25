@@ -21,16 +21,22 @@
           </table>
           <i class="far fa-bell float-right pl-3 mt-3"></i>
           <div class="float-right">
-            <h5>{{detUser.first_name}} {{detUser.last_name}}</h5>
-            <p v-if="detUser.handphone.split().length > 4" class="" style="color: rgba(58, 61, 66, 0.9)">
-              {{detUser.handphone}}
+            <h5>{{ detUser.first_name }} {{ detUser.last_name }}</h5>
+            <p
+              v-if="detUser.handphone.length > 4"
+              class=""
+              style="color: rgba(58, 61, 66, 0.9)"
+            >
+              {{ detUser.handphone }}
             </p>
             <router-link to="/addphone" v-else class="text-main">
               Add Your Phone Number
             </router-link>
           </div>
-          <img v-if="detUser.image"
-            class="float-right img-fluid mr-3" style="max-height:55px"
+          <img
+            v-if="detUser.image"
+            class="float-right img-fluid mr-3"
+            style="max-height: 55px"
             :src="`${webURL}/images/${detUser.image}`"
             alt=""
           />
