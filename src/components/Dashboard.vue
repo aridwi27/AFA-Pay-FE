@@ -42,7 +42,11 @@
               </div>
             </div>
             <div class="row">
-              <img src="https://i.ibb.co/8gqzyhG/chart-Sample.png" class="img-fluid" alt="" >
+              <div id="chartJS" class="col">
+                <line-chart :chartData="arrPositive" :options="chartOptions" :chartColors="positiveChartColors"
+                  label="Positive" />
+              </div>
+              <!-- <img src="https://i.ibb.co/8gqzyhG/chart-Sample.png" class="img-fluid" alt="" > -->
             </div>
           </div>
         </div>
@@ -79,9 +83,15 @@
 </template>
 
 <script>
+// import axios from 'axios'
+// import moment from 'moment'
 import { paymentMixin } from '../helpers/mixin'
+import LineChart from './LineChart'
 export default {
   mixins: [paymentMixin],
+  components: {
+    LineChart
+  },
   data () {
     return {
       sampleHistory: [
@@ -90,12 +100,40 @@ export default {
         { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
         { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
         { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'out', amount: 50000 }
-      ]
+      ],
+      arrPositive: { labels: ['Sat', 'Sun', 'mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
+      positiveChartColors: {
+        borderColor: 'rgba(99, 121, 244, 1)',
+        pointBorderColor: 'rgba(99, 121, 244, 1)',
+        pointBackgroundColor: 'rgba(99, 121, 244, 1)',
+        backgroundColor: 'rgba(99, 121, 244, 1)'
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              color: 'rgba(0, 0, 0, 0)'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              color: 'rgba(0, 0, 0, 0)'
+            },
+            ticks: {
+              display: false
+            }
+          }]
+        }
+      }
     }
   }
 }
 </script>
 
 <style>
-
 </style>
