@@ -1,20 +1,41 @@
 <template>
   <div>
-    <div class="card shadow-nm" style="border-radius:25px">
+    <div class="card shadow-nm" style="border-radius: 25px">
       <div class="card-body px-5">
         <h5 class="font-weight-bold mb-4">Manage Phone Number</h5>
-        <p class="text-secondary w-50 mb-2">You can only delete the phone number and then you must add another phone number.
+        <p class="text-secondary w-50 mb-2">
+          You can only delete the phone number and then you must add another
+          phone number.
         </p>
         <!-- ConfirmPin -->
         <form action="" class="my-5">
           <div class="row">
             <div class="col-12">
               <div class="form-group mb-5">
-              <label class="text-secondary">Primary</label>
+                <label class="text-secondary">Primary</label>
                 <div class="input-group mb-3 text-secondary">
-                  <input readonly type="text" value="+62 813 9387 7946" class="font-weight-bold classname form-control border-0 shadow-sm" >
-                  <div class="input-group-prepend ">
-                    <span class="input-group-text bg-white border-0 shadow-sm"><i class="far fa-trash-alt"></i></span>
+                  <input
+                    v-if="detUser.handphone === '+62'"
+                    readonly
+                    type="text"
+                    value="-"
+                    class="font-weight-bold classname form-control border-0 shadow-sm"
+                  />
+                  <input
+                    v-else
+                    readonly
+                    type="text"
+                    :value="detUser.handphone"
+                    class="font-weight-bold classname form-control border-0 shadow-sm"
+                  />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-0 shadow-sm"
+                      ><i
+                        @click.prevent="delNumber"
+                        class="far fa-trash-alt"
+                        style="cursor: pointer"
+                      ></i
+                    ></span>
                   </div>
                 </div>
               </div>
@@ -27,6 +48,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import { paymentMixin } from '../helpers/mixin'
 export default {
   mixins: [paymentMixin],
@@ -36,14 +58,37 @@ export default {
       newCode: 0
     }
   },
+  computed: {
+    ...mapGetters({
+      detUser: 'auth/detailUser'
+    })
+  },
   methods: {
+    ...mapActions({
+      delPhone: 'auth/updateUser',
+      actionsDetUser: 'auth/userDetail'
+    }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
+    },
+    delNumber () {
+      if (this.detUser.handphone === '+62') {
+        alert('You don\'t have active phone number')
+      } else {
+        const data = {
+          handphone: '+62'
+        }
+        this.delPhone(data).then(() => {
+          alert('Successfully delete number')
+          this.actionsDetUser()
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
     }
   }
 }
 </script>
 
 <style>
-
 </style>

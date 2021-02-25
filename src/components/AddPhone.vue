@@ -81,7 +81,8 @@ export default {
         }
         this.onInsert(data).then((response) => {
           this.getDetail()
-          alert('success')
+          alert('Success add phone number')
+          this.$router.push('/personalinfo')
         }).catch((err) => {
           console.log(err)
         })
