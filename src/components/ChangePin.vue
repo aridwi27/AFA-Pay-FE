@@ -91,21 +91,22 @@ export default {
       this.amount = this.formatPrice(this.amount)
     },
     alertCode () {
-      this.pinConfirmed = !this.pinConfirmed
+      // this.pinConfirmed = !this.pinConfirmed
       const data = {
         pin: parseInt(this.newCode)
       }
-      if (this.pinConfirmed) {
-        const check = confirm('Do you want to use this pin?')
-        if (check) {
-          this.pinConfirmed = true
-        } else {
-          this.pinConfirmed = false
-        }
+      if (!this.pinConfirmed) {
+        this.swalConfirm('Do you want to use this pin?', '', 'warning').then((result) => {
+          if (result) {
+            this.pinConfirmed = true
+          } else {
+            this.pinConfirmed = false
+          }
+        })
       } else {
         if (parseInt(this.code) === this.detUser.pin) {
           this.onInsert(data).then((response) => {
-            alert('Change pin Success')
+            this.swalAlert('Change pin Success', '', 'success')
             this.pinConfirmed = true
             this.$router.push('/profile')
           }).catch((err) => {
@@ -113,7 +114,7 @@ export default {
           })
         } else {
           this.pinConfirmed = true
-          alert('Wrong current pin')
+          this.swalAlert('Wrong current pin', '', 'error')
         }
       }
     }

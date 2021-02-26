@@ -81,8 +81,7 @@ export default {
         }
         this.onInsert(data).then((response) => {
           this.getDetail()
-          alert('Success add phone number')
-          this.$router.push('/personalinfo')
+          this.swalAlert('Success add phone number', '', 'success')
         }).catch((err) => {
           console.log(err)
         })
@@ -94,7 +93,7 @@ export default {
         }
         this.onInsert(data).then((response) => {
           this.getDetail()
-          alert('success')
+          this.swalAlert('Success change phone number', '', 'success')
         }).catch((err) => {
           console.log(err)
         })

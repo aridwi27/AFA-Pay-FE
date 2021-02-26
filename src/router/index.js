@@ -19,6 +19,7 @@ import AddPhone from '../views/AddPhone.vue'
 import ManagePhone from '../views/ManagePhone.vue'
 import Status from '../views/Status.vue'
 import store from '../store/index'
+import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
 
@@ -177,13 +178,18 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // console.log(to.matched[0].meta.auth)
+  // console.log(pin)
   // console.log(Boolean(store.getters['auth/getToken']))
   // console.log(store.getters['auth/detailUser'])
   if (to.matched[0].meta.auth) {
     if (store.getters['auth/getToken']) {
       next()
     } else {
-      alert('Need Login')
+      Swal.fire({
+        icon: 'info',
+        title: 'Not Login',
+        text: 'Login Needed!'
+      })
       next({
         path: '/login'
       })

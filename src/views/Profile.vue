@@ -44,7 +44,11 @@
                 float: none;
               "
             >
-              <router-link to="/personalinfo" style="text-decoration:none" class="card-body">
+              <router-link
+                to="/personalinfo"
+                style="text-decoration: none"
+                class="card-body"
+              >
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Personal Information
                 </h5>
@@ -64,7 +68,11 @@
                 float: none;
               "
             >
-              <router-link to="/changepassword" style="text-decoration:none" class="card-body">
+              <router-link
+                to="/changepassword"
+                style="text-decoration: none"
+                class="card-body"
+              >
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Change Password
                 </h5>
@@ -84,7 +92,11 @@
                 float: none;
               "
             >
-              <router-link to="/changepin" style="text-decoration:none" class="card-body">
+              <router-link
+                to="/changepin"
+                style="text-decoration: none"
+                class="card-body"
+              >
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Change PIN
                 </h5>
@@ -122,11 +134,22 @@
 import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     headers,
     Sidebar,
     Footer
+  },
+  computed: {
+    ...mapGetters({
+      detUser: 'auth/detailUser'
+    })
+  },
+  methods: {
+    ...mapActions({
+      actionsDetUser: 'auth/userDetail'
+    })
   }
 }
 </script>

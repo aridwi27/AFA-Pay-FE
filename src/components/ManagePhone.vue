@@ -73,13 +73,13 @@ export default {
     },
     delNumber () {
       if (this.detUser.handphone === '+62') {
-        alert('You don\'t have active phone number')
+        this.swalAlert('You don\'t have active phone number', '', 'info')
       } else {
         const data = {
           handphone: '+62'
         }
         this.delPhone(data).then(() => {
-          alert('Successfully delete number')
+          this.swalAlert('Successfully delete number', '', 'success')
           this.actionsDetUser()
         }).catch((err) => {
           console.log(err)

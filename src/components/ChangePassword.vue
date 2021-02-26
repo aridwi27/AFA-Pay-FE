@@ -118,7 +118,7 @@ export default {
     onChange () {
       if (this.form.curPassword && this.form.newPassword && this.form.confNewPassword) {
         if (this.form.newPassword !== this.form.confNewPassword) {
-          alert('New Password Not Match')
+          this.swalAlert('Error Change Password', 'New Password Not Match', 'error')
         } else {
           const data = {
             password: this.form.curPassword,
@@ -126,9 +126,10 @@ export default {
           }
           this.changePass(data).then((response) => {
             if (response.code === 500) {
-              alert(response.message)
+              this.swalAlert('Error Change Password', response.message, 'error')
             } else {
-              alert(response.message)
+              this.swalAlert(response.message, '', 'success')
+              this.$router.push('/personalinfo')
             }
           }).then((err) => {
             console.log(err)

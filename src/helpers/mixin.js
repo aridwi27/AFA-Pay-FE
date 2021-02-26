@@ -48,6 +48,25 @@ export const paymentMixin = {
         text
       })
     },
+    swalConfirm (title, text, icon) {
+      return new Promise((resolve, reject) => {
+        Swal.fire({
+          title,
+          text,
+          icon,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        })
+      })
+    },
     swalLoading (title) {
       Swal.fire({
         title: title,
