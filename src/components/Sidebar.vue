@@ -24,7 +24,9 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { paymentMixin } from '../helpers/mixin'
 export default {
+  mixins: [paymentMixin],
   data () {
     return {
     }
@@ -39,11 +41,18 @@ export default {
       }
     },
     logout () {
-      const check = confirm('Do you want to logout?')
-      if (check) {
-        this.onLogout()
-        this.$router.push('/')
-      }
+      this.swalLogout('Are You Sure Want Logout?', '', 'info').then((response) => {
+        console.log(response)
+        if (response === false) {
+          console.log(response)
+        } else {
+          this.onLogout()
+          this.$router.push('/')
+        }
+      })
+      // if (check) {
+
+      // }
     }
   }
 }
