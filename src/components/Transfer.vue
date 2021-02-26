@@ -102,7 +102,8 @@ export default {
   methods: {
     ...mapActions({
       actionTrans: 'trans/addTrans',
-      transDetail: 'trans/detailTrans'
+      transDetail: 'trans/detailTrans',
+      confTrans: 'trans/confTrans'
     }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
@@ -126,7 +127,7 @@ export default {
             this.amount = 0
             this.info = ''
             this.finalData = {}
-            this.$router.push('/status')
+            this.linkTo('home')
             this.swalAlert('Transaction Success', 'Please wait for confirmation', 'info')
           })
         })

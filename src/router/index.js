@@ -26,7 +26,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
     meta: {
       auth: false
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: Register,
     meta: {
       auth: false
@@ -42,7 +42,7 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'Home',
+    name: 'home',
     component: Home,
     meta: {
       auth: true
@@ -50,7 +50,7 @@ const routes = [
   },
   {
     path: '/history',
-    name: 'History',
+    name: 'history',
     component: History,
     meta: {
       auth: true
@@ -58,7 +58,7 @@ const routes = [
   },
   {
     path: '/changepassword',
-    name: 'ChangePassword',
+    name: 'changepassword',
     component: ChangePassword,
     meta: {
       auth: true
@@ -66,7 +66,7 @@ const routes = [
   },
   {
     path: '/changepin',
-    name: 'ChangePin',
+    name: 'changepin',
     component: ChangePin,
     meta: {
       auth: true
@@ -74,7 +74,7 @@ const routes = [
   },
   {
     path: '/transfer',
-    name: 'Transfer',
+    name: 'transfer',
     component: Transfer,
     meta: {
       auth: true
@@ -82,7 +82,7 @@ const routes = [
   },
   {
     path: '/success',
-    name: 'Success',
+    name: 'success',
     component: Success,
     meta: {
       auth: true
@@ -90,7 +90,7 @@ const routes = [
   },
   {
     path: '/error',
-    name: 'Error',
+    name: 'error',
     component: Error,
     meta: {
       auth: true
@@ -98,7 +98,7 @@ const routes = [
   },
   {
     path: '/search',
-    name: 'Search',
+    name: 'search',
     component: Search,
     meta: {
       auth: true
@@ -106,7 +106,7 @@ const routes = [
   },
   {
     path: '/status',
-    name: 'Status',
+    name: 'status',
     component: Status,
     meta: {
       auth: true
@@ -130,7 +130,7 @@ const routes = [
   },
   {
     path: '/topup',
-    name: 'Topup',
+    name: 'topup',
     component: Topup,
     meta: {
       auth: true
@@ -138,7 +138,7 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'profile',
     component: Profile,
     meta: {
       auth: true
@@ -146,7 +146,7 @@ const routes = [
   },
   {
     path: '/personalinfo',
-    name: 'PersonalInfo',
+    name: 'personalinfo',
     component: PersonalInfo,
     meta: {
       auth: true
@@ -154,7 +154,7 @@ const routes = [
   },
   {
     path: '/addphone',
-    name: 'AddPhone',
+    name: 'addphone',
     component: AddPhone,
     meta: {
       auth: true
@@ -162,7 +162,7 @@ const routes = [
   },
   {
     path: '/managephone',
-    name: 'ManagePhone',
+    name: 'managephone',
     component: ManagePhone,
     meta: {
       auth: true

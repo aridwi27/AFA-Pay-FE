@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 export const paymentMixin = {
   data () {
     return {
+      confirmedId: 0,
       mixin_webURL: process.env.VUE_APP_WEBURL,
       mixin_apiURL: process.env.VUE_APP_APIURL,
       Toast: Swal.mixin({
@@ -79,6 +80,11 @@ export const paymentMixin = {
     },
     swalLoadingClose () {
       Swal.close()
+    },
+    linkTo (route) {
+      if (this.$route.name !== route) {
+        this.$router.push(`/${route}`)
+      }
     }
   }
 }
