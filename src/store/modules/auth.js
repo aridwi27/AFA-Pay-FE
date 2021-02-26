@@ -41,7 +41,7 @@ const moduleAuth = {
   },
   mutations: {
     setToken (state, payload) {
-      state.token = payload.token
+      state.token = payload
     },
     setUserData (state, payload) {
       state.userData = {
@@ -75,9 +75,10 @@ const moduleAuth = {
           localStorage.setItem('token', response.data.data.token)
           localStorage.setItem('email', response.data.data.email)
           localStorage.setItem('id', response.data.data.id)
-          context.commit('setToken', response.data.data)
+          context.commit('setToken', response.data.data.token)
           context.commit('setUserData', response.data.data)
-          resolve(response.data.data)
+          resolve(response.data.message)
+          // console.log(response.data.message)
         }).catch((err) => {
           reject(err)
         })
@@ -95,9 +96,10 @@ const moduleAuth = {
     },
     userDetail (context) {
       return new Promise((resolve, reject) => {
-        axios.get(`${context.rootState.apiURL}/user/${localStorage.getItem('id')}`, { headers: { token: context.state.token } }).then((response) => {
+        axios.get(`${context.rootState.apiURL}/user/${localStorage.id}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setDetailUser', response.data.data[0])
           resolve(response.data.data[0])
+          console.log(response.data.data[0])
           // resolve(response.data)
         }).catch((err) => {
           reject(err)
@@ -105,8 +107,9 @@ const moduleAuth = {
       })
     },
     updateUser (context, data) {
+      console.log(data)
       return new Promise((resolve, reject) => {
-        axios.patch(`${context.rootState.apiURL}/user/${localStorage.getItem('id')}`, data, { headers: { token: context.state.token } }).then((response) => {
+        axios.patch(`${context.rootState.apiURL}/user/${localStorage.id}`, data, { headers: { token: context.state.token } }).then((response) => {
           resolve(response.data)
         }).catch((err) => {
           reject(err)

@@ -105,20 +105,24 @@ export default {
     }),
     onLogin () {
       if (this.form.username !== '' && this.form.password !== '') {
-        this.login(this.form).then(() => {
-          this.getUserDetail()
-            .then((response) => {
-              console.log(response)
-              if (!response.pin) {
-                this.swalToast('success', 'Login Success')
-                this.$router.push('/pin')
-              } else {
-                this.swalToast('success', 'Login Success')
-                this.$router.push('/home')
-              }
-            })
-        }).catch((err) => {
-          console.log(err)
+        this.login(this.form).then(async (response) => {
+          if (response === "Email hasn't been registered") {
+            this.$swal.close()
+            this.$swal('Data Not Register', 'Please Sign Up ', 'error')
+          } else if (response === 'Wrong Password') {
+            this.$swal.close()
+            this.$swal('Wrong Password', 'Please Check Your Password ', 'error')
+          } else {
+            await this.getUserDetail()
+              .then((response) => {
+                if (response.pin === null) {
+                  this.$router.push('/pin')
+                } else {
+                  this.swalToast('success', 'Login Success')
+                  this.$router.push('/home')
+                }
+              })
+          }
         })
       } else {
         alert('All Field Required')
