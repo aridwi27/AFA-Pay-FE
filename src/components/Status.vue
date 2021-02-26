@@ -2,8 +2,6 @@
   <div>
     <div class="card shadow-nm" style="border-radius:25px">
       <div class="card-body px-5">
-        {{transDetailUser}}
-        {{transDetail}}
         <div class="text-center">
           <div v-if="transDetailUser.status === 'Success'">
             <h1 class="mt-4"><i class="text-success fas fa-2x fa-check-circle"></i></h1>
@@ -58,7 +56,8 @@
           <router-link to="/home" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</router-link>
         </div>
         <div class="text-right mt-4 pt-4" v-if="transDetailUser.status === 'Pending'">
-          <button class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Confirm Transation</button>
+          <button @click="transConfirm('Canceled')" class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px">Cancel Transation</button>
+          <button @click="transConfirm('Success')" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Confirm Transation</button>
         </div>
       </div>
     </div>
@@ -67,15 +66,12 @@
 
 <script>
 import { paymentMixin } from '../helpers/mixin'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   mixins: [paymentMixin],
   data () {
     return {
-      amount: 0,
-      confirmData: {
-        status: 'Success'
-      }
+      amount: 0
     }
   },
   computed: {
@@ -86,8 +82,30 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      confTrans: 'trans/confTrans',
+      getTransDetail: 'trans/detailTrans'
+    }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
+    },
+    transConfirm (status) {
+      const data = {
+        status
+      }
+      this.confTrans(data)
+        .then(async (res) => {
+          await this.getTransDetail(this.transDetailUser.id)
+            .then((res2) => {
+              console.log(res2)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

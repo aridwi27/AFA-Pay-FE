@@ -8,7 +8,12 @@ const moduleTrans = {
         expense: 0
       },
       userTrans: [],
-      detailTransUser: {},
+      detailTransUser: {
+        id: 0,
+        amount: 0,
+        currentCredit: 0,
+        info: ''
+      },
       detailTrans: {
         amount: 0,
         currentCredit: 0,
@@ -64,6 +69,19 @@ const moduleTrans = {
           .then((response) => {
             context.commit('setDetailTransUser', response.data.data[0])
             resolve(response.data.data[0])
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    confTrans (context, data) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${context.rootState.apiURL}/transaction/${context.state.detailTransUser.id}`, data, { headers: { token: context.rootState.auth.token } })
+          .then((response) => {
+            // context.commit('setDetailTransUser', response.data.data[0])
+            // resolve(response.data.data[0])
+            resolve(response.data)
           })
           .catch((err) => {
             reject(err)
