@@ -2,7 +2,7 @@
   <div>
     <div class="h-100 bg-main">
       <headers />
-      <div class="container py-5">
+      <div class="container py-4">
         <div class="row">
           <div class="col-md-3">
             <!-- INi adalah Sidebar -->

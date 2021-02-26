@@ -7,7 +7,17 @@ const moduleAuth = {
       token: localStorage.getItem('token') || null,
       email: localStorage.getItem('email') || null,
       id: localStorage.getItem('id') || null,
-      userData: {},
+      userData: {
+        id: 0,
+        username: '',
+        first_name: '',
+        last_name: '',
+        pin: null,
+        image: 'default_photo.png',
+        email: 'user@afapay.com',
+        handphone: '+62',
+        credit: 0
+      },
       dataDetailUser: {
         id: 0,
         username: '',
@@ -18,6 +28,14 @@ const moduleAuth = {
         email: 'user@afapay.com',
         handphone: '+62',
         credit: 0
+      },
+      userSearch: [],
+      targetData: {
+        image: 'default_photo.png',
+        id: 0,
+        first_name: '',
+        last_name: '',
+        handphone: ''
       }
     }
   },
@@ -33,6 +51,12 @@ const moduleAuth = {
     },
     setDetailUser (state, payload) {
       state.dataDetailUser = payload
+    },
+    setSearchUser (state, payload) {
+      state.userSearch = payload
+    },
+    setTargetData (state, payload) {
+      state.targetData = payload
     }
   },
   actions: {
@@ -97,12 +121,27 @@ const moduleAuth = {
           reject(err)
         })
       })
+    },
+    searchUser (context, data) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.state.token } }).then((response) => {
+          context.commit('setSearchUser', response.data.data)
+          resolve(response.data)
+        }).catch((err) => {
+          reject(err)
+        })
+      })
+    },
+    selectTarget (context, data) {
+      context.commit('setTargetData', data)
     }
   },
   getters: {
     detailUser: state => state.dataDetailUser,
     getToken: state => state.token,
-    userId: state => state.id
+    userId: state => state.id,
+    userSearch: state => state.userSearch,
+    targetData: state => state.targetData
   }
 }
 export default moduleAuth

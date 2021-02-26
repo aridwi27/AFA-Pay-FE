@@ -47,14 +47,14 @@
           <div class="card-body">
             <div class="row">
               <div class="col-6">
-                <h1><i class="fas fa-arrow-down" style="color: green"></i></h1>
+                <h1><i class="fas fa-arrow-down text-success"></i></h1>
                 <p class="mb-0">Income</p>
                 <p class="font-weight-bold">
                   Rp. {{ formatPrice(Number(transRecap.totalIncome)) }}
                 </p>
               </div>
               <div class="col-6">
-                <h1><i class="fas fa-arrow-up" style="color: red"></i></h1>
+                <h1><i class="fas fa-arrow-up text-danger"></i></h1>
                 <p class="mb-0">Expense</p>
                 <p class="font-weight-bold">
                   Rp.
@@ -75,7 +75,6 @@
                   label="Positive"
                 />
               </div>
-              <!-- <img src="https://i.ibb.co/8gqzyhG/chart-Sample.png" class="img-fluid" alt="" > -->
             </div>
           </div>
         </div>
@@ -92,7 +91,7 @@
               style="overflow-y: scroll; height: 50vh"
             >
               <div v-for="(item, index) in transUser" :key="index">
-                <div class="card border-0">
+                <div v-if="item.status === 'Pending'" @click="popUpConfirm(item.id)" class="card border-0">
                   <div class="row no-gutters">
                     <div class="col-md-2 my-auto mx-auto">
                       <img
@@ -103,24 +102,43 @@
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
-                        <p
-                          v-if="item.type === 'in'"
-                          class="float-right font-weight-bold mb-0 text-success"
-                        >
-                          + Rp.{{ formatPrice(Number(item.amount)) }}
-                        </p>
-                        <p
-                          v-if="item.type === 'out'"
-                          class="float-right font-weight-bold mb-0 text-danger"
-                        >
-                          - Rp.{{ formatPrice(Number(item.amount)) }}
-                        </p>
-                        <p class="font-weight-bold mb-0">
-                          {{ item.targetFirstName }} {{ item.targetLastName }}
-                        </p>
-                        <p class="card-text mb-0">
-                          <small class="text-muted">{{ item.status }}</small>
-                        </p>
+                        <div>
+                          <p class="float-right font-weight-bold mb-0 text-warning">
+                            Rp.{{formatPrice(Number(item.amount))}}</p>
+                        </div>
+                        <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                        <div>
+                          <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
+                              Up</small></p>
+                          <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-else @click="detailTrans(item.id)" class="card border-0">
+                  <div class="row no-gutters">
+                    <div class="col-md-2 my-auto mx-auto">
+                      <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
+                    </div>
+                    <div class="col-md-10">
+                      <div class="card-body">
+                        <div>
+                          <p v-if="item.status ==='Canceled'" class="float-right font-weight-bold mb-0 text-secondary">
+                            Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <div v-else>
+                            <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
+                              Rp.{{formatPrice(Number(item.amount))}}</p>
+                            <p v-else class="float-right font-weight-bold mb-0 text-danger">-
+                              Rp.{{formatPrice(Number(item.amount))}}</p>
+                          </div>
+                        </div>
+                        <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                        <div>
+                          <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
+                              Up</small></p>
+                          <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -171,6 +189,41 @@
         </div>
       </form>
     </b-modal>
+     <b-modal id="confirmTrans" hide-header hide-footer>
+      <form @submit.prevent="submitTopUp()" class="my-4">
+        <div class="row">
+          <div class="col">
+            <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
+            <table class="table-borderless table w-100 my-3">
+              <tr>
+                <td class="w-25 py-0 font-weight-bold">From</td>
+                <td class="w-75 py-0">{{pendingData.userFirstName}} {{pendingData.userLastName}}</td>
+              </tr>
+              <tr>
+                <td class="w-25 py-0 font-weight-bold">To</td>
+                <td class="w-75 py-0">{{pendingData.targetFirstName}} {{pendingData.targetLastName}}</td>
+              </tr>
+              <tr>
+                <td class="w-25 py-0 font-weight-bold">Date</td>
+                <td class="w-75 py-0">{{formatDate(pendingData.created_at)}}</td>
+              </tr>
+              <tr>
+                <td class="w-25 py-0 font-weight-bold">Info</td>
+                <td class="w-75 py-0">{{pendingData.info}}</td>
+              </tr>
+              <tr>
+                <td class="w-25 py-0 font-weight-bold">Amount</td>
+                <td class="w-75 py-0">{{pendingData.amount}}</td>
+              </tr>
+            </table>
+        <div class="text-center">
+          <button type="button" @click="confirmPendingTrans('Success')" class="btn btnMain font-weight-bold px-4 w-25 mr-2 font-weight-bold" style="border-radius:10px">Confirm</button>
+          <button type="button" @click="confirmPendingTrans('Canceled')" class="btn btnSecondary font-weight-bold px-4 w-25 ml-2" style="border-radius:10px">Cancel</button>
+        </div>
+          </div>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
@@ -191,19 +244,14 @@ export default {
       transRecap: 'trans/transRecap',
       transUser: 'trans/transUser',
       userId: 'auth/userId',
-      webURL: 'webURL'
+      webURL: 'webURL',
+      pendingData: 'trans/transDetailUser'
     })
   },
   data () {
     return {
+      confirmedId: 0,
       amount: 0,
-      sampleHistory: [
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'out', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'in', amount: 50000 },
-        { image: '../img/Rectangle%2025.161e8c33.png', name: 'Samuel Suhi', status: 'Transfer', type: 'out', amount: 50000 }
-      ],
       arrPositive: { labels: ['Sat', 'Sun', 'mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
       positiveChartColors: {
         borderColor: 'rgba(99, 121, 244, 1)',
@@ -240,7 +288,8 @@ export default {
       getUserTrans: 'trans/getUserTrans',
       userDetail: 'auth/userDetail',
       addTrans: 'trans/addTrans',
-      transDetail: 'trans/detailTrans'
+      transDetail: 'trans/detailTrans',
+      confTrans: 'trans/confTrans'
     }),
     submitTopUp () {
       this.swalLoading('Creating Request')
@@ -254,22 +303,59 @@ export default {
       this.addTrans(data)
         .then(async (res) => {
           await this.transDetail(res.data.id).then((result) => {
-            console.log(result)
+            this.swalLoadingClose()
+            this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
+            this.$bvModal.hide('modalTopUp')
+            this.$router.push('/status')
+            this.amount = 0
           })
-          this.swalLoadingClose()
-          this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
-          this.$bvModal.hide('modalTopUp')
-          this.$router.push('/success')
         })
         .catch((err) => {
           console.log(err)
         })
-      // console.log(data)
-      // this.amount = 0
+    },
+    detailTrans (id) {
+      this.transDetail(id)
+        .then((res) => {
+          this.$router.push('/status')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    popUpConfirm (id) {
+      this.confirmedId = id
+      this.transDetail(id)
+        .then((res) => {
+          this.$bvModal.show('confirmTrans')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    confirmPendingTrans (status) {
+      const data = {
+        status
+      }
+      this.confTrans(data)
+        .then(async (res) => {
+          await this.transDetail(this.confirmedId)
+            .then(async (res2) => {
+              this.$bvModal.hide('confirmTrans')
+              this.swalAlert(`Transaction ${status}`, 'The Credit Already Transfered', 'success')
+              await this.$router.push('/status')
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   mounted () {
-    this.getUserTrans()
+    this.getUserTrans(this.queryTrans)
   }
 }
 </script>

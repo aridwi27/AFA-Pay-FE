@@ -10,13 +10,30 @@ export const paymentMixin = {
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true
-      })
+      }),
+      querySearch: {
+        name: '',
+        page: 1,
+        sort: 'ASC'
+      },
+      queryTrans: {
+        page: 1,
+        sort: 'desc'
+      },
+      arrMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']
     }
   },
   methods: {
     // Format Currency
     formatPrice (value) {
       return value.toLocaleString().replace(/,/g, '.')
+    },
+    formatDate (date) {
+      const month = this.arrMonth[new Date(date).getDay()]
+      const dates = new Date(date).getMonth() + 1
+      const years = new Date(date).getFullYear()
+      const time = new Date(date).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+      return (`${month} ${dates}, ${years} - ${time}`)
     },
     swalToast (icon, title) {
       this.Toast.fire({

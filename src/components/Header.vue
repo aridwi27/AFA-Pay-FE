@@ -97,7 +97,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import { paymentMixin } from '../helpers/mixin'
 export default {
-  mixins: paymentMixin,
+  mixins: [paymentMixin],
   data () {
     return {
       income: '30000',
