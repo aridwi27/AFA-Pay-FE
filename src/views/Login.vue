@@ -108,6 +108,7 @@ export default {
         this.login(this.form).then(() => {
           this.getUserDetail()
             .then((response) => {
+              console.log(response)
               if (!response.pin) {
                 this.swalToast('success', 'Login Success')
                 this.$router.push('/pin')
