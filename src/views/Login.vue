@@ -104,6 +104,7 @@ export default {
       getUserDetail: 'auth/userDetail'
     }),
     onLogin () {
+      this.swalLoading('Process Login')
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then(async (response) => {
           if (response === "Email hasn't been registered") {
