@@ -118,7 +118,7 @@ const moduleAuth = {
     },
     changePass (context, data) {
       return new Promise((resolve, reject) => {
-        axios.patch(`${context.rootState.apiURL}/changepass/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
+        axios.patch(`${context.rootState.apiURL}/changepass/${localStorage.getItem('id')}`, data, { headers: { token: context.state.token } }).then((response) => {
           resolve(response.data)
         }).catch((err) => {
           reject(err)

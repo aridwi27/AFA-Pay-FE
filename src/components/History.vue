@@ -7,86 +7,53 @@
           <p class="text-secondary"> This Week</p>
           <!-- {{transUser}} -->
           <div v-for="(item, index) in transUser" :key="index">
-            <div v-if="item.status === 'Pending'" @click="popUpConfirm(item.id)" class="card border-0">
-              <div class="row no-gutters">
-                <div class="col-md-1 my-auto mx-auto">
-                  <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="..." />
-                </div>
-                <div class="col-md-11">
-                  <div class="card-body">
-                    <div>
-                      <p class="float-right font-weight-bold mb-0 text-warning">
-                        Rp.{{formatPrice(Number(item.amount))}}</p>
+            <div class="card border-0">
+                  <div class="row no-gutters">
+                    <div class="col-md-1 my-auto mx-auto">
+                      <img v-if="Number(loginId) === Number(item.target_id)" :src="`${webURL}/images/${item.userImage}`" class="card-img text-center" alt="...">
+                      <img v-else :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
                     </div>
-                    <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                    <div>
-                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
-                          Up</small></p>
-                      <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-else @click="detailTrans(item.id)" class="card border-0">
-              <div class="row no-gutters">
-                <div class="col-md-1 my-auto mx-auto">
-                  <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
-                </div>
-                <div class="col-md-11">
-                  <div class="card-body">
-                    <div>
-                      <p v-if="item.status ==='Canceled'" class="float-right font-weight-bold mb-0 text-secondary">
-                        Rp.{{formatPrice(Number(item.amount))}}</p>
-                      <div v-else>
-                        <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <p v-else class="float-right font-weight-bold mb-0 text-danger">-
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
+                    <!-- Start Canceled -->
+                    <div v-if="item.status === 'Canceled'" class="col-md-11">
+                      <div @click="detailTrans(item.id)" class="card-body">
+                        <p class="float-right font-weight-bold mb-0 text-secondary">Rp.{{formatPrice(Number(item.amount))}}</p>
+                        <div>
+                          <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
+                          <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                        </div>
+                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
                       </div>
                     </div>
-                    <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                    <div>
-                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
-                          Up</small></p>
-                      <p v-else-if="item.status === 'Canceled'" class="card-text mb-0"><small
-                          class="text-muted">Canceled</small></p>
-                      <p v-else class="card-text mb-0"><small class="text-muted">Transfer</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Modal Confirm -->
-            <!-- <div @click="detailTrans(item.id)" class="card border-0 mb-3">
-              <div class="row no-gutters">
-                <div class="col-md-1 my-auto mx-auto">
-                  <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
-                </div>
-                <div class="col-md-11">
-                  <div class="card-body">
-                    <div>
-                      <p v-if="item.status ==='Canceled'" class="float-right font-weight-bold mb-0 text-secondary">
-                        Rp.{{formatPrice(Number(item.amount))}}</p>
-                      <div v-else>
-                        <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <p v-else class="float-right font-weight-bold mb-0 text-danger">-
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
+                    <!-- End Canceled -->
+                    <!-- Start Pending -->
+                    <div v-else-if="item.status === 'Pending'" class="col-md-11">
+                      <div @click="popUpConfirm(item.id)" class="card-body">
+                        <p class="float-right font-weight-bold mb-0 text-warning">Rp.{{formatPrice(Number(item.amount))}}</p>
+                        <div>
+                          <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
+                          <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                        </div>
+                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
                       </div>
                     </div>
-                    <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                    <div>
-                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
-                          Up</small></p>
-                      <p v-else-if="item.status === 'Canceled'" class="card-text mb-0"><small
-                          class="text-muted">Canceled</small></p>
-                      <p v-else class="card-text mb-0"><small class="text-muted">Transfer</small></p>
+                    <!-- End Pending -->
+                    <!-- Start Success -->
+                    <div v-else class="col-md-11">
+                      <div @click="detailTrans(item.id)" class="card-body">
+                        <div>
+                          <p v-if="Number(loginId) === Number(item.target_id)" class="float-right font-weight-bold mb-0 text-success">Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <p v-else class="float-right font-weight-bold mb-0 text-danger">Rp.{{formatPrice(Number(item.amount))}}</p>
+                        </div>
+                        <div>
+                          <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
+                          <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                        </div>
+                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                      </div>
                     </div>
+                    <!-- EndSuccess -->
                   </div>
                 </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -141,6 +108,7 @@ export default {
   mixins: [paymentMixin],
   data () {
     return {
+      loginId: localStorage.getItem('id')
     }
   },
   computed: {
