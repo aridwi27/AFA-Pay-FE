@@ -126,7 +126,7 @@ export default {
             this.amount = 0
             this.info = ''
             this.finalData = {}
-            this.$router.push('/status')
+            this.linkTo('home')
             this.swalAlert('Transaction Success', 'Please wait for confirmation', 'info')
           })
         })

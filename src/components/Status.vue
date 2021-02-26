@@ -8,9 +8,9 @@
             <p class="font-weight-bold">Transaction Success</p>
           </div>
           <div v-else>
-            <h1 class="mt-4"><i class="text-warning far fa-2x fa-clock"></i></h1>
-            <p class="font-weight-bold">Transaction Pending</p>
-            <p class="px-5 text-secondary">Your transaction currently pending, you either your target should confirm this transaction by pressing confirmation button on the bottom</p>
+            <h1 class="mt-4"><i class="text-secondary far fa-2x fa-check-circle"></i></h1>
+            <p class="font-weight-bold">Transaction Canceled</p>
+            <p class="px-5 text-secondary">Your transaction are canceled by yourself or your friends.</p>
           </div>
         </div>
         <form action="">
@@ -55,9 +55,10 @@
           <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="fas fa-download"></i> Download PDF</button>
           <router-link to="/home" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</router-link>
         </div>
-        <div class="text-right mt-4 pt-4" v-if="transDetailUser.status === 'Pending'">
-          <button @click="transConfirm('Canceled')" class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px">Cancel Transation</button>
-          <button @click="transConfirm('Success')" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Confirm Transation</button>
+         <div class="text-right mt-4 pt-4" v-else>
+          <!-- <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="text-secondary fas fa-share-alt"></i></button> -->
+          <!-- <button class="btn ml-4 px-4 py-3 btnSecondary" style="border-radius:10px"><i class="fas fa-download"></i> Download PDF</button> -->
+          <router-link to="/home" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home</router-link>
         </div>
       </div>
     </div>

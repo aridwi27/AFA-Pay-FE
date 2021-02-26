@@ -60,6 +60,11 @@ export const paymentMixin = {
     },
     swalLoadingClose () {
       Swal.close()
+    },
+    linkTo (route) {
+      if (this.$route.name !== route) {
+        this.$router.push(`/${route}`)
+      }
     }
   }
 }

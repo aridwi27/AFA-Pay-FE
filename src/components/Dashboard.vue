@@ -13,7 +13,7 @@
               <h1 class="font-weight-bold">
                 Rp. {{ formatPrice(Number(userData.credit)) }}
               </h1>
-              <p>+62{{ userData.handphone }}</p>
+              <p>{{ userData.handphone }}</p>
             </div>
             <div class="col-md-4 col-lg-2 my-auto">
               <div class="d-flex flex-column align-items-center">
@@ -137,7 +137,8 @@
                         <div>
                           <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
                               Up</small></p>
-                          <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                          <p v-else-if="item.status === 'Canceled'" class="card-text mb-0"><small class="text-muted">Canceled</small></p>
+                          <p v-else class="card-text mb-0"><small class="text-muted">Transfer</small></p>
                         </div>
                       </div>
                     </div>
@@ -235,6 +236,7 @@ import { paymentMixin } from '../helpers/mixin'
 import LineChart from './LineChart'
 export default {
   mixins: [paymentMixin],
+  name: 'Dashboard',
   components: {
     LineChart
   },
@@ -303,10 +305,12 @@ export default {
       this.addTrans(data)
         .then(async (res) => {
           await this.transDetail(res.data.id).then((result) => {
+            // console.log(res)
             this.swalLoadingClose()
             this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
             this.$bvModal.hide('modalTopUp')
-            this.$router.push('/status')
+            // this.$router.push('/status')
+            this.linkTo('status')
             this.amount = 0
           })
         })
@@ -317,7 +321,8 @@ export default {
     detailTrans (id) {
       this.transDetail(id)
         .then((res) => {
-          this.$router.push('/status')
+          // this.$router.push('/status')
+          this.linkTo('status')
         })
         .catch((err) => {
           console.log(err)
@@ -343,7 +348,7 @@ export default {
             .then(async (res2) => {
               this.$bvModal.hide('confirmTrans')
               this.swalAlert(`Transaction ${status}`, 'The Credit Already Transfered', 'success')
-              await this.$router.push('/status')
+              this.linkTo('status')
             })
             .catch((err) => {
               console.log(err)

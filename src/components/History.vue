@@ -12,24 +12,26 @@
                   <img :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
                 </div>
                 <div class="col-md-11">
-                  <div class="card-body">
-                    <div>
-                      <p v-if="item.status ==='Pending'" class="float-right font-weight-bold mb-0 text-warning">
-                        Rp.{{formatPrice(Number(item.amount))}}</p>
-                      <div v-else>
-                        <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
-                        <p v-else class="float-right font-weight-bold mb-0 text-danger">-
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
-                      </div>
-                    </div>
-                    <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                    <div>
-                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up</small>
-                      </p>
-                      <p v-else class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
-                    </div>
-                  </div>
+                 <div class="card-body">
+                   <div>
+                     <p v-if="item.status ==='Canceled'" class="float-right font-weight-bold mb-0 text-secondary">
+                       Rp.{{formatPrice(Number(item.amount))}}</p>
+                     <div v-else>
+                       <p v-if="item.type ==='in'" class="float-right font-weight-bold mb-0 text-success">+
+                         Rp.{{formatPrice(Number(item.amount))}}</p>
+                       <p v-else class="float-right font-weight-bold mb-0 text-danger">-
+                         Rp.{{formatPrice(Number(item.amount))}}</p>
+                     </div>
+                   </div>
+                   <p class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+                   <div>
+                     <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top
+                         Up</small></p>
+                     <p v-else-if="item.status === 'Canceled'" class="card-text mb-0"><small
+                         class="text-muted">Canceled</small></p>
+                     <p v-else class="card-text mb-0"><small class="text-muted">Transfer</small></p>
+                   </div>
+                 </div>
                 </div>
               </div>
             </div>
