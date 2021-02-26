@@ -57,29 +57,23 @@
                 <h1><i class="fas fa-arrow-down text-success"></i></h1>
                 <p class="mb-0">Income</p>
                 <p class="font-weight-bold">
-                  Rp. {{ formatPrice(Number(transRecap.totalIncome)) }}
+                  Rp.{{ transRecap.totalIncome === undefined ? 0 : formatPrice(Number(transRecap.totalIncome))}}
                 </p>
               </div>
               <div class="col-6">
                 <h1><i class="fas fa-arrow-up text-danger"></i></h1>
                 <p class="mb-0">Expense</p>
                 <p class="font-weight-bold">
-                  Rp.
-                  {{
-                    transRecap.totalExpense === null
-                      ? 0
-                      : formatPrice(Number(transRecap.totalExpense))
-                  }}
+                  Rp.{{ transRecap.totalExpense === undefined ? 0 : formatPrice(Number(transRecap.totalExpense))}}
                 </p>
               </div>
             </div>
             <div class="row">
-              <div id="chartJS" class="col">
+              <div v-if="transUser.length > 0" id="chartJS" class="col">
                 <line-chart
                   :chartData="arrPositive"
                   :options="chartOptions"
                   :chartColors="positiveChartColors"
-                  label="Positive"
                 />
               </div>
             </div>
@@ -93,10 +87,7 @@
               >See All</router-link
             >
             <h5 class="font-weight-bold">Transaction History</h5>
-            <div
-              class="mt-2 hideScroll"
-              style="overflow-y: scroll; height: 50vh"
-            >
+            <div v-if="transUser.length > 0" class="mt-2 hideScroll" style="overflow-y: scroll; height: 50vh">
               <div v-for="(item, index) in transUser" :key="index">
                 <div class="card border-0">
                   <div class="row no-gutters">
@@ -147,13 +138,16 @@
                 </div>
               </div>
             </div>
+            <div v-else class="text-center">
+              <h5 class="font-weight-bold my-4 text-secondary">You Have No Transaction</h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
     </div>
     <!-- Modal TopUp -->
-    <b-modal id="modalTopUp" title="Top Up Credit" hide-header hide-footer>
+    <b-modal id="modalTopUp" title="Top Up Credit" centered hide-header hide-footer>
       <form @submit.prevent="submitTopUp()" class="my-4">
         <div class="row">
           <div class="col">
@@ -192,12 +186,12 @@
         </div>
       </form>
     </b-modal>
-     <b-modal id="confirmTrans" hide-header hide-footer>
+    <b-modal id="confirmTrans" centered hide-header hide-footer>
       <form @submit.prevent="submitTopUp()" class="my-4">
         <div class="row">
           <div class="col">
             <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
-            <table class="table-borderless table w-100 my-3">
+            <table class="table-borderless table w-100 my-3 font-nunito">
               <tr>
                 <td class="w-25 py-0 font-weight-bold">From</td>
                 <td class="w-75 py-0">{{pendingData.userFirstName}} {{pendingData.userLastName}}</td>
@@ -216,7 +210,7 @@
               </tr>
               <tr>
                 <td class="w-25 py-0 font-weight-bold">Amount</td>
-                <td class="w-75 py-0">{{pendingData.amount}}</td>
+                <td class="w-75 py-0">Rp.{{formatPrice(Number(pendingData.amount))}}</td>
               </tr>
             </table>
         <div class="text-center">
@@ -274,12 +268,14 @@ export default {
         scales: {
           xAxes: [{
             gridLines: {
-              color: 'rgba(0, 0, 0, 0)'
+              // color: 'rgba(0, 0, 0, 0)'
+              display: false
             }
           }],
           yAxes: [{
             gridLines: {
-              color: 'rgba(0, 0, 0, 0)'
+              // color: 'rgba(0, 0, 0, 0)'
+              display: false
             },
             ticks: {
               display: false
@@ -300,8 +296,8 @@ export default {
     submitTopUp () {
       this.swalLoading('Creating Request')
       const data = {
-        user_id: this.userId,
-        target_id: this.userId,
+        user_id: Number(localStorage.getItem('id')),
+        target_id: Number(localStorage.getItem('id')),
         amount: this.amount,
         info: 'Top Up',
         type: 'in'
@@ -309,11 +305,9 @@ export default {
       this.addTrans(data)
         .then(async (res) => {
           await this.transDetail(res.data.id).then((result) => {
-            // console.log(res)
             this.swalLoadingClose()
             this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
             this.$bvModal.hide('modalTopUp')
-            // this.$router.push('/status')
             this.linkTo('status')
             this.amount = 0
           })
@@ -325,7 +319,6 @@ export default {
     detailTrans (id) {
       this.transDetail(id)
         .then((res) => {
-          // this.$router.push('/status')
           this.linkTo('status')
         })
         .catch((err) => {

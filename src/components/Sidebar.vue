@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0 h-100 shadow-nm" style="border-radius: 25px">
     <div class="card-body px-0">
-      <ul class="side-nav list-group" style="min-height: 60vh">
+      <ul class="side-nav list-group" style="min-height: 40vh">
         <li @click="goto('home')" class="list-group-item pl-4 side-nav-item">
           <i class="fas fa-th-large ml-3 mr-4"></i>Dashboard
         </li>
