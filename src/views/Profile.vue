@@ -25,13 +25,28 @@
                 alt="profile"
               />
               <b-dropdown
-                id="dropdown-1"
-                text="Edit"
-                variant="primary"
-                class="m-md-2 btnMain rounded"
+                size=""
+                variant="link"
+                toggle-class="text-decoration-none"
+                no-caret
               >
-                <b-dropdown-item>Update</b-dropdown-item>
-                <b-dropdown-item>Delete</b-dropdown-item>
+                <template #button-content>
+                  <b-icon
+                    icon="pencil"
+                    font-scale="1"
+                    style="color: #7a7886"
+                    class="d-inline mr-2"
+                  ></b-icon>
+                  <p class="d-inline" style="color: #7a7886">Edit</p>
+                </template>
+                <b-form-file id="image" placeholder="image"></b-form-file>
+                <b-button
+                  variant="link"
+                  style="color: #7a7886"
+                  size="sm"
+                  @click="sendUploadImage()"
+                  >save</b-button
+                >
               </b-dropdown>
               <!-- <div class="dropdown">
                 <button
