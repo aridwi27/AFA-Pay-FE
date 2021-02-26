@@ -102,7 +102,8 @@ export default {
   methods: {
     ...mapActions({
       actionTrans: 'trans/addTrans',
-      transDetail: 'trans/detailTrans'
+      transDetail: 'trans/detailTrans',
+      confTrans: 'trans/confTrans'
     }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
