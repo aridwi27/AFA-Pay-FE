@@ -24,13 +24,33 @@
                 width="100px"
                 alt="profile"
               />
-              <button class="btn mb-3" style="color: #7a7886">
-                <img src="" alt="" /><img
-                  src="../assets/image/pencil.png"
-                  alt=""
-                />
-                Edit
-              </button>
+              <b-dropdown
+                id="dropdown-1"
+                text="Edit"
+                variant="primary"
+                class="m-md-2 btnMain rounded"
+              >
+                <b-dropdown-item>Update</b-dropdown-item>
+                <b-dropdown-item>Delete</b-dropdown-item>
+              </b-dropdown>
+              <!-- <div class="dropdown">
+                <button
+                  class="btn mb-3 dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  style="color: #7a7886"
+                >
+                  <i class="fa fa-pencil"></i>
+                  Edit
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button class="dropdown-item" href="#">Update</button>
+                  <button class="dropdown-item" href="#">Delete</button>
+                </div>
+              </div> -->
               <h4 class="font-weight-bold mb-3" style="color: #4d4b57">
                 {{ detUser.first_name }} {{ detUser.last_name }}
               </h4>
@@ -117,7 +137,7 @@
                 float: none;
               "
             >
-              <div class="card-body">
+              <div @click="logout" class="card-body">
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Logout
                 </h5>
@@ -145,13 +165,21 @@ export default {
   computed: {
     ...mapGetters({
       detUser: 'auth/detailUser',
-      webURL: 'webURL'
+      webURL: 'webURL',
+      onLogout: 'auth/logout'
     })
   },
   methods: {
     ...mapActions({
       actionsDetUser: 'auth/userDetail'
-    })
+    }),
+    logout () {
+      const check = confirm('Do you want to logout?')
+      if (check) {
+        this.onLogout()
+        this.$router.push('/')
+      }
+    }
   }
 }
 </script>
