@@ -15,7 +15,8 @@ export const paymentMixin = {
       querySearch: {
         name: '',
         page: 1,
-        sort: 'ASC'
+        sort: 'asc',
+        limit: 5
       },
       queryTrans: {
         id: Number(localStorage.getItem('id')),
