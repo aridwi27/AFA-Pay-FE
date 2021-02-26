@@ -53,8 +53,10 @@
 import sidelog from '../components/sidelog'
 import PincodeInput from 'vue-pincode-input'
 import { mapActions } from 'vuex'
+import { paymentMixin } from '../helpers/mixin'
 
 export default {
+  mixins: [paymentMixin],
   data () {
     return {
       code: null
@@ -72,9 +74,9 @@ export default {
       const data = { pin: this.code }
       this.insertPin(data).then((response) => {
         if (response.message === 500) {
-          alert('Something wrong with pin')
+          this.swalAlert('Something wrong with pin', '', 'error')
         } else {
-          alert('Submit pin success')
+          this.swalAlert('Submit pin success', '', 'success')
           this.$router.push('/home')
         }
       }).catch((err) => {
