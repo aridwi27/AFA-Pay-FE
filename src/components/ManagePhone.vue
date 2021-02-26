@@ -15,27 +15,35 @@
                 <label class="text-secondary">Primary</label>
                 <div class="input-group mb-3 text-secondary">
                   <input
-                    v-if="detUser.handphone === '+62'"
-                    readonly
+                    v-if="
+                      detUser.handphone === '+62' ||
+                      detUser.handphone === '+62-' ||
+                      detUser.handphone === ''
+                    "
                     type="text"
-                    value="-"
+                    v-model="phone"
                     class="font-weight-bold classname form-control border-0 shadow-sm"
                   />
                   <input
                     v-else
-                    readonly
                     type="text"
-                    :value="detUser.handphone"
+                    v-model="phone"
                     class="font-weight-bold classname form-control border-0 shadow-sm"
                   />
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"
                       ><i
-                        @click.prevent="delNumber"
+                        @click.prevent="changeNum('delete')"
                         class="far fa-trash-alt"
                         style="cursor: pointer"
                       ></i
                     ></span>
+                    <button
+                      class="btn btnMain rounded"
+                      @click.prevent="changeNum('update')"
+                    >
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -55,7 +63,8 @@ export default {
   data () {
     return {
       code: 0,
-      newCode: 0
+      newCode: 0,
+      phone: ''
     }
   },
   computed: {
@@ -65,27 +74,67 @@ export default {
   },
   methods: {
     ...mapActions({
-      delPhone: 'auth/updateUser',
+      upPhone: 'auth/updateUser',
       actionsDetUser: 'auth/userDetail'
     }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
     },
-    delNumber () {
-      if (this.detUser.handphone === '+62') {
-        this.swalAlert('You don\'t have active phone number', '', 'info')
-      } else {
-        const data = {
-          handphone: '+62'
+    phoneNum () {
+      this.actionsDetUser().then((result) => {
+        if (result.handphone === '+62' || result.handphone === '+62-' || result.handphone === '') {
+          this.phone = '-'
+        } else {
+          this.phone = result.handphone
         }
-        this.delPhone(data).then(() => {
-          this.swalAlert('Successfully delete number', '', 'success')
-          this.actionsDetUser()
-        }).catch((err) => {
-          console.log(err)
-        })
+      })
+    },
+    changeNum (e) {
+      if (e === 'delete') {
+        if (this.detUser.handphone === '+62' || this.detUser.handphone === '+62-' || this.detUser.handphone === '') {
+          this.swalAlert('You don\'t have active phone number', '', 'info')
+        } else {
+          const data = {
+            handphone: '+62'
+          }
+          this.upPhone(data).then(async () => {
+            await this.phoneNum()
+            this.swalAlert('Successfully delete number', '', 'success')
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
+      } else {
+        if (this.phone.charAt(0) === '0') {
+          const splitNum = this.phone.split('').slice(1, this.phone.length)
+          const phoneNum = ['+62', ...splitNum].join('')
+          const data = {
+            handphone: phoneNum
+          }
+          this.upPhone(data).then(async () => {
+            await this.phoneNum()
+            this.swalAlert('Success update phone number', '', 'success')
+          }).catch((err) => {
+            console.log(err)
+          })
+        } else {
+          const splitNum = this.phone.split('')
+          const phoneNum = ['+62', ...splitNum].join('')
+          const data = {
+            handphone: phoneNum
+          }
+          this.upPhone(data).then(async () => {
+            await this.phoneNum()
+            this.swalAlert('Success update phone number', '', 'success')
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
       }
     }
+  },
+  mounted () {
+    this.phoneNum()
   }
 }
 </script>

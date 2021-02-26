@@ -93,7 +93,7 @@ export default {
         }
         this.onInsert(data).then((response) => {
           this.getDetail()
-          this.swalAlert('Success change phone number', '', 'success')
+          this.swalAlert('Success add phone number', '', 'success')
         }).catch((err) => {
           console.log(err)
         })
