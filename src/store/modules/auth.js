@@ -95,7 +95,7 @@ const moduleAuth = {
     },
     userDetail (context) {
       return new Promise((resolve, reject) => {
-        axios.get(`${context.rootState.apiURL}/user/${context.state.id}`, { headers: { token: context.state.token } }).then((response) => {
+        axios.get(`${context.rootState.apiURL}/user/${localStorage.getItem('id')}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setDetailUser', response.data.data[0])
           resolve(response.data.data[0])
           // resolve(response.data)
@@ -106,7 +106,7 @@ const moduleAuth = {
     },
     updateUser (context, data) {
       return new Promise((resolve, reject) => {
-        axios.patch(`${context.rootState.apiURL}/user/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
+        axios.patch(`${context.rootState.apiURL}/user/${localStorage.getItem('id')}`, data, { headers: { token: context.state.token } }).then((response) => {
           resolve(response.data)
         }).catch((err) => {
           reject(err)
@@ -115,7 +115,7 @@ const moduleAuth = {
     },
     changePass (context, data) {
       return new Promise((resolve, reject) => {
-        axios.patch(`${context.rootState.apiURL}/changepass/${context.state.id}`, data, { headers: { token: context.state.token } }).then((response) => {
+        axios.patch(`${context.rootState.apiURL}/changepass/${localStorage.getItem('id')}`, data, { headers: { token: context.state.token } }).then((response) => {
           resolve(response.data)
         }).catch((err) => {
           reject(err)
