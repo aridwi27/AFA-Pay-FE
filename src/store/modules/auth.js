@@ -90,7 +90,7 @@ const moduleAuth = {
         localStorage.removeItem('email')
         localStorage.removeItem('id')
         context.commit('setToken', null)
-        context.commit('setUserData', null)
+        context.commit('setUserData', { id: null, email: null })
         resolve(true)
       })
     },
@@ -99,7 +99,7 @@ const moduleAuth = {
         axios.get(`${context.rootState.apiURL}/user/${localStorage.id}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setDetailUser', response.data.data[0])
           resolve(response.data.data[0])
-          console.log(response.data.data[0])
+          // console.log(response.data.data[0])
           // resolve(response.data)
         }).catch((err) => {
           reject(err)
@@ -107,7 +107,7 @@ const moduleAuth = {
       })
     },
     updateUser (context, data) {
-      console.log(data)
+      // console.log(data)
       return new Promise((resolve, reject) => {
         axios.patch(`${context.rootState.apiURL}/user/${localStorage.id}`, data, { headers: { token: context.state.token } }).then((response) => {
           resolve(response.data)

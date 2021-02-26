@@ -18,6 +18,7 @@ export const paymentMixin = {
         sort: 'ASC'
       },
       queryTrans: {
+        id: Number(localStorage.getItem('id')),
         page: 1,
         sort: 'desc'
       },
