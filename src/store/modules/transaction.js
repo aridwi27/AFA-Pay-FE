@@ -39,7 +39,6 @@ const moduleTrans = {
     getUserTrans (context, data) {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.apiURL}/transaction?id=${data.id}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.rootState.auth.token } }).then((response) => {
-          console.log(response)
           if (response.data.data.length > 0) {
             context.commit('setUserTrans', response.data.data)
             context.commit('setUserRecap', response.data.pagination)

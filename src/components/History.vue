@@ -5,7 +5,6 @@
         <h5 class="font-weight-bold">Transaction History</h5>
         <div class="mt-4 hideScroll" style="overflow-y: scroll; max-height:60vh">
           <p class="text-secondary"> This Week</p>
-          <!-- {{transUser}} -->
           <div v-for="(item, index) in transUser" :key="index">
             <div class="card border-0">
                   <div class="row no-gutters">
@@ -60,7 +59,7 @@
     </div>
 
             <b-modal id="confirmTrans2" hide-header hide-footer>
-              <form @submit.prevent="submitTopUp()" class="my-4">
+              <form @submit.prevent="submitTopUp()" class="my-4 font-nunito">
                 <div class="row">
                   <div class="col">
                     <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
