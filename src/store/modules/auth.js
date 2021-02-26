@@ -77,7 +77,7 @@ const moduleAuth = {
           localStorage.setItem('id', response.data.data.id)
           context.commit('setToken', response.data.data)
           context.commit('setUserData', response.data.data)
-          resolve(response.data)
+          resolve(response)
         }).catch((err) => {
           reject(err)
         })
