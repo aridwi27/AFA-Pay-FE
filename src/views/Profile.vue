@@ -19,9 +19,10 @@
           >
             <div class="text-center">
               <img
-                src="../assets/image/Rectangle 25.png"
+                :src="`${webURL}/images/${detUser.image}`"
                 class="rounded mx-auto d-block"
-                alt="..."
+                width="100px"
+                alt="profile"
               />
               <button class="btn mb-3" style="color: #7a7886">
                 <img src="" alt="" /><img
@@ -31,9 +32,9 @@
                 Edit
               </button>
               <h4 class="font-weight-bold mb-3" style="color: #4d4b57">
-                Robert Chandler
+                {{ detUser.first_name }} {{ detUser.last_name }}
               </h4>
-              <p style="color: #7a7886">+62 813-9387-7946</p>
+              <p style="color: #7a7886">{{ detUser.handphone }}</p>
             </div>
             <div
               class="card w-50 mb-3"
@@ -143,7 +144,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      detUser: 'auth/detailUser'
+      detUser: 'auth/detailUser',
+      webURL: 'webURL'
     })
   },
   methods: {
