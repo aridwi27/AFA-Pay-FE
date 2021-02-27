@@ -17,51 +17,9 @@
               padding-top: 2%;
             "
           >
-            <p class="d-inline" style="font-weight: bold">How To Top Up</p>
-            <b-button
-              v-b-modal.modal-center
-              style="background: #6379f4"
-              class="btn float-right"
-            >
-              <p class="font-weight-bold mb-0">
-                <i class="fas fa-plus"></i> Top Up
-              </p>
-            </b-button>
-            <b-modal id="modal-center" centered title="Top Up">
-              <form action="" @submit.prevent="btntopup()">
-                <div class="input-group mb-3 text-secondary my-5">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text bg-white border-top-0 border-left-0 border-right-0"
-                      ><i class="fas fa-dollar-sign"></i
-                    ></span>
-                  </div>
-                  <input
-                    type="text"
-                    class="form-control border-top-0 border-left-0 border-right-0"
-                    placeholder="money you want to top up "
-                    v-model="topup"
-                  />
-                </div>
-              </form>
-              <template #modal-footer="{ cancel }">
-                <b-button size="" variant="" @click="cancel()">
-                  <p class="font-weight-bold mb-0">
-                    <i class="far fa-window-close"></i> Cancel
-                  </p></b-button
-                >
-                <b-button
-                  v-b-modal.modal-center
-                  style="background: #6379f4"
-                  class="btn float-right"
-                  @click="btntopup()"
-                >
-                  <p class="font-weight-bold mb-0">
-                    <i class="fas fa-plus"></i> Top Up
-                  </p>
-                </b-button>
-              </template>
-            </b-modal>
+            <button class="btn btnMain float-right" @click="$bvModal.show('modalTopUp')">
+              <i class="fas fa-plus"></i> Top Up</button>
+            <p class="" style="font-weight: bold">How To Top Up</p>
             <div
               class="card mb-2 mt-5"
               style="
@@ -203,6 +161,45 @@
           </div>
         </div>
       </div>
+       <b-modal id="modalTopUp" title="Top Up Credit" centered hide-header hide-footer>
+      <form @submit.prevent="submitTopUp()" class="my-4">
+        <div class="row">
+          <div class="col">
+            <p class="font-weight-bold text-center mb-0">Input Amount :</p>
+            <input
+              v-model="amount"
+              type="number"
+              class="form-control border-0 text-main text-center"
+              placeholder="0.00"
+              style="
+                font-size: 72px;
+                overflow-y: hidden;
+                color: var(--main-theme);
+                resize: none;
+                box-shadow: none;
+              "
+            />
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btnMain font-weight-bold px-4 w-25 mr-2"
+                style="border-radius: 10px"
+              >
+                Continue
+              </button>
+              <button
+                type="button"
+                @click="$bvModal.hide('modalTopUp')"
+                class="btn btnSecondary font-weight-bold px-4 w-25 ml-2"
+                style="border-radius: 10px"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </b-modal>
       <Footer />
     </div>
   </div>
@@ -212,7 +209,10 @@
 import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
+import { paymentMixin } from '../helpers/mixin'
+import { mapActions } from 'vuex'
 export default {
+  mixins: [paymentMixin],
   components: {
     headers,
     Sidebar,
@@ -220,13 +220,37 @@ export default {
   },
   data () {
     return {
-      topup: ''
+      topup: '',
+      amount: 0
     }
   },
   methods: {
-    btntopup () {
-      const value = this.topup
-      alert(value)
+    ...mapActions({
+      transDetail: 'trans/detailTrans',
+      addTrans: 'trans/addTrans'
+    }),
+    submitTopUp () {
+      this.swalLoading('Creating Request')
+      const data = {
+        user_id: Number(localStorage.getItem('id')),
+        target_id: Number(localStorage.getItem('id')),
+        amount: this.amount,
+        info: 'Top Up',
+        type: 'in'
+      }
+      this.addTrans(data)
+        .then(async (res) => {
+          await this.transDetail(res.data.id).then((result) => {
+            this.swalLoadingClose()
+            this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
+            this.$bvModal.hide('modalTopUp')
+            this.linkTo('status')
+            this.amount = 0
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

@@ -69,6 +69,25 @@ export const paymentMixin = {
         })
       })
     },
+    swalLogout (title, text, icon) {
+      return new Promise((resolve, reject) => {
+        Swal.fire({
+          title,
+          text,
+          icon,
+          showCancelButton: true,
+          confirmButtonColor: '#6379F4',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Logout'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        })
+      })
+    },
     swalLoading (title) {
       Swal.fire({
         title: title,
