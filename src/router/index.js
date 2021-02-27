@@ -8,8 +8,6 @@ import Landpage from '../views/Landpage.vue'
 import Transfer from '../views/Transfer.vue'
 import Search from '../views/Search.vue'
 import Pin from '../views/Pin.vue'
-import Success from '../views/Success.vue'
-import Error from '../views/Error.vue'
 import Topup from '../views/Topup.vue'
 import Profile from '../views/Profile.vue'
 import PersonalInfo from '../views/PersonalInfo.vue'
@@ -76,22 +74,6 @@ const routes = [
     path: '/transfer',
     name: 'transfer',
     component: Transfer,
-    meta: {
-      auth: true
-    }
-  },
-  {
-    path: '/success',
-    name: 'success',
-    component: Success,
-    meta: {
-      auth: true
-    }
-  },
-  {
-    path: '/error',
-    name: 'error',
-    component: Error,
     meta: {
       auth: true
     }
@@ -195,18 +177,18 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else {
-    // if (store.getters['auth/getToken']) {
-    //   Swal.fire({
-    //     icon: 'info',
-    //     title: '',
-    //     text: 'You already logged in!'
-    //   })
-    //   next({
-    //     path: '/product'
-    //   })
-    // } else {
-    next()
-    // }
+    if (store.getters['auth/getToken']) {
+      Swal.fire({
+        icon: 'info',
+        title: '',
+        text: 'You already logged in!'
+      })
+      next({
+        path: '/home'
+      })
+    } else {
+      next()
+    }
   }
 })
 

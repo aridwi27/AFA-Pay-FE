@@ -42,7 +42,7 @@
     </div>
     <!-- Chart & History -->
     <div>
-      <div v-if="isLoading" class="row w-100">
+    <div v-if="isLoading" class="row w-100">
       <div class="col-12 py-5 my-5 text-center">
         <b-spinner style="width: 4rem; height: 4rem;" variant="info"></b-spinner>
         <h5 class="mt-4">Preparing Your Data ...</h5>
@@ -115,7 +115,7 @@
                           <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
                           <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         </div>
-                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                       </div>
                     </div>
                     <!-- End Pending -->
@@ -188,7 +188,14 @@
       </form>
     </b-modal>
     <b-modal id="confirmTrans" centered hide-header hide-footer>
-      <form @submit.prevent="submitTopUp()" class="my-4">
+      <div v-if="isLoadingConfirm" class="row w-100">
+        <div class="col-12 text-center">
+          <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
+          <b-spinner class="mt-4 pt-4" style="width: 2rem; height: 2rem;" variant="info"></b-spinner>
+          <p class="mt-4 text-secondary">Please Wait</p>
+        </div>
+      </div>
+      <form v-else @submit.prevent="submitTopUp()" class="my-4">
         <div class="row">
           <div class="col">
             <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
@@ -249,9 +256,10 @@ export default {
   data () {
     return {
       isLoading: true,
+      isLoadingConfirm: true,
       loginId: localStorage.getItem('id'),
       confirmedId: 0,
-      amount: 0,
+      amount: null,
       arrPositive: { labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
       positiveChartColors: {
         borderColor: 'rgba(99, 121, 244, 1)',
@@ -309,7 +317,7 @@ export default {
             this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
             this.$bvModal.hide('modalTopUp')
             this.linkTo('status')
-            this.amount = 0
+            this.amount = null
           })
         })
         .catch((err) => {
@@ -317,19 +325,25 @@ export default {
         })
     },
     detailTrans (id) {
+      this.swalLoading('Please Wait')
       this.transDetail(id)
         .then((res) => {
+          this.swalLoadingClose()
           this.linkTo('status')
         })
         .catch((err) => {
+          this.swalLoadingClose()
           console.log(err)
         })
     },
     popUpConfirm (id) {
+      this.$bvModal.show('confirmTrans')
+      this.isLoadingConfirm = true
       this.confirmedId = id
       this.transDetail(id)
         .then((res) => {
-          this.$bvModal.show('confirmTrans')
+          this.isLoadingConfirm = false
+          // this.$bvModal.show('confirmTrans')
         })
         .catch((err) => {
           console.log(err)

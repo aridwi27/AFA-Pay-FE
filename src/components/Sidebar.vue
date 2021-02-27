@@ -5,14 +5,14 @@
         <li
           @click="goto('home')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'home' ? 'onroute ' : ''}`"
+          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'home' || $route.name === 'history' || $route.name === 'status' ? 'onroute ' : ''}`"
         >
           <i class="fas fa-th-large ml-3 mr-4"></i>Dashboard
         </li>
         <li
           @click="goto('search')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'search' ? 'onroute ' : ''}`"
+          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'search' || $route.name === 'transfer' ? 'onroute ' : ''}`"
         >
           <i class="fas fa-arrow-up ml-3 mr-4"></i>Transfer
         </li>
@@ -26,7 +26,7 @@
         <li
           @click="goto('profile')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'profile' ? 'onroute ' : ''}`"
+          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'profile' || $route.name === 'personalinfo' ||$route.name === 'changepassword' || $route.name === 'managephone' || $route.name === 'addphone' ? 'onroute ' : ''}`"
         >
           <i class="far fa-user ml-3 mr-4"></i>Profile
         </li>

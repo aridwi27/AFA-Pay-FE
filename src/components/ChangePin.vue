@@ -73,8 +73,8 @@ export default {
     return {
       pinConfirmed: false,
       amount: 0,
-      code: 0,
-      newCode: 0
+      code: '',
+      newCode: ''
     }
   },
   computed: {
