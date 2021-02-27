@@ -37,7 +37,17 @@
               <h4 class="font-weight-bold mb-3" style="color: #4d4b57">
                 {{ detUser.first_name }} {{ detUser.last_name }}
               </h4>
-              <p style="color: #7a7886">{{ detUser.handphone }}</p>
+              <p
+                v-if="
+                  detUser.handphone === '+62' ||
+                  detUser.handphone === '+62-' ||
+                  detUser.handphone === ''
+                "
+                style="color: #7a7886"
+              >
+                No Phone Number
+              </p>
+              <p v-else style="color: #7a7886">{{ detUser.handphone }}</p>
             </div>
             <div
               class="card w-50 mb-3"
@@ -176,7 +186,7 @@ export default {
       this.$refs.fileInput.click()
     },
     onFilePicked (event) {
-      this.swalLoading('Uploading Photo')
+      // this.swalLoading('Uploading Photo')
       const files = event.target.files
       const fileReader = new FileReader()
       fileReader.addEventListener('load', () => {
