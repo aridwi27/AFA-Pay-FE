@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-12 text-center hideScroll" style="overflow-x:scroll">
+          <div class="col-lg-12 col-md-12 col-12 text-center hideScroll" style="overflow-x:scroll">
             <b-form-group>
               <b-form-radio-group id="btn-radios-2" @change="getTrans()" v-model="queryTrans.page"
                 button-variant="outline-primary" :options="optionPage" buttons></b-form-radio-group>
@@ -87,23 +87,29 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-6">
+          <div class="col-1"></div>
+          <div class="col-lg-2 col-md-3 col-6">
+            <b-form-select v-model="queryTrans.range" @change="getOrderLimitQuery(1)" size="sm" :options="optionRange">
+            </b-form-select>
+          </div>
+          <div class="col-lg-2 col-md-3 col-6">
             <b-form-select v-model="queryTrans.sort" @change="getOrderLimitQuery(1)" size="sm" :options="optionSort">
             </b-form-select>
           </div>
-          <div class="col-lg-3 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6">
             <b-form-select v-model="queryTrans.order" @change="getOrderLimitQuery(1)" size="sm" :options="optionOrder">
             </b-form-select>
           </div>
-          <div class="col-lg-3 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6">
             <b-form-select v-model="queryTrans.limit" @change="getOrderLimitQuery(1)" size="sm" :options="optionLimit">
             </b-form-select>
           </div>
-          <div class="col-lg-3 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6">
             <b-form-select v-model="queryTrans.status" @change="getOrderLimitQuery(1)" size="sm"
               :options="optionStatus">
             </b-form-select>
           </div>
+          <div class="col-1"></div>
         </div>
       </div>
     </div>
@@ -175,6 +181,12 @@ export default {
       optionOrder: [
         { value: 'created_at', text: 'Date' },
         { value: 'amount', text: 'Amount' }
+      ],
+      optionRange: [
+        { value: 'day', text: 'Day' },
+        { value: 'week', text: 'Week' },
+        { value: 'month', text: 'Month' },
+        { value: 'year', text: 'Year' }
       ]
     }
   },

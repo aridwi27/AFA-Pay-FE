@@ -24,7 +24,7 @@ export const paymentMixin = {
         sort: 'desc',
         limit: 5,
         order: 'created_at',
-        range: 'YEAR',
+        range: 'year',
         status: ''
       },
       arrMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']

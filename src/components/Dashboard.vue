@@ -87,7 +87,7 @@
               >See All</router-link
             >
             <h5 class="font-weight-bold">Transaction History</h5>
-            <div v-if="transUser.length > 0" class="mt-2 hideScroll" style="overflow-y: scroll; height: 50vh">
+            <div v-if="transUser.length > 0" class="mt-2 hideScroll" style="overflow-y: scroll; min-height: 50vh">
               <div v-for="(item, index) in transUser" :key="index">
                 <div class="card border-0">
                   <div class="row no-gutters">
@@ -103,7 +103,7 @@
                           <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
                           <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         </div>
-                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                       </div>
                     </div>
                     <!-- End Canceled -->
@@ -130,7 +130,8 @@
                           <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>
                           <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                         </div>
-                        <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up {{item.status}}</small></p>
+                        <p v-else class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                       </div>
                     </div>
                     <!-- EndSuccess -->
@@ -251,7 +252,7 @@ export default {
       loginId: localStorage.getItem('id'),
       confirmedId: 0,
       amount: 0,
-      arrPositive: { labels: ['Sat', 'Sun', 'mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
+      arrPositive: { labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
       positiveChartColors: {
         borderColor: 'rgba(99, 121, 244, 1)',
         pointBorderColor: 'rgba(99, 121, 244, 1)',
@@ -335,6 +336,7 @@ export default {
         })
     },
     confirmPendingTrans (status) {
+      this.swalLoading('Confirming Transaction')
       const data = {
         status
       }
@@ -342,11 +344,13 @@ export default {
         .then(async (res) => {
           await this.transDetail(this.confirmedId)
             .then(async (res2) => {
+              this.swalLoadingClose()
               this.$bvModal.hide('confirmTrans')
               this.swalAlert(`Transaction ${status}`, 'The Credit Already Transfered', 'success')
               this.linkTo('status')
             })
             .catch((err) => {
+              this.swalLoadingClose()
               console.log(err)
             })
         })
