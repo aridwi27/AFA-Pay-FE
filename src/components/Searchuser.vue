@@ -17,7 +17,7 @@
         </div>
         <div v-else>
           <div v-for="(user, index) in userSearch" :key="index">
-            <div v-if="Number(user.id) !== Number(userId)" class="row card shadow-sm border-0 mt-2 p-2 mx-2">
+            <div v-if="Number(user.id) !== Number(loginId)" class="row card shadow-sm border-0 mt-2 p-2 mx-2">
               <div @click="createTrans(user.id, user.image, user.first_name, user.last_name, user.handphone)"
                 class="d-flex ml-2">
                 <img width="50px" :src="`${webURL}/images/${user.image}`" alt="image" />
@@ -27,9 +27,7 @@
                       {{ user.last_name }}
                     </span>
                   </div>
-                  <span style="font-size: 12px" class="d-block">{{
-            user.handphone
-          }}</span>
+                  <span style="font-size: 12px" class="d-block">{{ user.handphone }}</span>
                 </div>
               </div>
             </div>
@@ -68,6 +66,7 @@ export default {
   mixins: [paymentMixin],
   data () {
     return {
+      loginId: localStorage.getItem('id'),
       isLoading: true,
       searchName: '',
       optionLimit: [
@@ -85,8 +84,7 @@ export default {
     ...mapGetters({
       userSearch: 'auth/userSearch',
       paginationSearch: 'auth/paginationSearch',
-      webURL: 'webURL',
-      userId: 'auth/userId'
+      webURL: 'webURL'
     })
   },
   methods: {
