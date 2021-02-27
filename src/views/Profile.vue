@@ -24,48 +24,16 @@
                 width="100px"
                 alt="profile"
               />
-              <b-dropdown
-                size=""
-                variant="link"
-                toggle-class="text-decoration-none"
-                no-caret
-              >
-                <template #button-content>
-                  <b-icon
-                    icon="pencil"
-                    font-scale="1"
-                    style="color: #7a7886"
-                    class="d-inline mr-2"
-                  ></b-icon>
-                  <p class="d-inline" style="color: #7a7886">Edit</p>
-                </template>
-                <b-form-file id="image" placeholder="image"></b-form-file>
-                <b-button
-                  variant="link"
-                  style="color: #7a7886"
-                  size="sm"
-                  @click="sendUploadImage()"
-                  >save</b-button
-                >
-              </b-dropdown>
-              <!-- <div class="dropdown">
-                <button
-                  class="btn mb-3 dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  style="color: #7a7886"
-                >
-                  <i class="fa fa-pencil"></i>
-                  Edit
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item" href="#">Update</button>
-                  <button class="dropdown-item" href="#">Delete</button>
-                </div>
-              </div> -->
+              <input
+                type="file"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+                @change="onFilePicked"
+              />
+              <button @click="onPickFile" class="btn btnMain my-2">
+                Upload Photo
+              </button>
               <h4 class="font-weight-bold mb-3" style="color: #4d4b57">
                 {{ detUser.first_name }} {{ detUser.last_name }}
               </h4>
@@ -171,11 +139,18 @@ import headers from '../components/Header'
 import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
 import { mapActions, mapGetters } from 'vuex'
+import { paymentMixin } from '../helpers/mixin'
 export default {
+  mixins: [paymentMixin],
   components: {
     headers,
     Sidebar,
     Footer
+  },
+  data () {
+    return {
+      image: null
+    }
   },
   computed: {
     ...mapGetters({
@@ -186,7 +161,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      actionsDetUser: 'auth/userDetail'
+      actionsDetUser: 'auth/userDetail',
+      actionsUpdate: 'auth/updateUser'
     }),
     logout () {
       const check = confirm('Do you want to logout?')
@@ -194,6 +170,26 @@ export default {
         this.onLogout()
         this.$router.push('/')
       }
+    },
+    onPickFile () {
+      this.$refs.fileInput.click()
+    },
+    onFilePicked (event) {
+      const files = event.target.files
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
+      const fd = new FormData()
+      fd.append('image', files[0])
+      this.actionsUpdate(fd).then((result) => {
+        this.actionsDetUser()
+        this.swalAlert('Update Photo Success', '', 'success')
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }
