@@ -120,7 +120,7 @@
                 float: none;
               "
             >
-              <div @click="logout" class="card-body">
+              <div @click="logout" style="cursor: pointer" class="card-body">
                 <h5 class="d-inline" style="font-weight: bold; color: #4d4b57">
                   Logout
                 </h5>
