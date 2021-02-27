@@ -104,7 +104,7 @@ export default {
       getUserDetail: 'auth/userDetail'
     }),
     onLogin () {
-      this.swalLoading('Process Login')
+      // this.swalLoading('Process Login')
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then(async (response) => {
           if (response === "Email hasn't been registered") {
@@ -119,6 +119,7 @@ export default {
                 if (response.pin === null) {
                   this.$router.push('/pin')
                 } else {
+                  this.swalLoading('Process Login')
                   this.swalToast('success', 'Login Success')
                   this.$router.push('/home')
                 }
