@@ -131,7 +131,6 @@ const moduleAuth = {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setSearchUser', response.data)
-          console.log(response.data)
           resolve(response.data)
         }).catch((err) => {
           reject(err)

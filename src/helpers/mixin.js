@@ -21,7 +21,11 @@ export const paymentMixin = {
       queryTrans: {
         id: Number(localStorage.getItem('id')),
         page: 1,
-        sort: 'desc'
+        sort: 'desc',
+        limit: 5,
+        order: 'created_at',
+        range: 'YEAR',
+        status: ''
       },
       arrMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']
     }
