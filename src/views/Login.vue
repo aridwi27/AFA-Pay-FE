@@ -34,7 +34,7 @@
                 type="text"
                 class="form-control"
                 id="inlineFormInputGroupUsername"
-                placeholder="Username"
+                placeholder="Email"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default {
       getUserDetail: 'auth/userDetail'
     }),
     onLogin () {
-      this.swalLoading('Process Login')
+      // this.swalLoading('Process Login')
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then((response) => {
           if (response === "Email hasn't been registered") {
@@ -120,6 +120,7 @@ export default {
                   this.swalLoading('Process Login')
                   this.$router.push('/pin')
                 } else {
+                  this.swalLoading('Process Login')
                   this.swalToast('success', 'Login Success')
                   this.$router.push('/home')
                 }

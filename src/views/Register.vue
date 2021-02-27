@@ -114,6 +114,7 @@ export default {
       register: 'auth/signUp'
     }),
     signUp () {
+      this.swalLoading('Process Register')
       if (this.form.email !== '' && this.form.password !== '' && this.form.username !== '') {
         this.register(this.form).then((response) => {
           if (response === 'Email has been registered') {

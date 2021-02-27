@@ -18,7 +18,8 @@ const moduleTrans = {
         amount: 0,
         currentCredit: 0,
         info: ''
-      }
+      },
+      optionPage: []
     }
   },
   mutations: {
@@ -33,19 +34,29 @@ const moduleTrans = {
     },
     setDetailTransUser (state, payload) {
       state.detailTransUser = payload
+    },
+    setOptionPage (state, payload) {
+      const holderPage = []
+      for (let i = 1; i <= payload; i++) {
+        const value = { text: `${i}`, value: `${i}` }
+        holderPage.push(value)
+      }
+      state.optionPage = holderPage
     }
   },
   actions: {
     getUserTrans (context, data) {
       return new Promise((resolve, reject) => {
-        axios.get(`${context.rootState.apiURL}/transaction?id=${data.id}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.rootState.auth.token } }).then((response) => {
+        axios.get(`${context.rootState.apiURL}/transaction?id=${data.id}&status=${data.status}&sort=${data.sort}&page=${data.page}&limit=${data.limit}&order=${data.order}&range=${data.range}`, { headers: { token: context.rootState.auth.token } }).then((response) => {
           if (response.data.data.length > 0) {
             context.commit('setUserTrans', response.data.data)
             context.commit('setUserRecap', response.data.pagination)
+            context.commit('setOptionPage', response.data.pagination.totalPages)
             resolve(response.data)
           } else {
             context.commit('setUserTrans', [])
             context.commit('setUserRecap', { income: 0, expense: 0 })
+            context.commit('setOptionPage', 0)
             resolve(response.data)
           }
         }).catch((err) => {
@@ -81,8 +92,6 @@ const moduleTrans = {
       return new Promise((resolve, reject) => {
         axios.patch(`${context.rootState.apiURL}/transaction/${context.state.detailTransUser.id}`, data, { headers: { token: context.rootState.auth.token } })
           .then((response) => {
-            // context.commit('setDetailTransUser', response.data.data[0])
-            // resolve(response.data.data[0])
             resolve(response.data)
           })
           .catch((err) => {
@@ -95,7 +104,8 @@ const moduleTrans = {
     transRecap: state => state.userRecap,
     transUser: state => state.userTrans,
     transDetail: state => state.detailTrans,
-    transDetailUser: state => state.detailTransUser
+    transDetailUser: state => state.detailTransUser,
+    optionPage: state => state.optionPage
   }
 }
 export default moduleTrans

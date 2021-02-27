@@ -123,8 +123,8 @@
                     <div v-else class="col-md-10">
                       <div @click="detailTrans(item.id)" class="card-body">
                         <div>
-                          <p v-if="Number(loginId) === Number(item.target_id)" class="float-right font-weight-bold mb-0 text-success">Rp.{{formatPrice(Number(item.amount))}}</p>
-                          <p v-else class="float-right font-weight-bold mb-0 text-danger">Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <p v-if="Number(loginId) === Number(item.target_id)" class="float-right font-weight-bold mb-0 text-success">+ Rp.{{formatPrice(Number(item.amount))}}</p>
+                          <p v-else class="float-right font-weight-bold mb-0 text-danger">- Rp.{{formatPrice(Number(item.amount))}}</p>
                         </div>
                         <div>
                           <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">{{item.userFirstName}} {{item.userLastName}}</p>

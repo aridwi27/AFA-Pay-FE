@@ -30,6 +30,7 @@ const moduleAuth = {
         credit: 0
       },
       userSearch: [],
+      paginationSearch: {},
       targetData: {
         image: 'default_photo.png',
         id: 0,
@@ -53,7 +54,8 @@ const moduleAuth = {
       state.dataDetailUser = payload
     },
     setSearchUser (state, payload) {
-      state.userSearch = payload
+      state.userSearch = payload.data
+      state.paginationSearch = payload.pagination
     },
     setTargetData (state, payload) {
       state.targetData = payload
@@ -128,7 +130,7 @@ const moduleAuth = {
     searchUser (context, data) {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.state.token } }).then((response) => {
-          context.commit('setSearchUser', response.data.data)
+          context.commit('setSearchUser', response.data)
           resolve(response.data)
         }).catch((err) => {
           reject(err)
@@ -137,6 +139,15 @@ const moduleAuth = {
     },
     selectTarget (context, data) {
       context.commit('setTargetData', data)
+    },
+    deletePhoto (context) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${context.rootState.apiURL}/delete_photo/${localStorage.id}`, { headers: { token: context.state.token } }).then((response) => {
+          console.log(response)
+        }).catch((err) => {
+          console.log(err)
+        })
+      })
     }
   },
   getters: {
@@ -144,6 +155,7 @@ const moduleAuth = {
     getToken: state => state.token,
     userId: state => state.id,
     userSearch: state => state.userSearch,
+    paginationSearch: state => state.paginationSearch,
     targetData: state => state.targetData
   }
 }
