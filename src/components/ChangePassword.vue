@@ -144,7 +144,7 @@ export default {
               this.swalAlert('Error Change Password', response.message, 'error')
             } else {
               this.swalAlert(response.message, '', 'success')
-              this.$router.push('/personalinfo')
+              this.$router.push('/profile')
             }
           }).then((err) => {
             console.log(err)
