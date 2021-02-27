@@ -10,14 +10,33 @@ const moduleTrans = {
       userTrans: [],
       detailTransUser: {
         id: 0,
+        user_id: 0,
         amount: 0,
+        type: '',
         currentCredit: 0,
-        info: ''
+        info: '',
+        creditLeft: 0,
+        created_at: new Date(),
+        targetImage: 'default_photo.png',
+        targetFirstName: '',
+        targetLastName: '',
+        targetHandphone: '',
+        status: ''
       },
       detailTrans: {
+        id: 0,
+        user_id: 0,
         amount: 0,
+        type: '',
         currentCredit: 0,
-        info: ''
+        info: '',
+        creditLeft: 0,
+        created_at: new Date(),
+        targetImage: 'default_photo.png',
+        targetFirstName: '',
+        targetLastName: '',
+        targetHandphone: '',
+        status: ''
       },
       optionPage: []
     }

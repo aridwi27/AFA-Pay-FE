@@ -37,7 +37,8 @@ const moduleAuth = {
         first_name: '',
         last_name: '',
         handphone: ''
-      }
+      },
+      paginationUser: []
     }
   },
   mutations: {
@@ -59,6 +60,14 @@ const moduleAuth = {
     },
     setTargetData (state, payload) {
       state.targetData = payload
+    },
+    setPaginationUser (state, payload) {
+      const holderPage = []
+      for (let i = 1; i <= payload; i++) {
+        const value = { text: `${i}`, value: `${i}` }
+        holderPage.push(value)
+      }
+      state.paginationUser = holderPage
     }
   },
   actions: {
@@ -129,8 +138,9 @@ const moduleAuth = {
     },
     searchUser (context, data) {
       return new Promise((resolve, reject) => {
-        axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${data.page}`, { headers: { token: context.state.token } }).then((response) => {
+        axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${Number(data.page)}&limit=${Number(data.limit)}`, { headers: { token: context.state.token } }).then((response) => {
           context.commit('setSearchUser', response.data)
+          context.commit('setPaginationUser', response.data.pagination.totalPage)
           resolve(response.data)
         }).catch((err) => {
           reject(err)
@@ -156,7 +166,8 @@ const moduleAuth = {
     userId: state => state.id,
     userSearch: state => state.userSearch,
     paginationSearch: state => state.paginationSearch,
-    targetData: state => state.targetData
+    targetData: state => state.targetData,
+    paginationUser: state => state.paginationUser
   }
 }
 export default moduleAuth

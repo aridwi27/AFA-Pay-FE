@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="card shadow-nm" style="border-radius:25px">
-      <div class="card-body px-5">
-        <div class="text-center">
+      <div v-if="transDetailUser.id === 0" class="card-body my-auto px-5">
+        <h1 class="p-5 text-center my-5 text-secondary">Please Select Your Transaction</h1>
+      </div>
+      <div v-else class="card-body px-5">
+        <div>
+          <div class="text-center">
           <div v-if="transDetailUser.status === 'Success'">
             <h1 class="mt-4"><i class="text-success fas fa-2x fa-check-circle"></i></h1>
             <p class="font-weight-bold">Transaction Success</p>
@@ -67,6 +71,7 @@
           <router-link to="/home" class="btn ml-4 px-4 py-3 btnMain" style="border-radius:10px">Back To Home
           </router-link>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -79,6 +84,7 @@ export default {
   mixins: [paymentMixin],
   data () {
     return {
+      isLoading: true,
       amount: 0,
       loginId: localStorage.getItem('id')
     }
@@ -92,29 +98,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      confTrans: 'trans/confTrans',
       getTransDetail: 'trans/detailTrans'
     }),
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
-    },
-    transConfirm (status) {
-      const data = {
-        status
-      }
-      this.confTrans(data)
-        .then(async (res) => {
-          await this.getTransDetail(this.transDetailUser.id)
-            .then((res2) => {
-              console.log(res2)
-            })
-            .catch((err) => {
-              console.log(err)
-            })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
     }
   }
 }
