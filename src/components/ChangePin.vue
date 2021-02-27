@@ -3,8 +3,10 @@
     <div class="card shadow-nm" style="border-radius: 25px">
       <div class="card-body px-5">
         <h5 class="font-weight-bold mb-4">Change Pin</h5>
-        <p class="text-secondary w-50 mb-2">
-          Enter your
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-12">
+            <p class="text-secondary">
+              Enter your
           <span class="font-weight-bold" v-if="pinConfirmed === false"
             >Current</span
           >
@@ -16,7 +18,9 @@
           <span class="font-weight-bold" v-else
             >finish change pin process.</span
           >
-        </p>
+            </p>
+          </div>
+        </div>
         <!-- ConfirmPin -->
         <form
           v-if="pinConfirmed === false"
@@ -25,8 +29,8 @@
           class="my-5"
         >
           <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="d-none d-md-block d-lg-block col-3 col-lg-3 col-md-1"></div>
+            <div class="col-12 col-lg-6 col-md-10">
               <div class="text-center mb-4">
                 <PincodeInput v-model="code" :length="6" />
               </div>
@@ -36,13 +40,13 @@
                 Continue
               </button>
             </div>
-            <div class="col-3"></div>
+            <div class="d-none d-md-block d-lg-block col-3 col-lg-3 col-md-1"></div>
           </div>
         </form>
         <form v-else action="" @submit.prevent="alertCode('e')" class="my-5">
           <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+            <div class="d-none d-md-block d-lg-block col-3 col-lg-3 col-md-1"></div>
+            <div class="col-lg-6 col-md-12 col-12">
               <div class="text-center mb-4">
                 <PincodeInput v-model="newCode" :length="6" />
               </div>
@@ -52,7 +56,7 @@
                 Change Pin
               </button>
             </div>
-            <div class="col-3"></div>
+            <div class="d-none d-md-block d-lg-block col-3 col-lg-3 col-md-1"></div>
           </div>
         </form>
       </div>

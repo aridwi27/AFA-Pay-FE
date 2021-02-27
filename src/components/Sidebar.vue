@@ -5,37 +5,69 @@
         <li
           @click="goto('home')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'home' || $route.name === 'history' || $route.name === 'status' ? 'onroute ' : ''}`"
+          :class="`list-group-item side-nav-item ${$route.name === 'home' || $route.name === 'history' || $route.name === 'status' ? 'onroute ' : ''}`"
         >
-          <i class="fas fa-th-large ml-3 mr-4"></i>Dashboard
+          <div class="row">
+            <div class="col-12 col-lg-3 col-md-12 text-center">
+              <i class="fas fa-th-large"></i>
+            </div>
+            <div class="col-12 col-lg-9 col-md-12 text-md-center text-lg-left text-sm-center text-center">
+              Dashboard
+            </div>
+          </div>
         </li>
-        <li
-          @click="goto('search')"
-          style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'search' || $route.name === 'transfer' ? 'onroute ' : ''}`"
-        >
-          <i class="fas fa-arrow-up ml-3 mr-4"></i>Transfer
+        <li @click="goto('search')" style="cursor: pointer"
+          :class="`list-group-item side-nav-item ${$route.name === 'search' || $route.name === 'transfer' ? 'onroute ' : ''}`">
+          <div class="row">
+            <div class="col-12 col-lg-3 col-md-12 text-center">
+              <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="col-12 col-lg-9 col-md-12 text-md-center text-lg-left text-sm-center text-center">
+              Transfer
+            </div>
+          </div>
         </li>
         <li
           @click="goto('topup')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'topup' ? 'onroute ' : ''}`"
+          :class="`list-group-item side-nav-item ${$route.name === 'topup' ? 'onroute ' : ''}`"
         >
-          <i class="fas fa-plus ml-3 mr-4"></i>Top Up
+          <div class="row">
+            <div class="col-12 col-lg-3 col-md-12 text-center">
+              <i class="fas fa-plus"></i>
+            </div>
+            <div class="col-12 col-lg-9 col-md-12 text-md-center text-lg-left text-sm-center text-center">
+              Top Up
+            </div>
+          </div>
         </li>
         <li
           @click="goto('profile')"
           style="cursor: pointer"
-          :class="`list-group-item pl-4 side-nav-item ${$route.name === 'profile' || $route.name === 'personalinfo' ||$route.name === 'changepassword' || $route.name === 'managephone' || $route.name === 'addphone' ? 'onroute ' : ''}`"
+          :class="`list-group-item side-nav-item ${$route.name === 'profile' || $route.name === 'personalinfo' ||$route.name === 'changepassword' || $route.name === 'managephone' || $route.name === 'addphone' ? 'onroute ' : ''}`"
         >
-          <i class="far fa-user ml-3 mr-4"></i>Profile
+          <div class="row">
+            <div class="col-12 col-lg-3 col-md-12 text-center">
+              <i class="far fa-user"></i>
+            </div>
+            <div class="col-12 col-lg-9 col-md-12 text-md-center text-lg-left text-sm-center text-center">
+              Profile
+            </div>
+          </div>
         </li>
         <li
           @click="logout()"
           style="cursor: pointer"
-          class="list-group-item pl-4 side-nav-item"
+          class="list-group-item side-nav-item"
         >
-          <i class="fas fa-sign-out-alt ml-3 mr-4"></i>Logout
+          <div class="row">
+            <div class="col-12 col-lg-3 col-md-12 text-center">
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <div class="col-12 col-lg-9 col-md-12 text-md-center text-lg-left text-sm-center text-center">
+              Logout
+            </div>
+          </div>
         </li>
       </ul>
     </div>

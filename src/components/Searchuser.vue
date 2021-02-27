@@ -15,7 +15,7 @@
             <h5 class="mt-4">Preparing Your Data ...</h5>
           </div>
         </div>
-        <div v-else>
+        <div v-else style="height:50vh;overflow-y:scroll" class="hideScroll">
           <div v-for="(user, index) in userSearch" :key="index">
             <div v-if="Number(user.id) !== Number(loginId)" class="row card shadow-sm border-0 mt-2 p-2 mx-2">
               <div @click="createTrans(user.id, user.image, user.first_name, user.last_name, user.handphone)"

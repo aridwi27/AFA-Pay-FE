@@ -16,8 +16,8 @@
               <p>{{ userData.handphone }}</p>
             </div>
             <div class="col-md-4 col-lg-2 my-auto">
-              <div class="d-flex flex-column align-items-center">
-                <router-link
+               <div class="row">
+                  <router-link
                   to="/search"
                   class="btn btnTrans d-block w-100 mb-2"
                 >
@@ -25,7 +25,9 @@
                     <i class="fas fa-arrow-up"></i> Transfer
                   </p>
                 </router-link>
-                <button
+               </div>
+                <div class="row">
+                  <button
                   @click="$bvModal.show('modalTopUp')"
                   to="/topup"
                   class="btn btnTrans d-block w-100 mt-2"
@@ -34,7 +36,7 @@
                     <i class="fas fa-plus"></i> Top Up
                   </p>
                 </button>
-              </div>
+                </div>
             </div>
           </div>
         </div>

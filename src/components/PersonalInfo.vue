@@ -16,12 +16,16 @@
           Edit
         </h5>
         <h5 class="font-weight-bold mb-4">Personal Information</h5>
-        <p class="text-secondary w-50 mb-2">
-          We got your personal information from the sign up proccess. If you
-          want to make changes on your information, contact our support.
-        </p>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-12">
+            <p class="text-secondary tet-left">
+              We got your personal information from the sign up proccess. If you
+              want to make changes on your information, contact our support.
+            </p>
+          </div>
+        </div>
         <div v-if="showEdit">
-          <form action="" @submit.prevent="changeUser" class="my-5">
+          <form action="" @submit.prevent="changeUser" class="mb-5 mt-2">
             <div class="form-group">
               <label class="text-secondary">First Name</label>
               <input
@@ -54,7 +58,7 @@
             </div>
           </form>
         </div>
-        <form v-else action="" class="my-5">
+        <form v-else action="" class="mb-5 mt-2">
           <div class="form-group">
             <label class="text-secondary">First Name</label>
             <input

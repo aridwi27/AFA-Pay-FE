@@ -15,7 +15,7 @@
               <h1 class="mt-4 text-secondary">You Don't Have Any Transaction Data</h1>
             </div>
           </div>
-          <div v-else>
+          <div v-else style="height:50vh;overflow-y:scroll" class="hideScroll pb-4">
             <div v-for="(item, index) in transUser" :key="index">
               <div class="card border-0">
                 <div class="row no-gutters">
@@ -79,7 +79,7 @@
             </div>
           </div>
         </div>
-        <div class="row mb-2">
+        <div class="row mb-2 mt-2 px-2">
           <div class="col-lg-12 col-md-12 col-12 text-center hideScroll" style="overflow-x:scroll">
             <b-form-group>
               <b-form-radio-group id="btn-radios-2" @change="getTrans()" v-model="queryTrans.page"
@@ -88,29 +88,28 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-1"></div>
-          <div class="col-lg-2 col-md-3 col-6">
+          <div class="col-1 d-none d-md-none d-lg-block"></div>
+          <div class="col-lg-2 col-md-3 col-6 mb-4">
             <b-form-select v-model="queryTrans.range" @change="getOrderLimitQuery(1)" size="sm" :options="optionRange">
             </b-form-select>
           </div>
-          <div class="col-lg-2 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6 mb-4">
             <b-form-select v-model="queryTrans.sort" @change="getOrderLimitQuery(1)" size="sm" :options="optionSort">
             </b-form-select>
           </div>
-          <div class="col-lg-2 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6 mb-4">
             <b-form-select v-model="queryTrans.order" @change="getOrderLimitQuery(1)" size="sm" :options="optionOrder">
             </b-form-select>
           </div>
-          <div class="col-lg-2 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6 mb-4">
             <b-form-select v-model="queryTrans.limit" @change="getOrderLimitQuery(1)" size="sm" :options="optionLimit">
             </b-form-select>
           </div>
-          <div class="col-lg-2 col-md-3 col-6">
+          <div class="col-lg-2 col-md-3 col-6 mb-4">
             <b-form-select v-model="queryTrans.status" @change="getOrderLimitQuery(1)" size="sm"
               :options="optionStatus">
             </b-form-select>
           </div>
-          <div class="col-1"></div>
         </div>
       </div>
     </div>
