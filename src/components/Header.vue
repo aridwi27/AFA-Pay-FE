@@ -67,7 +67,7 @@
           </b-dropdown>
 
           <div class="float-right">
-            <h5>{{ detUser.first_name }} {{ detUser.last_name }}</h5>
+            <h5 class="font-weight-bold">{{ detUser.first_name }} {{ detUser.last_name }}</h5>
             <p
               v-if="detUser.handphone.length > 4"
               class=""

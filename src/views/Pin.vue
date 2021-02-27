@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <div class="row">
       <sidelog />
-      <div
+<form action="" @submit.prevent="submit()">
+        <div
         class="col-md-6"
         style="
           background: #fafcff;
@@ -40,11 +41,12 @@
             border-radius: 12px;
             height: 57px;
           "
-          @click="submit()"
+          type="submit"
         >
           Confirm
         </button>
       </div>
+</form>
     </div>
   </div>
 </template>
@@ -71,12 +73,15 @@ export default {
       insertPin: 'auth/updateUser'
     }),
     submit () {
+      this.swalLoading('Processing Data')
       const data = { pin: this.code }
       this.insertPin(data).then((response) => {
         if (response.message === 500) {
+          this.swalLoadingClose()
           this.swalAlert('Something wrong with pin', '', 'error')
         } else {
-          this.swalAlert('Submit pin success', '', 'success')
+          this.swalLoadingClose()
+          this.swalAlert('Register Pin Success', '', 'success')
           this.$router.push('/home')
         }
       }).catch((err) => {

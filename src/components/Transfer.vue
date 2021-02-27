@@ -3,7 +3,13 @@
     <div class="card shadow-nm" style="border-radius: 25px">
       <div class="card-body">
         <h5 class="font-weight-bold">Transfer Money</h5>
-        <div class="card border-0 mb-3 shadow-sm">
+        <div v-if="targetData.first_name === ''" class="row w-100">
+          <div class="col-12 py-5 my-5 text-center">
+            <h1 class="mt-4 text-secondary">Please Re-Select Your Target</h1>
+          </div>
+        </div>
+        <div v-else>
+          <div class="card border-0 mb-3 shadow-sm">
           <div class="row no-gutters pr-1">
             <div class="col-md-1 my-auto mx-auto">
               <img
@@ -18,7 +24,8 @@
                   {{ targetData.first_name }} {{ targetData.last_name }}
                 </p>
                 <p class="card-text mb-0">
-                  <small class="text-muted">{{ targetData.handphone }}</small>
+                  <small v-if="targetData.handphone === '+62' || targetData.handphone === '+62-'" class="text-danger font-italic">No Phone Number Detected</small>
+                  <small v-else class="text-muted">{{ targetData.handphone }}</small>
                 </p>
               </div>
             </div>
@@ -128,7 +135,6 @@
           </div>
           <div class="text-right">
             <b-button v-b-modal.modal-center>Continue</b-button>
-
             <b-modal
               id="modal-center"
               centered
@@ -164,6 +170,7 @@
               Continue
             </button> -->
           </div>
+        </div>
         </div>
       </div>
     </div>

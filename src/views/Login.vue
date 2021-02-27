@@ -104,22 +104,23 @@ export default {
       getUserDetail: 'auth/userDetail'
     }),
     onLogin () {
+      this.swalLoading('Processing Data')
       if (this.form.username !== '' && this.form.password !== '') {
         this.login(this.form).then((response) => {
           if (response === "Email hasn't been registered") {
-            this.$swal.close()
+            this.swalLoadingClose()
             this.$swal('Data Not Register', 'Please Sign Up ', 'error')
           } else if (response === 'Wrong Password') {
-            this.$swal.close()
+            this.swalLoadingClose()
             this.$swal('Wrong Password', 'Please Check Your Password ', 'error')
           } else {
             this.getUserDetail()
               .then((response) => {
                 if (response.pin === null) {
-                  // this.swalLoading('Process Login')
+                  this.swalLoadingClose()
                   this.$router.push('/pin')
                 } else {
-                  // this.swalLoading('Process Login')
+                  this.swalLoadingClose()
                   this.swalToast('success', 'Login Success')
                   this.$router.push('/home')
                 }

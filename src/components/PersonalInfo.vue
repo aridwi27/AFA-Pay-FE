@@ -11,7 +11,8 @@
             <h5 class="mt-4">Preparing Your Data ...</h5>
           </div>
         </div>
-        <h5 class="font-weight-bold float-right text-main" @click="clickEdit">
+       <div v-else>
+          <h5 class="font-weight-bold float-right text-main" @click="clickEdit">
           Edit
         </h5>
         <h5 class="font-weight-bold mb-4">Personal Information</h5>
@@ -24,6 +25,7 @@
             <div class="form-group">
               <label class="text-secondary">First Name</label>
               <input
+                required
                 type="text"
                 v-model="data.first_name"
                 class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm"
@@ -32,6 +34,7 @@
             <div class="form-group">
               <label class="text-secondary">Last name</label>
               <input
+                required
                 type="text"
                 v-model="data.last_name"
                 class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm"
@@ -40,6 +43,7 @@
             <div class="form-group">
               <label class="text-secondary">Verified Email</label>
               <input
+                required
                 type="email"
                 v-model="data.email"
                 class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm"
@@ -91,12 +95,10 @@
               <router-link to="/addphone" class="float-right text-main">
                 Add Number</router-link
               >
-              <p class="float-right text-secondary">Manage /</p>
             </div>
             <div v-else class="float-right">
-              <p class="float-right text-secondary">Add Number</p>
               <router-link to="/managephone" class="float-right text-main"
-                >Manage /
+                >Manage
               </router-link>
             </div>
             <input
@@ -115,6 +117,7 @@
             />
           </div>
         </form>
+       </div>
       </div>
     </div>
   </div>
@@ -167,14 +170,16 @@ export default {
       })
     },
     changeUser () {
+      this.swalLoading('Submitting Data')
       this.showEdit = !this.showEdit
       this.actionsUpdate(this.data).then((response) => {
+        this.swalLoadingClose()
         this.actionsDetUser()
         // this.detailUser()
         if (response.code === 500) {
-          this.swalAlert('Update User', response.message, 'error')
+          this.swalAlert('Update Failed', response.message, 'error')
         } else {
-          this.swalAlert('Update User', response.message, 'success')
+          this.swalAlert('User Updated', response.message, 'success')
         }
       }).catch((err) => {
         console.log(err)

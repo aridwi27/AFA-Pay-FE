@@ -53,7 +53,8 @@
               <div class="card-body">
                 <p class="font-weight-bold mb-0">{{transDetailUser.targetFirstName}} {{transDetailUser.targetLastName}}
                 </p>
-                <p class="card-text mb-0"><small class="text-muted">{{transDetailUser.targetHandphone}}</small></p>
+                <p v-if="transDetailUser.targetHandphone === '+62' || transDetailUser.targetHandphone === '+62-'" class="text-danger font-italic"><small>No Phone Number Detected</small></p>
+                <p v-else class="card-text mb-0"><small class="text-muted">{{transDetailUser.targetHandphone}}</small></p>
               </div>
             </div>
           </div>
