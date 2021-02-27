@@ -221,7 +221,7 @@ export default {
   data () {
     return {
       topup: '',
-      amount: 0
+      amount: null
     }
   },
   methods: {

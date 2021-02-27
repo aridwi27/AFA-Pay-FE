@@ -259,7 +259,7 @@ export default {
       isLoadingConfirm: true,
       loginId: localStorage.getItem('id'),
       confirmedId: 0,
-      amount: 0,
+      amount: null,
       arrPositive: { labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
       positiveChartColors: {
         borderColor: 'rgba(99, 121, 244, 1)',
@@ -317,7 +317,7 @@ export default {
             this.swalAlert('Top Up Success', 'Your saldo already added', 'success')
             this.$bvModal.hide('modalTopUp')
             this.linkTo('status')
-            this.amount = 0
+            this.amount = null
           })
         })
         .catch((err) => {
@@ -325,11 +325,14 @@ export default {
         })
     },
     detailTrans (id) {
+      this.swalLoading('Please Wait')
       this.transDetail(id)
         .then((res) => {
+          this.swalLoadingClose()
           this.linkTo('status')
         })
         .catch((err) => {
+          this.swalLoadingClose()
           console.log(err)
         })
     },
