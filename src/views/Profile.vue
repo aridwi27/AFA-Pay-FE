@@ -181,6 +181,7 @@ export default {
       const fileReader = new FileReader()
       fileReader.addEventListener('load', () => {
         this.imageUrl = fileReader.result
+        // this.swalLoadingClosed()
       })
       fileReader.readAsDataURL(files[0])
       this.image = files[0]
@@ -188,8 +189,14 @@ export default {
       fd.append('image', files[0])
       this.actionsUpdate(fd).then((result) => {
         this.actionsDetUser()
-        this.swalAlert('Update Photo Success', '', 'success')
+        if (result.code === 500) {
+          this.swalAlert('Update Photo Fail', '', 'error')
+        } else {
+          this.swalAlert('Update Photo Success', '', 'success')
+        }
+        // this.swalLoadingClosed()
       }).catch((err) => {
+        // this.swalLoadingClosed()
         console.log(err)
       })
     }
