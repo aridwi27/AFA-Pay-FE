@@ -112,7 +112,7 @@ export default {
           })
         }
       } else {
-        if (parseInt(this.code) === this.detUser.pin) {
+        if (parseInt(this.code) == this.detUser.pin) {
           this.swalAlert('Insert New Pin', '', 'info')
           this.pinConfirmed = true
         } else {
