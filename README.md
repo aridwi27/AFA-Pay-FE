@@ -42,7 +42,7 @@ Here is few step to run the Payment Web frontend aplication:
 1. Open your terminal and head to your project directory
 2. Clone this repository
 ```
-git clone https://github.com/aridwi27/AFA-Pay-BE.git
+git clone https://github.com/aridwi27/AFA-Pay-FE
 ``` 
 3. Use this command to install all dependencies
 ```
