@@ -176,6 +176,7 @@ export default {
       this.$refs.fileInput.click()
     },
     onFilePicked (event) {
+      this.swalLoading('Uploading Photo')
       const files = event.target.files
       const fileReader = new FileReader()
       fileReader.addEventListener('load', () => {

@@ -119,7 +119,7 @@ export default {
                 if (response.pin === null) {
                   this.$router.push('/pin')
                 } else {
-                  this.swalLoading('Process Login')
+                  // this.swalLoading('Process Login')
                   this.swalToast('success', 'Login Success')
                   this.$router.push('/home')
                 }

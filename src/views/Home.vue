@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <Footer class="fixed-bottom" />
+    <Footer />
   </div>
 </template>
 
