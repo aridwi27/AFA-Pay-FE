@@ -35,7 +35,7 @@
                           {{item.userFirstName}} {{item.userLastName}}</p>
                         <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                       </div>
-                      <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                      <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                     </div>
                   </div>
                   <!-- End Canceled -->
@@ -49,7 +49,7 @@
                           {{item.userFirstName}} {{item.userLastName}}</p>
                         <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                       </div>
-                      <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                        <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                     </div>
                   </div>
                   <!-- End Pending -->
@@ -69,7 +69,8 @@
                           {{item.userFirstName}} {{item.userLastName}}</p>
                         <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
                       </div>
-                      <p class="card-text mb-0"><small class="text-muted">{{item.status}}</small></p>
+                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up {{item.status}}</small></p>
+                      <p v-else class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
                     </div>
                   </div>
                   <!-- EndSuccess -->
@@ -113,8 +114,15 @@
         </div>
       </div>
     </div>
-    <b-modal id="confirmTrans2" hide-header hide-footer>
-      <form @submit.prevent="submitTopUp()" class="my-4 font-nunito">
+    <b-modal id="confirmTrans2" hide-header hide-footer centered>
+      <div v-if="isLoadingConfirm" class="row w-100">
+        <div class="col-12 text-center">
+          <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
+          <b-spinner class="mt-4 pt-4" style="width: 2rem; height: 2rem;" variant="info"></b-spinner>
+          <p class="mt-4 text-secondary">Please Wait</p>
+        </div>
+      </div>
+      <form v-else @submit.prevent="submitTopUp()" class="my-4 font-nunito">
         <div class="row">
           <div class="col">
             <p class="font-weight-bold text-center mb-0">Confirm Transaction </p>
@@ -163,6 +171,7 @@ export default {
     return {
       loginId: localStorage.getItem('id'),
       isLoading: true,
+      isLoadingConfirm: true,
       optionLimit: [
         { value: 5, text: 'Limit 5' },
         { value: 10, text: 'Limit 10' },
@@ -227,9 +236,11 @@ export default {
     },
     popUpConfirm (id) {
       this.confirmedId = id
+      this.isLoadingConfirm = true
+      this.$bvModal.show('confirmTrans2')
       this.transDetail(id)
         .then((res) => {
-          this.$bvModal.show('confirmTrans2')
+          this.isLoadingConfirm = false
         })
         .catch((err) => {
           console.log(err)

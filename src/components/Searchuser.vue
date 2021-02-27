@@ -27,7 +27,8 @@
                       {{ user.last_name }}
                     </span>
                   </div>
-                  <span style="font-size: 12px" class="d-block">{{ user.handphone }}</span>
+                  <span v-if="user.handphone === '+62-' || user.handphone === '+62'" style="font-size: 12px" class="d-block text-danger font-italic">No Phone Number Detected</span>
+                  <span v-else style="font-size: 12px" class="d-block">{{ user.handphone }}</span>
                 </div>
               </div>
             </div>
@@ -105,7 +106,6 @@ export default {
       this.actionSearch(this.querySearch)
         .then((response) => {
           this.isLoading = false
-          console.log(response)
         })
         .catch((err) => {
           console.log(err)
