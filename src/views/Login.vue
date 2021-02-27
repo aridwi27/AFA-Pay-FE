@@ -117,7 +117,7 @@ export default {
             this.getUserDetail()
               .then((response) => {
                 if (response.pin === null) {
-                  this.swalLoading('Process Login')
+                  // this.swalLoading('Process Login')
                   this.$router.push('/pin')
                 } else {
                   // this.swalLoading('Process Login')
