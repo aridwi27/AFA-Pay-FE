@@ -41,18 +41,12 @@ export default {
       }
     },
     logout () {
-      this.swalLogout('Are You Sure Want Logout?', '', 'info').then((response) => {
-        console.log(response)
-        if (response === false) {
-          console.log(response)
-        } else {
+      this.swalLogout('Do you want to logout?', '', 'warning').then((result) => {
+        if (result) {
           this.onLogout()
           this.$router.push('/')
         }
       })
-      // if (check) {
-
-      // }
     }
   }
 }

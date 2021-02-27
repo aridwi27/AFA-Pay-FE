@@ -155,21 +155,22 @@ export default {
   computed: {
     ...mapGetters({
       detUser: 'auth/detailUser',
-      webURL: 'webURL',
-      onLogout: 'auth/logout'
+      webURL: 'webURL'
     })
   },
   methods: {
     ...mapActions({
       actionsDetUser: 'auth/userDetail',
-      actionsUpdate: 'auth/updateUser'
+      actionsUpdate: 'auth/updateUser',
+      onLogout: 'auth/logout'
     }),
     logout () {
-      const check = confirm('Do you want to logout?')
-      if (check) {
-        this.onLogout()
-        this.$router.push('/')
-      }
+      this.swalLogout('Do you want to logout?', '', 'warning').then((result) => {
+        if (result) {
+          this.onLogout()
+          this.$router.push('/')
+        }
+      })
     },
     onPickFile () {
       this.$refs.fileInput.click()

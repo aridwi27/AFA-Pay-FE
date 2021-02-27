@@ -2,6 +2,15 @@
   <div>
     <div class="card shadow-nm" style="border-radius: 25px">
       <div class="card-body px-5">
+        <div v-if="isLoading" class="row w-100">
+          <div class="col-12 py-5 my-5 text-center">
+            <b-spinner
+              style="width: 4rem; height: 4rem"
+              variant="info"
+            ></b-spinner>
+            <h5 class="mt-4">Preparing Your Data ...</h5>
+          </div>
+        </div>
         <h5 class="font-weight-bold float-right text-main" @click="clickEdit">
           Edit
         </h5>
@@ -37,7 +46,7 @@
               />
             </div>
             <div class="text-right">
-              <button class="btn btnMain">Save Change</button>
+              <button type="submit" class="btn btnMain">Save Change</button>
             </div>
           </form>
         </div>
@@ -124,7 +133,8 @@ export default {
         last_name: '',
         email: ''
       },
-      showEdit: false
+      showEdit: false,
+      isLoading: false
     }
   },
   computed: {
@@ -144,12 +154,14 @@ export default {
       this.showEdit = !this.showEdit
     },
     detailUser () {
+      this.isLoading = true
       this.actionsDetUser().then((response) => {
         this.data = {
           email: response.email,
           first_name: response.first_name,
           last_name: response.last_name
         }
+        this.isLoading = false
       }).catch((err) => {
         console.log(err)
       })
@@ -157,7 +169,8 @@ export default {
     changeUser () {
       this.showEdit = !this.showEdit
       this.actionsUpdate(this.data).then((response) => {
-        this.detUser()
+        this.actionsDetUser()
+        // this.detailUser()
         if (response.code === 500) {
           this.swalAlert('Update User', response.message, 'error')
         } else {
