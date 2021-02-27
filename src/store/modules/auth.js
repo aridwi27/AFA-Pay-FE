@@ -139,6 +139,15 @@ const moduleAuth = {
     },
     selectTarget (context, data) {
       context.commit('setTargetData', data)
+    },
+    deletePhoto (context) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${context.rootState.apiURL}/delete_photo/${localStorage.id}`, { headers: { token: context.state.token } }).then((response) => {
+          console.log(response)
+        }).catch((err) => {
+          console.log(err)
+        })
+      })
     }
   },
   getters: {

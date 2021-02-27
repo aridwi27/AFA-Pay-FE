@@ -34,7 +34,7 @@
                 type="text"
                 class="form-control"
                 id="inlineFormInputGroupUsername"
-                placeholder="Username"
+                placeholder="Email"
               />
             </div>
           </div>
