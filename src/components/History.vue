@@ -10,6 +10,11 @@
               <h5 class="mt-4">Preparing Your Data ...</h5>
             </div>
           </div>
+          <div v-else-if="transUser.length < 1" class="row w-100">
+            <div class="col-12 py-5 my-5 text-center">
+              <h1 class="mt-4 text-secondary">You Don't Have Any Transaction Data</h1>
+            </div>
+          </div>
           <div v-else>
             <div v-for="(item, index) in transUser" :key="index">
               <div class="card border-0">
@@ -73,7 +78,6 @@
             </div>
           </div>
         </div>
-
         <div class="row mb-2">
           <div class="col-12 text-center hideScroll" style="overflow-x:scroll">
             <b-form-group>
@@ -180,7 +184,6 @@ export default {
       transRecap: 'trans/transRecap',
       webURL: 'webURL',
       pendingData: 'trans/transDetailUser',
-      userId: 'auth/userId',
       optionPage: 'trans/optionPage'
     })
   },

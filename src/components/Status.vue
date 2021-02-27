@@ -19,10 +19,10 @@
             <input readonly type="text" :value="`Rp. ${formatPrice(Number(transDetailUser.amount))}`"
               class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
-          <div class="form-group">
+          <div v-if="transDetailUser.user_id === Number(loginId) " class="form-group">
             <label v-if="transDetailUser.type === 'in'" class="text-secondary">Balance Now</label>
             <label v-else class="text-secondary">Balance Left</label>
-            <input readonly type="text" :value="`Rp. ${formatPrice(Number(transDetail.currentCredit))}`"
+            <input readonly type="text" :value="`Rp. ${formatPrice(Number(transDetailUser.creditLeft))}`"
               class="classname font-weight-bold form-control border-top-0 border-0 shadow-sm">
           </div>
           <div class="form-group">
@@ -79,7 +79,8 @@ export default {
   mixins: [paymentMixin],
   data () {
     return {
-      amount: 0
+      amount: 0,
+      loginId: localStorage.getItem('id')
     }
   },
   computed: {

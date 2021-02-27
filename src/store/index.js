@@ -15,7 +15,7 @@ const store = new Vuex.Store({
   },
   mutations: {
   },
-  actions: {
+  tions: {
   },
   modules: {
     auth: moduleAuth,

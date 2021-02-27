@@ -241,7 +241,6 @@ export default {
       userData: 'auth/detailUser',
       transRecap: 'trans/transRecap',
       transUser: 'trans/transUser',
-      userId: 'auth/userId',
       webURL: 'webURL',
       pendingData: 'trans/transDetailUser'
     })
