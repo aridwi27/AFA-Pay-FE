@@ -39,6 +39,7 @@
                   required
                   min="1"
                   v-model="amount"
+                  :max="userData.credit"
                   @keyup="formatAmount()"
                   class="form-control border-0 text-main text-center"
                   placeholder="0.00"
@@ -135,30 +136,25 @@
               hide-header
               hide-footer
             >
-              <div class="px-3 mt-3">
-                <h5 style="color: #3a3d42" class="mt- d-inline">
-                  Enter PIN to Transfer
-                </h5>
-                <i class="fas fa-times float-right"></i>
-                <p
-                  style="color: rgba(58, 61, 66, 0.6); width: 70%"
-                  class="my-4"
-                >
-                  Enter your 6 digits PIN for confirmation to continue
-                  transferring money.
-                </p>
-              </div>
-              <div class="text-center">
-                <PincodeInput v-model="code" :length="6" />
-              </div>
-              <button
-                type="submit"
-                class="btn btnMain font-weight-bold mt-5 mb-2 px-4 float-right"
-                style="border-radius: 10px"
-                @click="doTransfer()"
-              >
-                Continue
-              </button>
+              <form action="" @submit.prevent="doTransfer()">
+                <div class="px-3 mt-3">
+                  <h5 style="color: #3a3d42" class="mt- d-inline">
+                    Enter PIN to Transfer
+                  </h5>
+                  <i class="fas fa-times float-right"></i>
+                  <p style="color: rgba(58, 61, 66, 0.6); width: 70%" class="my-4">
+                    Enter your 6 digits PIN for confirmation to continue
+                    transferring money.
+                  </p>
+                </div>
+                <div class="text-center">
+                  <PincodeInput v-model="code" :length="6" />
+                </div>
+                <button type="submit" class="btn btnMain font-weight-bold mt-5 mb-2 px-4 float-right"
+                  style="border-radius: 10px">
+                  Continue
+                </button>
+              </form>
             </b-modal>
             <!-- <button
               @click="doTransfer()"
@@ -224,13 +220,17 @@ export default {
     },
     doTransfer () {
       const pin = parseInt(this.code)
+      this.swalLoading('Checking Your Pin')
       this.getUserDetail().then((response) => {
         if (response.pin !== pin) {
+          this.swalLoadingClose()
+          this.code = ''
           this.swalAlert('Your Pin Wrong', 'Please Check Your Pin', 'error')
         } else {
           this.actionTrans(this.finalData)
             .then(async (res) => {
               await this.transDetail(res.data.id).then((result) => {
+                this.swalLoadingClose()
                 this.showConfirm = false
                 this.amount = 0
                 this.info = ''
