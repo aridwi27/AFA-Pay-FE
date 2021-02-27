@@ -252,7 +252,7 @@ export default {
       loginId: localStorage.getItem('id'),
       confirmedId: 0,
       amount: 0,
-      arrPositive: { labels: ['Sat', 'Sun', 'mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
+      arrPositive: { labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'], data: [40, 25, 30, 35, 28, 40, 33] },
       positiveChartColors: {
         borderColor: 'rgba(99, 121, 244, 1)',
         pointBorderColor: 'rgba(99, 121, 244, 1)',

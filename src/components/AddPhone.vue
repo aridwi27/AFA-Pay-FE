@@ -73,6 +73,7 @@ export default {
       this.amount = this.formatPrice(this.amount)
     },
     addPhone () {
+      this.swalLoading('Submitting Data')
       if (this.newPhone.charAt(0) === '0') {
         const splitNum = this.newPhone.split('').slice(1, this.newPhone.length)
         const phoneNum = ['+62', ...splitNum].join('')
@@ -80,8 +81,10 @@ export default {
           handphone: phoneNum
         }
         this.onInsert(data).then((response) => {
+          this.swalLoadingClose()
           this.getDetail()
-          this.swalAlert('Success add phone number', '', 'success')
+          this.swalAlert('Phone Number Addedr', '', 'success')
+          this.linkTo('personalinfo')
         }).catch((err) => {
           console.log(err)
         })
@@ -92,8 +95,10 @@ export default {
           handphone: phoneNum
         }
         this.onInsert(data).then((response) => {
+          this.swalLoadingClose()
           this.getDetail()
-          this.swalAlert('Success add phone number', '', 'success')
+          this.swalAlert('Phone Number Added', '', 'success')
+          this.linkTo('personalinfo')
         }).catch((err) => {
           console.log(err)
         })
