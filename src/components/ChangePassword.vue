@@ -20,13 +20,15 @@
                   </div>
                   <input
                     v-model="form.curPassword"
-                    type="password"
+                    :type="typeOld"
                     class="form-control border-0 shadow-sm"
                     placeholder="Current Password"
                   />
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-0 shadow-sm"
-                      ><i class="fas fa-eye-slash"></i
+                    <span
+                      @click="onShowPass('old')"
+                      class="input-group-text bg-white border-0 shadow-sm"
+                      ><i :class="iconOld"></i
                     ></span>
                   </div>
                 </div>
@@ -40,13 +42,15 @@
                   </div>
                   <input
                     v-model="form.newPassword"
-                    type="password"
+                    :type="typeNew"
                     class="form-control border-0 shadow-sm"
                     placeholder="New Password"
                   />
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-0 shadow-sm"
-                      ><i class="fas fa-eye-slash"></i
+                    <span
+                      @click="onShowPass('new')"
+                      class="input-group-text bg-white border-0 shadow-sm"
+                      ><i :class="iconNew"></i
                     ></span>
                   </div>
                 </div>
@@ -60,13 +64,15 @@
                   </div>
                   <input
                     v-model="form.confNewPassword"
-                    type="password"
+                    :type="typeConf"
                     class="form-control border-0 shadow-sm"
                     placeholder="Confirm New Password"
                   />
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-0 shadow-sm"
-                      ><i class="fas fa-eye-slash"></i
+                    <span
+                      @click="onShowPass('conf')"
+                      class="input-group-text bg-white border-0 shadow-sm"
+                      ><i :class="iconConf"></i
                     ></span>
                   </div>
                 </div>
@@ -99,7 +105,16 @@ export default {
         newPassword: '',
         confNewPassword: ''
       },
-      amount: 0
+      amount: 0,
+      iconOld: 'fas fa-eye-slash',
+      iconNew: 'fas fa-eye-slash',
+      iconConf: 'fas fa-eye-slash',
+      typeCondOld: true,
+      typeCondNew: true,
+      typeCondConf: true,
+      typeOld: 'password',
+      typeNew: 'password',
+      typeConf: 'password'
     }
   },
   computed: {
@@ -129,7 +144,7 @@ export default {
               this.swalAlert('Error Change Password', response.message, 'error')
             } else {
               this.swalAlert(response.message, '', 'success')
-              this.$router.push('/personalinfo')
+              this.$router.push('/profile')
             }
           }).then((err) => {
             console.log(err)
@@ -137,6 +152,36 @@ export default {
         }
       } else {
         alert('All Field Required')
+      }
+    },
+    onShowPass (e) {
+      if (e === 'old') {
+        this.typeCondOld = !this.typeCondOld
+        if (this.typeCondOld) {
+          this.iconOld = 'fas fa-eye-slash'
+          this.typeOld = 'password'
+        } else {
+          this.iconOld = 'fas fa-eye'
+          this.typeOld = 'text'
+        }
+      } else if (e === 'new') {
+        this.typeCondNew = !this.typeCondNew
+        if (this.typeCondNew) {
+          this.iconNew = 'fas fa-eye-slash'
+          this.typeNew = 'password'
+        } else {
+          this.iconNew = 'fas fa-eye'
+          this.typeNew = 'text'
+        }
+      } else {
+        this.typeCondConf = !this.typeCondConf
+        if (this.typeCondConf) {
+          this.iconConf = 'fas fa-eye-slash'
+          this.typeConf = 'password'
+        } else {
+          this.iconConf = 'fas fa-eye'
+          this.typeConf = 'text'
+        }
       }
     }
   },

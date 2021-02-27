@@ -5,12 +5,12 @@
         <h5 class="font-weight-bold mb-4">Change Pin</h5>
         <p class="text-secondary w-50 mb-2">
           Enter your
-          <span class="font-weight-bold" v-if="pinConfirmed === true"
+          <span class="font-weight-bold" v-if="pinConfirmed === false"
             >Current</span
           >
           <span class="font-weight-bold" v-else>New</span> 6 digits Zwallet PIN
           below to
-          <span class="font-weight-bold" v-if="pinConfirmed !== true"
+          <span class="font-weight-bold" v-if="pinConfirmed == false"
             >continue to the next steps.</span
           >
           <span class="font-weight-bold" v-else
@@ -19,7 +19,7 @@
         </p>
         <!-- ConfirmPin -->
         <form
-          v-if="pinConfirmed === true"
+          v-if="pinConfirmed === false"
           action=""
           @submit.prevent="alertCode()"
           class="my-5"
@@ -39,7 +39,7 @@
             <div class="col-3"></div>
           </div>
         </form>
-        <form v-else action="" @submit.prevent="alertCode()" class="my-5">
+        <form v-else action="" @submit.prevent="alertCode('e')" class="my-5">
           <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
@@ -90,30 +90,33 @@ export default {
     formatAmount () {
       this.amount = this.formatPrice(this.amount)
     },
-    alertCode () {
+    alertCode (e) {
       // this.pinConfirmed = !this.pinConfirmed
       const data = {
         pin: parseInt(this.newCode)
       }
-      if (!this.pinConfirmed) {
-        this.swalConfirm('Do you want to use this pin?', '', 'warning').then((result) => {
-          if (result) {
-            this.pinConfirmed = true
-          } else {
-            this.pinConfirmed = false
-          }
-        })
+      if (this.pinConfirmed) {
+        if (e === 'e') {
+          this.swalConfirm('Do you want to use this pin?', '', 'warning').then((result) => {
+            if (result) {
+              this.swalLoading('Changing Pin')
+              this.onInsert(data).then(async (response) => {
+                await this.swalAlert('Change Pin Success', '', 'success')
+                this.$router.push('/profile')
+              }).catch((err) => {
+                console.log(err)
+              })
+            } else {
+              this.pinConfirmed = true
+            }
+          })
+        }
       } else {
         if (parseInt(this.code) === this.detUser.pin) {
-          this.onInsert(data).then((response) => {
-            this.swalAlert('Change pin Success', '', 'success')
-            this.pinConfirmed = true
-            this.$router.push('/profile')
-          }).catch((err) => {
-            console.log(err)
-          })
-        } else {
+          this.swalAlert('Insert New Pin', '', 'info')
           this.pinConfirmed = true
+        } else {
+          this.pinConfirmed = false
           this.swalAlert('Wrong current pin', '', 'error')
         }
       }
