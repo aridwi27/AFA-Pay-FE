@@ -8,7 +8,7 @@
           style="background: #f5f5f5; border-radius: 10px; padding-left: 40px" type="text"
           placeholder="Search reciever here" />
       </div>
-      <div class="hideScroll" style="height:40vh;overflow-y:scroll">
+      <div class="hideScroll" style="min-height:40vh;overflow-y:scroll">
         <div v-if="isLoading" class="row w-100">
           <div class="col-12 py-5 my-5 text-center">
             <b-spinner style="width: 4rem; height: 4rem;" variant="info"></b-spinner>
@@ -36,16 +36,10 @@
       </div>
       <!-- {{paginationSearch}} -->
       <div class="row w-100 mt-4">
-        <div class="col-2 d-flex justify-content-left">
-          <p class="mb-0 my-auto">Page : {{ querySearch.page }}</p>
-        </div>
-        <div class="col-5 d-flex justify-content-center hideScroll" style="overflow-x:scroll">
-          <!-- <p class="mb-0 my-auto">Select :</p> -->
-          <p v-for="(index, page) in paginationSearch.totalPage" :key="index" class="mb-0 btn btnMain mx-2"
-            @click="getOrderLimitQuery(page + 1)">
-            {{ page + 1 }}
-          </p>
-        </div>
+        <div class="col-7 hideScroll" style="overflow-x:scroll">
+              <b-form-radio-group id="btn-radios-2" @change="searchUser()" v-model="querySearch.page"
+                button-variant="outline-primary" :options="paginationUser" buttons></b-form-radio-group>
+          </div>
         <div class="col-3">
           <b-form-select v-model="querySearch.sort" @change="getOrderLimitQuery(1)" size="sm" :options="optionSort">
           </b-form-select>
@@ -84,6 +78,7 @@ export default {
     ...mapGetters({
       userSearch: 'auth/userSearch',
       paginationSearch: 'auth/paginationSearch',
+      paginationUser: 'auth/paginationUser',
       webURL: 'webURL'
     })
   },
@@ -110,6 +105,7 @@ export default {
       this.actionSearch(this.querySearch)
         .then((response) => {
           this.isLoading = false
+          console.log(response)
         })
         .catch((err) => {
           console.log(err)
