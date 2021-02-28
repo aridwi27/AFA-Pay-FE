@@ -3,6 +3,7 @@
 Payment Web is an aplication that aims to make it easy for user to do online payment. In frontend part, Payment Web provide UI, UX, and integration from [backend Payment Web aplication](https://github.com/aridwi27/AFA-Pay-BE). In this Web aplication user can configure their profile and do transaction to whoever connected to this website. It is also provide transaction history and send or top up money.
 
 ## Documentation
+### Desktop Version
 ![landing](https://i.ibb.co/5hKrFL2/landing-page.png)
 
 ![login](https://i.ibb.co/c1MK9Bv/Login.png)
@@ -16,6 +17,9 @@ Payment Web is an aplication that aims to make it easy for user to do online pay
 ![transfer](https://i.ibb.co/C5NhszL/transfer.png)
 
 ![history](https://i.ibb.co/Pr7jpvB/history.png)
+
+### Mobile Version
+![m-home](https://i.ibb.co/svJvNSK/m-home.png)    ![m-profile](https://i.ibb.co/N3Pq3Ph/m-profile.png)    ![m-transfer](https://i.ibb.co/Ydtffxv/m-transfer.png)
 
 
 ## Getting Started

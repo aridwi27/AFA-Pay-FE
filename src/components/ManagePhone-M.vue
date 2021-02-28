@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="card shadow-nm" style="border-radius: 25px">
-      <div class="card-body" style="min-height:88vh">
-        <h5 @click="linkTo('personalinfo')" class="font-weight-bold mb-4"><i class="fas fa-arrow-left mr-4"></i>
-          Manage Phone Number</h5>
-        <p class="text-secondary text-center px-1" style="line-height:30px">
+      <div class="card-body" style="min-height: 88vh">
+        <h5 @click="linkTo('personalinfo')" class="font-weight-bold mb-4">
+          <i class="fas fa-arrow-left mr-4"></i> Manage Phone Number
+        </h5>
+        <p class="text-secondary text-center px-1" style="line-height: 30px">
           You can only delete the phone number and then you must add another
           phone number.
         </p>
@@ -112,6 +113,19 @@ export default {
       } else {
         if (this.phone.charAt(0) === '0') {
           const splitNum = this.phone.split('').slice(1, this.phone.length)
+          const phoneNum = ['+62', ...splitNum].join('')
+          const data = {
+            handphone: phoneNum
+          }
+          this.upPhone(data).then(async () => {
+            await this.phoneNum()
+            this.swalAlert('Success update phone number', '', 'success')
+            this.linkTo('personalinfo')
+          }).catch((err) => {
+            console.log(err)
+          })
+        } else if (this.phone.charAt(3) === '0' && this.phone.charAt(0) === '+') {
+          const splitNum = this.phone.split('').slice(4, this.phone.length)
           const phoneNum = ['+62', ...splitNum].join('')
           const data = {
             handphone: phoneNum

@@ -117,6 +117,21 @@ export default {
           this.upPhone(data).then(async () => {
             await this.phoneNum()
             this.swalAlert('Success update phone number', '', 'success')
+            this.linkTo('personalinfo')
+            this.linkTo('personalinfo')
+          }).catch((err) => {
+            console.log(err)
+          })
+        } else if (this.phone.charAt(3) === '0' && this.phone.charAt(0) === '+') {
+          const splitNum = this.phone.split('').slice(4, this.phone.length)
+          const phoneNum = ['+62', ...splitNum].join('')
+          const data = {
+            handphone: phoneNum
+          }
+          this.upPhone(data).then(async () => {
+            await this.phoneNum()
+            this.swalAlert('Success update phone number', '', 'success')
+            this.linkTo('personalinfo')
           }).catch((err) => {
             console.log(err)
           })
@@ -127,6 +142,7 @@ export default {
           this.upPhone(data).then(async () => {
             await this.phoneNum()
             this.swalAlert('Success update phone number', '', 'success')
+            this.linkTo('personalinfo')
           }).catch((err) => {
             console.log(err)
           })
@@ -139,6 +155,7 @@ export default {
           this.upPhone(data).then(async () => {
             await this.phoneNum()
             this.swalAlert('Success update phone number', '', 'success')
+            this.linkTo('personalinfo')
           }).catch((err) => {
             console.log(err)
           })
