@@ -1,14 +1,16 @@
 <template>
   <div class="bg-main">
-    <div class="card w-100 bg-theme text-white shadow-nm"
+    <!-- <div class="card w-100 bg-theme text-white shadow-nm"
       style="border-bottom-left-radius: 25px;border-bottom-right-radius: 25px">
       <div class="card-body mt-3">
         <h5 @click="linkTo('home')" class="font-weigh-bold"><i class="fas fa-arrow-left mr-4"></i> Transaction</h5>
       </div>
-    </div>
-    <div class="card bg-main shadow-nm" style="border-radius:25px">
+    </div> -->
+    <div class="card bg-main shadow-nm" style="border-radius:25px;min-height:88vh">
       <div class="card-body" style="background:#FAFCFF">
-        <div class="hideScroll" >
+        <h5 @click="linkTo('home')" class="font-weight-bold mb-0"><i class="fas fa-arrow-left mr-4"></i> Notification
+        </h5>
+        <div class="mt-4 hideScroll">
           <div v-if="isLoading" class="row w-100">
             <div class="col-12 py-5 my-5 text-center">
               <b-spinner style="width: 4rem; height: 4rem;" variant="info"></b-spinner>
@@ -20,109 +22,70 @@
               <h1 class="mt-4 text-secondary">You Don't Have Any Transaction Data</h1>
             </div>
           </div>
-          <div v-else style="height:50vh;overflow-y:scroll" class="hideScroll pb-4">
+          <div v-else style="height:80vh;overflow-y:scroll" class="hideScroll pb-4">
             <div v-for="(item, index) in transUser" :key="index">
-              <div class="card border-0 shadow-nm mb-3">
-                <div class="row no-gutters">
-                  <div class="col-md-2 col-2 my-auto mx-auto">
-                    <img v-if="Number(loginId) === Number(item.target_id)" :src="`${webURL}/images/${item.userImage}`"
-                      class="card-img text-center" alt="...">
-                    <img v-else :src="`${webURL}/images/${item.targetImage}`" class="card-img text-center" alt="...">
-                  </div>
-                  <!-- Start Canceled -->
-                  <div v-if="item.status === 'Canceled'" class="col-md-10 col-10">
-                    <div @click="detailTrans(item.id)" class="card-body">
-                      <p class="float-right font-weight-bold mb-0 text-secondary">
-                        Rp.{{formatPrice(Number(item.amount))}}
-                      </p>
-                      <div>
-                        <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">
-                          {{item.userFirstName}} {{item.userLastName}}</p>
-                        <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
+             <!-- Start Canceled -->
+                <div @click="detailTrans(item.id)" v-if="item.status === 'Canceled' " class="card shadow-nm">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-2">
+                        <i class="fas fa-ban text-secondary fa-2x"></i>
                       </div>
-                      <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
+                      <div class="col-10">
+                        <small v-if="Number(loginId) === Number(item.target_id)"
+                          class="text-secondary mb-0 d-block">Transfer From {{item.userFirstName}} {{item.userLastName}}
+                          {{item.status}}</small>
+                        <small v-else class="text-secondary mb-0 d-block">Transfer To {{item.targetFirstName}}
+                          {{item.targetLastName}} {{item.status}}</small>
+                        <p class="font-weight-bold mb-0">Rp. {{formatPrice(Number(item.amount))}}</p>
+                      </div>
                     </div>
                   </div>
-                  <!-- End Canceled -->
-                  <!-- Start Pending -->
-                  <div v-else-if="item.status === 'Pending'" class="col-md-10 col-10">
-                    <div @click="popUpConfirm(item.id)" class="card-body">
-                      <p class="float-right font-weight-bold mb-0 text-warning">Rp.{{formatPrice(Number(item.amount))}}
-                      </p>
-                      <div>
-                        <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">
-                          {{item.userFirstName}} {{item.userLastName}}</p>
-                        <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                      </div>
-                        <p class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
-                    </div>
-                  </div>
-                  <!-- End Pending -->
-                  <!-- Start Success -->
-                  <div v-else class="col-md-10 col-10">
-                    <div @click="detailTrans(item.id)" class="card-body">
-                      <div>
-                        <p v-if="Number(loginId) === Number(item.target_id)"
-                          class="float-right font-weight-bold mb-0 text-success">+
-                          Rp.{{formatPrice(Number(item.amount))}}
-                        </p>
-                        <p v-else class="float-right font-weight-bold mb-0 text-danger">-
-                          Rp.{{formatPrice(Number(item.amount))}}</p>
-                      </div>
-                      <div>
-                        <p v-if="Number(loginId) === Number(item.target_id)" class="font-weight-bold mb-0">
-                          {{item.userFirstName}} {{item.userLastName}}</p>
-                        <p v-else class="font-weight-bold mb-0">{{item.targetFirstName}} {{item.targetLastName}}</p>
-                      </div>
-                      <p v-if="item.info === 'Top Up'" class="card-text mb-0"><small class="text-muted">Top Up {{item.status}}</small></p>
-                      <p v-else class="card-text mb-0"><small class="text-muted">Transfer {{item.status}}</small></p>
-                    </div>
-                  </div>
-                  <!-- EndSuccess -->
                 </div>
-              </div>
+                <!-- End Cancel -->
+                <!-- Start Pending -->
+                <div v-else-if="item.status === 'Pending' " class="card shadow-nm">
+                  <div @click="popUpConfirm(item.id)" class="card-body">
+                    <div class="row">
+                      <div class="col-2">
+                        <i v-if="item.status === 'Pending'" class="far fa-clock text-warning fa-2x"></i>
+                      </div>
+                      <div class="col-10">
+                        <small v-if="Number(loginId) === Number(item.target_id)"
+                          class="text-secondary mb-0 d-block">Transfer From {{item.userFirstName}}
+                          {{item.userLastName}}</small>
+                        <small v-else class="text-secondary mb-0 d-block">Transfer To {{item.targetFirstName}}
+                          {{item.targetLastName}}</small>
+                        <p class="font-weight-bold mb-0">Rp. {{formatPrice(Number(item.amount))}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Pending -->
+                 <!-- Start Success -->
+                <div v-else class="card shadow-nm">
+                  <div @click="detailTrans(item.id)" class="card-body">
+                    <div class="row">
+                      <div class="col-2">
+                        <i v-if="Number(loginId) === Number(item.target_id)"
+                          class="fas fa-arrow-up text-success fa-2x"></i>
+                        <i v-else class="fas fa-arrow-down text-danger fa-2x"></i>
+                      </div>
+                      <div class="col-10">
+                        <small v-if="item.info ==='Top Up'" class="text-secondary mb-0 d-block">Top Up Account
+                          {{item.userFirstName}}</small>
+                        <small v-else-if="Number(loginId) === Number(item.target_id)"
+                          class="text-secondary mb-0 d-block">Transfer From {{item.userFirstName}}
+                          {{item.userLastName}}</small>
+                        <small v-else class="text-secondary mb-0 d-block">Transfer To {{item.targetFirstName}}
+                          {{item.targetLastName}}</small>
+                        <p class="font-weight-bold mb-0">Rp. {{formatPrice(Number(item.amount))}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Success -->
             </div>
-          </div>
-        </div>
-        <div class="row mb-2 mt-2 px-2">
-          <div class="col-lg-12 col-md-12 col-12 text-center hideScroll" style="overflow-x:scroll">
-            <b-form-group>
-              <b-form-radio-group id="btn-radios-2" @change="getTrans()" v-model="queryTrans.page"
-                button-variant="outline-primary" :options="optionPage" buttons></b-form-radio-group>
-            </b-form-group>
-          </div>
-        </div>
-        <div class="my-2 p-2 text-center">
-          <button @click="filterButton('')" class="btn btn-light shadow text-center mx-2">
-            <i class="fas fa-globe text-info"></i>
-          </button>
-          <button @click="filterButton('Success')" class="btn btn-light shadow text-center mx-2">
-            <i class="fas fa-check text-success"></i>
-          </button>
-          <button @click="filterButton('Pending')" class="btn btn-light shadow text-center mx-2">
-            <i class="far fa-clock text-warning"></i>
-          </button>
-          <button @click="filterButton('Canceled')" class="btn btn-light shadow text-center mx-2">
-            <i class="fas fa-ban text-secondary"></i>
-          </button>
-        </div>
-        <div class="row mt-2">
-          <div class="col-1 d-none d-md-none d-lg-block"></div>
-          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <b-form-select v-model="queryTrans.range" @change="getOrderLimitQuery(1)" size="sm" :options="optionRange">
-            </b-form-select>
-          </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <b-form-select v-model="queryTrans.sort" @change="getOrderLimitQuery(1)" size="sm" :options="optionSort">
-            </b-form-select>
-          </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <b-form-select v-model="queryTrans.order" @change="getOrderLimitQuery(1)" size="sm" :options="optionOrder">
-            </b-form-select>
-          </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-4">
-            <b-form-select v-model="queryTrans.limit" @change="getOrderLimitQuery(1)" size="sm" :options="optionLimit">
-            </b-form-select>
           </div>
         </div>
       </div>

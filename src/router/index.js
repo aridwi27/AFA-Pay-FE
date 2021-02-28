@@ -13,6 +13,7 @@ import Profile from '../views/Profile.vue'
 import PersonalInfo from '../views/PersonalInfo.vue'
 import ChangePassword from '../views/ChangePassword.vue'
 import ChangePin from '../views/ChangePin.vue'
+import Notification from '../views/Notification.vue'
 import AddPhone from '../views/AddPhone.vue'
 import ManagePhone from '../views/ManagePhone.vue'
 import Status from '../views/Status.vue'
@@ -66,6 +67,14 @@ const routes = [
     path: '/changepin',
     name: 'changepin',
     component: ChangePin,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/notification',
+    name: 'notification',
+    component: Notification,
     meta: {
       auth: true
     }

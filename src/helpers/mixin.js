@@ -22,7 +22,7 @@ export const paymentMixin = {
         id: Number(localStorage.getItem('id')),
         page: 1,
         sort: 'desc',
-        limit: 5,
+        limit: 10,
         order: 'created_at',
         range: 'year',
         status: ''

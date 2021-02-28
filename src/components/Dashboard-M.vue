@@ -7,7 +7,7 @@
         <div class="card w-100 bg-theme text-white shadow-nm"
           style="border-bottom-left-radius: 25px;border-bottom-right-radius: 25px">
           <div class="card-body">
-            <h1 class="float-right mt-4"><i class="far fa-bell"></i></h1>
+            <h1 @click="linkTo('notification')" class="float-right mt-4"><i class="far fa-bell"></i></h1>
             <div class="row">
               <div class="col-3 my-auto">
                 <img :src="`${webURL}/images/${userData.image}`" @click="linkTo('profile')" class="img-fluid h-80 w-100 "
@@ -89,7 +89,7 @@
     </div>
     <!-- Transaction History -->
     <div>
-    <div v-if="isLoadingM" class="row w-100" style="min-height:60vh">
+    <div v-if="isLoadingM" class="row w-100" style="height:60vh">
       <div class="col-12 py-5 my-5 text-center">
         <b-spinner style="width: 4rem; height: 4rem;" variant="info"></b-spinner>
         <h5 class="mt-4">Preparing Your Data ...</h5>
@@ -99,7 +99,7 @@
       <div class="card-body">
         <router-link to="/history" class="mb-0 text-main float-right">See All</router-link>
         <h5 class="font-weight-bold">Transaction History</h5>
-        <div v-if="transUser.length > 0" class="mt-2 hideScroll" style="overflow-y: scroll; min-height: 50vh">
+        <div v-if="transUser.length > 0" class="mt-2 hideScroll" style="overflow-y: scroll; height: 48vh">
           <div v-for="(item, index) in transUser" :key="index">
             <div class="card border-0">
               <div class="row no-gutters">
