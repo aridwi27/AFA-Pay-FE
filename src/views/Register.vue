@@ -82,7 +82,7 @@
         </form>
         <p class="text-center">
           Already have an account? Let's
-          <router-link to="/"
+          <router-link to="/login"
             ><span style="color: #6379f4">Login</span></router-link
           >
         </p>
