@@ -274,7 +274,7 @@
             <div class="row w-100 mx-0">
               <div class="col-3"></div>
               <div class="col-6">
-                <button @click="linkTo('login')" class="btn btn-light w-100">Login</button>
+                <button @click="linkTo('login')" class="btn btn-light w-100">Start</button>
                 </div>
               <div class="col-3"></div>
             </div></td>
