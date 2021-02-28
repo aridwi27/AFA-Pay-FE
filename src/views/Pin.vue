@@ -3,13 +3,13 @@
   <div class="container-fluid d-none d-lg-block d-md-block" style="">
     <div class="row">
       <sidelog />
-      <form action="" @submit.prevent="submit()">
         <div class="col-md-6" style="
           background: #fafcff;
           padding-left: 5%;
           padding-right: 10%;
           padding-top: 5%;
         ">
+      <form action="" @submit.prevent="submit()">
           <h2 class="font-weight-bold mb-5" style="padding-right: 10%; line-height: 2">
             Secure Your Account, Your Wallet, and Your Data With 6 Digits PIN That
             You Created Yourself.
@@ -34,8 +34,8 @@
           " type="submit">
             Confirm
           </button>
-        </div>
       </form>
+        </div>
     </div>
   </div>
   <div class="d-block d-lg-none d-md-none bg-white" style="height:100vh">
@@ -48,14 +48,14 @@
           </tr>
         </tbody>
       </table>
-      <form action="" @submit.prevent="submit()" >
+      <form action="" @submit.prevent="submitM()" >
       <div class="card shadow-top" style="border-radius;min-height:75vh">
         <div class="card-body">
           <h3 class="text-center font-weight-bold mb-3">Login</h3>
           <p class="text-center text-secondary px-3">Create a PIN that’s contain 6 digits number for security purpose in Zwallet.</p>
           <div class="pt-3">
           <div class="mb-5 text-center" style=" margin-bottom: 20%">
-            <PincodeInput v-model="code" :length="6" />
+            <PincodeInput v-model="codeM" :length="6" />
           </div>
           <div style="height:25vh">
             &nbsp;
@@ -86,7 +86,8 @@ export default {
   mixins: [paymentMixin],
   data () {
     return {
-      code: ''
+      code: '',
+      codeM: ''
     }
   },
   components: {
@@ -101,6 +102,27 @@ export default {
       this.swalLoading('Processing Data')
       const data = { pin: this.code }
       if (this.code.length === 6) {
+        this.insertPin(data)
+          .then((response) => {
+            if (response.message === 500) {
+              this.swalLoadingClose()
+              this.swalAlert('Something wrong with pin', '', 'error')
+            } else {
+              this.swalLoadingClose()
+              this.swalAlert('Register Pin Success', '', 'success')
+              this.$router.push('/home')
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+      } else {
+        this.swalAlert('Please Check Your Pin', '', 'error')
+      }
+    },
+    submitM () {
+      this.swalLoading('Processing Data')
+      const data = { pin: this.codeM }
+      if (this.codeM.length === 6) {
         this.insertPin(data)
           .then((response) => {
             if (response.message === 500) {

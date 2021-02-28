@@ -27,7 +27,8 @@ export const paymentMixin = {
         range: 'year',
         status: ''
       },
-      arrMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']
+      arrMonth: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember'],
+      arrDay: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     }
   },
   methods: {
@@ -36,15 +37,15 @@ export const paymentMixin = {
       return value.toLocaleString().replace(/,/g, '.')
     },
     formatDate (date) {
-      const month = this.arrMonth[new Date(date).getDay()]
-      const dates = new Date(date).getMonth() + 1
+      const month = this.arrMonth[new Date(date).getMonth()]
+      const dates = new Date(date).getDate()
       const years = new Date(date).getFullYear()
       const time = new Date(date).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
       return (`${month} ${dates}, ${years} - ${time}`)
     },
     formatDateOnly (date) {
-      const month = this.arrMonth[new Date(date).getDay()]
-      const dates = new Date(date).getMonth() + 1
+      const month = this.arrMonth[new Date(date).getMonth()]
+      const dates = new Date(date).getDate()
       const years = new Date(date).getFullYear()
       return (`${month} ${dates}, ${years}`)
     },

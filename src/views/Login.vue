@@ -72,20 +72,20 @@
           <p class="text-center text-secondary px-3">Login to your existing account to access
             all the features in Zwallet.</p>
           <div>
-            <form action=""  @submit.prevent="onLogin">
+            <form action=""  @submit.prevent="onLoginM">
               <div class="form-group my-5">
                 <div class="input-group mb-5 text-secondary">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"><i class="far fa-envelope"></i></span>
                   </div>
-                  <input v-model="form.email" type="text" class="form-control border-0 shadow-sm"
+                  <input v-model="formM.email" type="text" class="form-control border-0 shadow-sm"
                     placeholder="Enter your e-mail" />
                 </div>
                 <div class="input-group mb-3 text-secondary">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"><i class="fas fa-lock"></i></span>
                   </div>
-                  <input v-model="form.newPassword" :type="typeNew" class="form-control border-0 shadow-sm"
+                  <input v-model="formM.password" :type="typeNew" class="form-control border-0 shadow-sm"
                     placeholder="Your Password" />
                   <div class="input-group-prepend">
                     <span @click="onShowPass('new')" class="input-group-text bg-white border-0 shadow-sm"><i
@@ -133,6 +133,10 @@ export default {
       form: {
         email: '',
         password: ''
+      },
+      formM: {
+        email: '',
+        password: ''
       }
     }
   },
@@ -166,7 +170,37 @@ export default {
           }
         })
       } else {
-        alert('All Field Required')
+        this.swalLoadingClose()
+        this.$swal('Empty Field', 'Please Fill All Data', 'error')
+      }
+    },
+    onLoginM () {
+      this.swalLoading('Processing Data')
+      if (this.formM.username !== '' && this.formM.password !== '') {
+        this.login(this.formM).then((response) => {
+          if (response === "Email hasn't been registered") {
+            this.swalLoadingClose()
+            this.$swal('Data Not Register', 'Please Sign Up ', 'error')
+          } else if (response === 'Wrong Password') {
+            this.swalLoadingClose()
+            this.$swal('Wrong Password', 'Please Check Your Password ', 'error')
+          } else {
+            this.getUserDetail()
+              .then((response) => {
+                if (response.pin === null) {
+                  this.swalLoadingClose()
+                  this.$router.push('/pin')
+                } else {
+                  this.swalLoadingClose()
+                  this.swalToast('success', 'Login Success')
+                  this.$router.push('/home')
+                }
+              })
+          }
+        })
+      } else {
+        this.swalLoadingClose()
+        this.$swal('Empty Field', 'Please Fill All Data', 'error')
       }
     },
     onShowPass (e) {

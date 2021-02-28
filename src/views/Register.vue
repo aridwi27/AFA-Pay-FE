@@ -82,7 +82,7 @@
         </form>
         <p class="text-center">
           Already have an account? Let's
-          <router-link to="/"
+          <router-link to="/login"
             ><span style="color: #6379f4">Login</span></router-link
           >
         </p>
@@ -105,27 +105,27 @@
           <h3 class="text-center font-weight-bold mb-3">Sign Up</h3>
           <p class="text-center text-secondary px-3">Create your account to access Zwallet.</p>
           <div>
-            <form action="" @submit.prevent="signUp" >
+            <form action="" @submit.prevent="signUpM" >
               <div class="form-group my-5">
                 <div class="input-group my-5 text-secondary">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"><i class="far fa-user"></i></span>
                   </div>
-                  <input v-model="form.username" type="text" class="form-control border-0 shadow-sm"
+                  <input v-model="formM.username" type="text" class="form-control border-0 shadow-sm"
                     placeholder="Enter your username" />
                 </div>
                 <div class="input-group my-5 text-secondary">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"><i class="far fa-envelope"></i></span>
                   </div>
-                  <input v-model="form.email" type="text" class="form-control border-0 shadow-sm"
+                  <input v-model="formM.email" type="text" class="form-control border-0 shadow-sm"
                     placeholder="Enter your e-mail" />
                 </div>
                 <div class="input-group my-5 text-secondary">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-white border-0 shadow-sm"><i class="fas fa-lock"></i></span>
                   </div>
-                  <input v-model="form.newPassword" :type="typeNew" class="form-control border-0 shadow-sm"
+                  <input v-model="formM.password" :type="typeNew" class="form-control border-0 shadow-sm"
                     placeholder="Create your password" />
                   <div class="input-group-prepend">
                     <span @click="onShowPass('new')" class="input-group-text bg-white border-0 shadow-sm"><i
@@ -172,6 +172,11 @@ export default {
         email: '',
         password: '',
         username: ''
+      },
+      formM: {
+        email: '',
+        password: '',
+        username: ''
       }
     }
   },
@@ -193,7 +198,26 @@ export default {
           }
         })
       } else {
-        alert('All Field Required')
+        this.swalLoadingClose()
+        this.$swal('Empty Field', 'Please Fill All Data', 'error')
+      }
+    },
+    signUpM () {
+      this.swalLoading('Process Register')
+      if (this.formM.email !== '' && this.formM.password !== '' && this.formM.username !== '') {
+        this.register(this.formM).then((response) => {
+          if (response === 'Email has been registered') {
+            this.$swal.close()
+            this.$swal('Email registed', 'Please Change Email ', 'error')
+          } else {
+            this.$swal.close()
+            this.$swal('Register Email Success', 'You can Login Now ', 'success')
+            this.$router.push('/login')
+          }
+        })
+      } else {
+        this.swalLoadingClose()
+        this.$swal('Empty Field', 'Please Fill All Data', 'error')
       }
     },
     onShowPass (e) {
