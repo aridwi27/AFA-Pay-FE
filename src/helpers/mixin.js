@@ -16,7 +16,7 @@ export const paymentMixin = {
         name: '',
         page: 1,
         sort: 'asc',
-        limit: 5
+        limit: 10
       },
       queryTrans: {
         id: Number(localStorage.getItem('id')),
@@ -41,6 +41,16 @@ export const paymentMixin = {
       const years = new Date(date).getFullYear()
       const time = new Date(date).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
       return (`${month} ${dates}, ${years} - ${time}`)
+    },
+    formatDateOnly (date) {
+      const month = this.arrMonth[new Date(date).getDay()]
+      const dates = new Date(date).getMonth() + 1
+      const years = new Date(date).getFullYear()
+      return (`${month} ${dates}, ${years}`)
+    },
+    formatTimeOnly (date) {
+      const time = new Date(date).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+      return (`${time}`)
     },
     swalToast (icon, title) {
       this.Toast.fire({

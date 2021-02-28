@@ -139,8 +139,13 @@ const moduleAuth = {
     searchUser (context, data) {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.apiURL}/user?name=${data.name}&sort=${data.sort}&page=${Number(data.page)}&limit=${Number(data.limit)}`, { headers: { token: context.state.token } }).then((response) => {
-          context.commit('setSearchUser', response.data)
-          context.commit('setPaginationUser', response.data.pagination.totalPage)
+          if (response.data.data.length > 0) {
+            context.commit('setSearchUser', response.data)
+            context.commit('setPaginationUser', response.data.pagination.totalPage)
+          } else {
+            context.commit('setSearchUser', { data: [], pagination: {} })
+            context.commit('setPaginationUser', 1)
+          }
           resolve(response.data)
         }).catch((err) => {
           reject(err)
