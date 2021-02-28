@@ -10,7 +10,7 @@
             <h1 class="float-right mt-4"><i class="far fa-bell"></i></h1>
             <div class="row">
               <div class="col-3 my-auto">
-                <img :src="`${webURL}/images/${userData.image}`" class="img-fluid h-80 w-100 "
+                <img :src="`${webURL}/images/${userData.image}`" @click="linkTo('profile')" class="img-fluid h-80 w-100 "
                   style="object-fit:cover;border-radius:8px" alt="">
               </div>
               <div class="col-9" @click="toggleDetailSaldo()">
