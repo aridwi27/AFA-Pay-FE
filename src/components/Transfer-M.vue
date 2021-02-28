@@ -5,7 +5,9 @@
         <h5 @click="linkTo('search')" class="font-weigh-bold"><i class="fas fa-arrow-left mr-4"></i> Transfer</h5>
       </div>
       <div class="card border-0 mb-3 px-3 mx-4 shadow-sm bg-main" style="border-radius:25px">
-        <div class="row no-gutters pr-1">
+        <div v-if="targetData.first_name === ''" class="row w-100">
+        </div>
+        <div v-else class="row no-gutters pr-1">
           <div class="col-md-2 col-2 col-lg-2 my-auto mx-auto">
             <img :src="`${webURL}/images/${targetData.image}`" class="card-img text-center" alt="..." />
           </div>

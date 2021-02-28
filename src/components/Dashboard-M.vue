@@ -88,7 +88,14 @@
       </div>
     </div>
     <!-- Transaction History -->
-    <div class="card shadow-nm" style="border-radius: 25px">
+    <div>
+    <div v-if="isLoadingM" class="row w-100" style="min-height:60vh">
+      <div class="col-12 py-5 my-5 text-center">
+        <b-spinner style="width: 4rem; height: 4rem;" variant="info"></b-spinner>
+        <h5 class="mt-4">Preparing Your Data ...</h5>
+      </div>
+    </div>
+    <div v-else class="card shadow-nm" style="border-radius: 25px">
       <div class="card-body">
         <router-link to="/history" class="mb-0 text-main float-right">See All</router-link>
         <h5 class="font-weight-bold">Transaction History</h5>
@@ -161,6 +168,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
       <b-modal id="confirmTransM" centered hide-header hide-footer>
       <div v-if="isLoadingConfirmM" class="row w-100">
@@ -231,7 +239,7 @@ export default {
   data () {
     return {
       detailSaldo: false,
-      isLoading: true,
+      isLoadingM: true,
       isLoadingConfirmM: true,
       loginId: localStorage.getItem('id'),
       confirmedId: 0,
@@ -349,10 +357,10 @@ export default {
         })
     },
     mountUserTrans () {
-      this.isLoading = true
+      this.isLoadingM = true
       this.getUserTrans(this.queryTrans)
         .then((res) => {
-          this.isLoading = false
+          this.isLoadingM = false
         })
     },
     toggleDetailSaldo () {

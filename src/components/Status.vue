@@ -12,7 +12,7 @@
             <p class="font-weight-bold">Transaction Success</p>
           </div>
           <div v-else>
-            <h1 class="mt-4"><i class="text-secondary far fa-2x fa-check-circle"></i></h1>
+            <h1 class="mt-4"><i class="text-danger fas fa-2x fa-times-circle"></i></h1>
             <p class="font-weight-bold">Transaction Canceled</p>
             <p class="px-5 text-secondary">Your transaction are canceled by yourself or your friends.</p>
           </div>

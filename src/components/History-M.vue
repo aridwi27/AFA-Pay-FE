@@ -237,11 +237,14 @@ export default {
       this.getTrans()
     },
     detailTrans (id) {
+      this.swalLoading('Please Wait')
       this.transDetail(id)
         .then((res) => {
+          this.swalLoadingClose()
           this.$router.push('/status')
         })
         .catch((err) => {
+          this.swalLoadingClose()
           console.log(err)
         })
     },
