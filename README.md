@@ -68,7 +68,7 @@ npm run lint
 ```
 
 ## Deployment
- * Visit our demo at : [E-Wallet](http://52.91.116.102:3010/)
+ * Visit our demo at : [AFA-Wallet](http://52.91.116.102:3010/)
 
 ## Team
 You can visit our team account
