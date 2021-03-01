@@ -7,7 +7,7 @@
             <div class="col-md-6" style="padding-right: 14%; padding-left: 12%; padding-top: 5%">
               <router-link to="/">
                 <h3 class="font-weight-bold" style="color: #6379f4; margin-bottom: 20%">
-                  Zwallet
+                  AFA-Wallet
                 </h3>
               </router-link>
               <h1 class="font-weight-bold mb-5" style="line-height: 1.5">
@@ -106,7 +106,7 @@
                   <img src="../assets/image/Group 12.png" alt="" />
                   <h5 class="card-title mt-3 mb-5">Easy Download</h5>
                   <p class="card-text" style="color: rgba(58, 61, 66, 0.9)">
-                    Zwallet is 100% totally free to use it’s now available on
+                    AFA-Wallet is 100% totally free to use it’s now available on
                     Google Play Store and App Store.
                   </p>
                 </div>
@@ -142,7 +142,7 @@
             </div>
             <div class="col-md-6" style="padding-top: 10%">
               <h1 class="display-3 font-weight-bold" style="margin-bottom: 5%">
-                All The <span style="color: #6379f4">Great</span> Zwallet
+                All The <span style="color: #6379f4">Great</span> AFA-Wallet
                 Features.
               </h1>
               <div class="card" style="
@@ -156,7 +156,7 @@
                     <span style="color: #6379f4">1.</span> Small Fee
                   </h5>
                   <p class="card-text">
-                    We only charge 5% of every success transaction done in Zwallet
+                    We only charge 5% of every success transaction done in AFA-Wallet
                     app.
                   </p>
                 </div>
@@ -187,7 +187,7 @@
                     <span style="color: #6379f4">3.</span> User Friendly
                   </h5>
                   <p class="card-text">
-                    Zwallet come up with modern and sleek design and not
+                    AFA-Wallet come up with modern and sleek design and not
                     complicated.
                   </p>
                 </div>
@@ -226,7 +226,7 @@
                   <img src="../assets/image/1.png" alt="" />
                   <h5 class="card-title mt-3 mb-5">Jessica Mera</h5>
                   <p class="card-text" style="color: rgba(58, 61, 66, 0.9)">
-                    “I use Zwallet to manage all financial needs. It’s super easy
+                    “I use AFA-Wallet to manage all financial needs. It’s super easy
                     to use and it’s 100% free app”
                   </p>
                 </div>
@@ -240,7 +240,7 @@
                   <h5 class="card-title mt-3 mb-5">Robert Chandler</h5>
                   <p class="card-text" style="color: rgba(58, 61, 66, 0.9)">
                     “Since I’m using this app, I’m not going to move to another
-                    similar app. Thank you Zwallet!”
+                    similar app. Thank you AFA-Wallet!”
                   </p>
                 </div>
               </div>
@@ -248,48 +248,36 @@
           </div>
         </div>
         <div class="col-md-12 mt-5 py-5" style="background: #6379f4; padding-left: 12%; padding-right: 12%">
-          <h3 class="font-weight-bold mb-5" style="color: #ffffff">Zwallet</h3>
+          <h3 class="font-weight-bold mb-5" style="color: #ffffff">AFA-Wallet</h3>
           <p style="color: rgba(239, 239, 239, 0.75); width: 25%; line-height: 2">
             Simplify financial needs and saving much time in banking needs with
             one single app.
           </p>
           <div style="border: 1px solid rgba(255, 255, 255, 0.6)" class="mb-4"></div>
           <p class="d-inline" style="color: rgba(239, 239, 239, 0.75)">
-            2020 Zwallet. All right reserved.
+            2020 AFA-Wallet. All right reserved.
           </p>
           <div class="float-right" style="color: #efefef">
             <p class="d-inline">+62 5637 8882 9901</p>
-            <p class="ml-5 d-inline">contact@zwallet.com</p>
+            <p class="ml-5 d-inline">contact@afawallet.com</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="d-block d-lg-none d-md-none" style="background-color:#6379F4;height:100vh">
-      <table class="h-100 w-100 mx-0 my-0 px-0 py-0">
-        <tbody>
-          <tr>
-            <td class="align-middle text-center">
-            <h1 class="text-white">Zwallet</h1>
-            <p class="text-white font-italic">By AFA-Team</p>
-            <div class="row w-100 mx-0">
-              <div class="col-3"></div>
-              <div class="col-6">
-                <button @click="linkTo('login')" class="btn btn-light w-100">Start</button>
-                </div>
-              <div class="col-3"></div>
-            </div></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="d-block d-lg-none d-md-none" style="height:100vh">
+     <mLandPage />
     </div>
   </div>
 </template>
 
 <script>
 import { paymentMixin } from '../helpers/mixin'
+import mLandPage from '../components/LandPage-M'
 export default {
-  mixins: [paymentMixin]
-
+  mixins: [paymentMixin],
+  components: {
+    mLandPage
+  }
 }
 </script>
 

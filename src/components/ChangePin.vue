@@ -10,7 +10,7 @@
           <span class="font-weight-bold" v-if="pinConfirmed === false"
             >Current</span
           >
-          <span class="font-weight-bold" v-else>New</span> 6 digits Zwallet PIN
+          <span class="font-weight-bold" v-else>New</span> 6 digits AFA-Wallet PIN
           below to
           <span class="font-weight-bold" v-if="pinConfirmed == false"
             >continue to the next steps.</span

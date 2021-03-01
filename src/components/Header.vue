@@ -9,7 +9,7 @@
                 <td>
                   <router-link to="/home">
                     <h2 style="color: #6379f4; font-weight: bold" class="d-inline">
-                      Zwallet
+                      AFA-Wallet
                     </h2>
                   </router-link>
                 </td>
