@@ -4,6 +4,8 @@ Payment Web is an aplication that aims to make it easy for user to do online pay
 
 
 ## Documentation
+
+### Desktop Version
 ![landing](https://i.ibb.co/5hKrFL2/landing-page.png)
 
 ![login](https://i.ibb.co/c1MK9Bv/Login.png)
@@ -17,6 +19,9 @@ Payment Web is an aplication that aims to make it easy for user to do online pay
 ![transfer](https://i.ibb.co/K926GHX/transfer-new.png)
 
 ![history](https://i.ibb.co/XJcShkx/searchnew.png)
+
+### Mobile Version
+![m-home](https://i.ibb.co/bRdMHty/homemnew.png)    ![m-profile](https://i.ibb.co/VmTTFBK/personalm.png)    ![m-transfer](https://i.ibb.co/ZhLNrcH/transferm.png)
 
 
 ## Getting Started
