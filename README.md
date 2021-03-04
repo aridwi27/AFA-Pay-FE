@@ -70,6 +70,9 @@ npm run lint
 ## Deployment
  * Visit our demo at : [AFA-Wallet](http://52.91.116.102:3010/)
 
+## Backend Repository
+[Backend Payment Web aplication](https://github.com/aridwi27/AFA-Pay-BE)
+
 ## Team
 You can visit our team account
 
