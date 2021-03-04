@@ -19,8 +19,8 @@
             line-height: 2;
             padding-right: 8%;
           ">
-            Create 6 digits pin to secure all your money and your data in Zwallet
-            app. Keep it secret and don’t tell anyone about your Zwallet account
+            Create 6 digits pin to secure all your money and your data in AFA-Wallet
+            app. Keep it secret and don’t tell anyone about your AFA-Wallet account
             password and the PIN.
           </p>
           <div class="mt-5" style="margin-left: 20%; margin-bottom: 20%">
@@ -43,7 +43,7 @@
         <tbody>
           <tr>
             <td class="align-middle text-center">
-              <h1 class="text-main">Zwallet</h1>
+              <h1 class="text-main">AFA-Wallet</h1>
             </td>
           </tr>
         </tbody>
@@ -52,7 +52,7 @@
       <div class="card shadow-top" style="border-radius;min-height:75vh">
         <div class="card-body">
           <h3 class="text-center font-weight-bold mb-3">Login</h3>
-          <p class="text-center text-secondary px-3">Create a PIN that’s contain 6 digits number for security purpose in Zwallet.</p>
+          <p class="text-center text-secondary px-3">Create a PIN that’s contain 6 digits number for security purpose in AFA-Wallet.</p>
           <div class="pt-3">
           <div class="mb-5 text-center" style=" margin-bottom: 20%">
             <PincodeInput v-model="codeM" :length="6" />

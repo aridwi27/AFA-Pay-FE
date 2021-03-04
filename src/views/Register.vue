@@ -17,7 +17,7 @@
           30.000+ Users
         </h3>
         <p class="text-left mb-5" style="color: rgba(58, 61, 66, 0.6)">
-          Transfering money is eassier than ever, you can access Zwallet
+          Transfering money is eassier than ever, you can access AFA-Wallet
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
@@ -95,7 +95,7 @@
         <tbody>
           <tr>
             <td class="align-middle text-center">
-              <h1 class="text-main">Zwallet</h1>
+              <h1 class="text-main">AFA-Wallet</h1>
             </td>
           </tr>
         </tbody>
@@ -103,7 +103,7 @@
       <div class="card shadow-top" style="border-radius">
         <div class="card-body">
           <h3 class="text-center font-weight-bold mb-3">Sign Up</h3>
-          <p class="text-center text-secondary px-3">Create your account to access Zwallet.</p>
+          <p class="text-center text-secondary px-3">Create your account to access AFA-Wallet.</p>
           <div>
             <form action="" @submit.prevent="signUpM" >
               <div class="form-group my-5">

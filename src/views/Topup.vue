@@ -154,7 +154,7 @@
                   <span class="mr-3" style="color: #6379f4; font-weight: bold"
                     >8
                   </span>
-                  You can see your money in Zwallet within 3 hours.
+                  You can see your money in AFA-Wallet within 3 hours.
                 </p>
               </div>
             </div>
