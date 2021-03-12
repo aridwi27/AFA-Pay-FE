@@ -76,6 +76,3 @@ You can visit our team account
 1. [Aridwi](https://github.com/aridwi27)
 2. [Ferdy](https://github.com/cotbakheu)
 3. [Alif](https://github.com/alifma)
-
-## Backend
-You can check this application backend (here)[http://github.com/aridwi27/AFA-Pay-BE].
