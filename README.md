@@ -6,22 +6,21 @@ Payment Web is an aplication that aims to make it easy for user to do online pay
 ## Documentation
 
 ### Desktop Version
-![landing](https://i.ibb.co/5hKrFL2/landing-page.png)
+![landing](https://i.ibb.co/tPr0r9S/landingR.jpg)
 
-![login](https://i.ibb.co/c1MK9Bv/Login.png)
+![home](https://i.ibb.co/12m0V1K/homeR.jpg)
 
-![home](https://i.ibb.co/h1Sv847/homenew.png)
+![profile](https://i.ibb.co/mzVzJpD/user.jpg)
 
-![profile](https://i.ibb.co/ZBkB81D/profilenew.png)
+![transfer](https://i.ibb.co/BNhKXmr/transaksi-R.jpg)
 
-![personal](https://i.ibb.co/6yKJbyH/persoalinfonew.png)
+![search](https://i.ibb.co/CHRbQH7/searchR.jpg)
 
-![transfer](https://i.ibb.co/K926GHX/transfer-new.png)
-
-![history](https://i.ibb.co/XJcShkx/searchnew.png)
+![trasaksi](https://i.ibb.co/3Ct62Xg/successR.jpg)
 
 ### Mobile Version
-![m-home](https://i.ibb.co/bRdMHty/homemnew.png)    ![m-profile](https://i.ibb.co/VmTTFBK/personalm.png)    ![m-transfer](https://i.ibb.co/ZhLNrcH/transferm.png)
+![m-home](https://i.ibb.co/cb444D7/mhome.jpg)    ![m-profile](https://i.ibb.co/5TWCC94/mprofile.jpg)    ![m-transfer](https://i.ibb.co/ZhLNrcH/transferm.png)
+
 
 
 ## Getting Started
